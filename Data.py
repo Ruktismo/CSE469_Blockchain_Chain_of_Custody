@@ -6,3 +6,4 @@ class Data:
         self.state = 0
         # INITIAL (for the initial block ONLY), CHECKEDIN, CHECKEDOUT, DISPOSED, DESTROYED, or RELEASED
         # -1,                                   0,          2,          3,          4,          5
+        #states need to be padded to 12 bytes
