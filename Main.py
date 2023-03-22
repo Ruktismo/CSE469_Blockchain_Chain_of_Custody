@@ -15,6 +15,9 @@ Once it has the cmd and all args needed it will pass off to the corresponding fu
 """
 def main():
     # TODO put any setup that needs to be done here. ie. load blockchain from disk
+    # TODO Johnny
+    # File names will be the time ISO
+
     """
     Argument Types:
         bchoc add -c case_id -i item_id [-i item_id ...]
