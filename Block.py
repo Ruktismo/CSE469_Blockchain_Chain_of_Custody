@@ -28,8 +28,8 @@ class Block:
     def getTimestamp(self):
         return self.Timestamp
 
-    def setTimestamp(self, time):
-        self.Timestamp = time
+    def setTimestamp(self):
+        self.Timestamp = getUnixTime()
     
     def getCID(self):
         return self.CID
