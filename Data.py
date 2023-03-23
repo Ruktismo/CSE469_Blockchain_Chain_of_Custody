@@ -25,5 +25,5 @@ class Data:
         part = block[0:17]
         part = tupHex(part)
         print(part)
-d = Data()
-d.importData("2023-03-23T001804.594218.raw")
+# d = Data()
+# d.importData("2023-03-23T001804.594218.raw")
