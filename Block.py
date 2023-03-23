@@ -54,7 +54,7 @@ class Block:
     def getState(self):
         return self.State
 
-    def setEID(self, state):
+    def setState(self, state):
         self.State = state
         
     def getDataLength(self):
@@ -73,9 +73,10 @@ class Block:
         dt = datetime.datetime.strptime(self.getTimestamp(), '%Y-%m-%dT%H:%M:%S.%f')
         unix_timestamp = datetime.datetime.timestamp(dt) * 1000
         double_timestamp = struct.pack('d', unix_timestamp)
+        # print(type(double_timestamp))
         return double_timestamp
 
-    #need to work on formatting this
+    #TODO need to work on formatting this
     def blockToBytes(self):
 
         block = bytes((str(self.getPreviousHash())),'utf-8')
@@ -85,10 +86,14 @@ class Block:
         # print("***"+str(y))
         # print("***"+str(getIso8601Timestamp(y)))
         
+        #TODO need to make time a nicer hex
         block += bytes(str(self.getDoubleTimestamp()),'utf-8')
         block += bytes(hex(self.getCID())[2:],'utf-8')
         block += bytes(hex(self.getEID())[2:],'utf-8')
-        block += bytes(hex(self.getState())[2:],'utf-8')
+        
+        state = self.getState().encode('utf-8')
+        block += bytes(state.hex(),'utf-8')
+        
         block += bytes(hex(self.getDataLength())[2:],'utf-8')
         s = self.getData().encode('utf-8')
         block += bytes(s.hex(),'utf-8')
@@ -141,6 +146,7 @@ b = Block()
 b.setCID(9269517611667619)
 b.setData("uwF6MJKlWZ6G1JQQuqXRVHAwYIusJQBhhL7KFtrnxnN9xTwhESWbAi6MI09OfyGYUFbp8vUMEJcwCIJInReYggGt9HsS3QzjDc1h")
 b.setEID(2179)
+b.setState("CHECKEDIN")
 b.setPreviousHash("261913b71a13306d63d65612875ead13ed281b2f70f9c713761247f47a9ff7ee")
 b.setTimestamp()
 b.setDataLength(100)
