@@ -2,13 +2,13 @@
 import datetime
 import struct
 
+#initial get iso time
 def getUnixTime():
-   
     presentDate = datetime.datetime.now()
-    # unix_timestamp = datetime.datetime.timestamp(presentDate)*1000
     isoTime = presentDate.isoformat()
     return  isoTime
 
+#converts stored double back to iso format
 def getIso8601Timestamp(double_timestamp):
     unix_timestamp = struct.unpack('d', double_timestamp)[0] / 1000
     dt = datetime.datetime.fromtimestamp(unix_timestamp)
