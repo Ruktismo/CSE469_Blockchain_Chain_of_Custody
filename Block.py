@@ -35,6 +35,7 @@ class Block:
     def getTimestamp(self):
         return self.Timestamp
 
+    #auto grabs current unix time, no params needed
     def setTimestamp(self):
         self.Timestamp = getUnixTime()
     
