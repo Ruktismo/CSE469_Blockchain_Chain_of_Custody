@@ -1,6 +1,7 @@
 # TODO Johnny
 import datetime
 import struct
+import os
 
 #initial get iso time
 def getUnixTime():
@@ -79,27 +80,41 @@ class Block:
     #TODO need to work on formatting this
     def blockToBytes(self):
 
-        block = bytes((str(self.getPreviousHash())),'utf-8')
+        # block = bytes((str(self.getPreviousHash())),'utf-8')
         
-        # print("***"+ self.getTimestamp())
-        # y = self.getDoubleTimestamp()
-        # print("***"+str(y))
-        # print("***"+str(getIso8601Timestamp(y)))
+        # # print("***"+ self.getTimestamp())
+        # # y = self.getDoubleTimestamp()
+        # # print("***"+str(y))
+        # # print("***"+str(getIso8601Timestamp(y)))
         
-        #TODO need to make time a nicer hex
-        block += bytes(str(self.getDoubleTimestamp()),'utf-8')
-        block += bytes(hex(self.getCID())[2:],'utf-8')
-        block += bytes(hex(self.getEID())[2:],'utf-8')
+        # #TODO need to make time a nicer hex
+        # block += bytes(str(self.getDoubleTimestamp()),'utf-8')
+        # block += bytes(hex(self.getCID())[2:],'utf-8')
+        # block += bytes(hex(self.getEID())[2:],'utf-8')
         
-        state = self.getState().encode('utf-8')
-        block += bytes(state.hex(),'utf-8')
+        # state = self.getState().encode('utf-8')
+        # block += bytes(state.hex(),'utf-8')
         
-        block += bytes(hex(self.getDataLength())[2:],'utf-8')
-        s = self.getData().encode('utf-8')
-        block += bytes(s.hex(),'utf-8')
-        print(block)
-        # out = open(str(self.getTimestamp())+".raw", "wb")
-        # out.write(block)
+        # block += bytes(hex(self.getDataLength())[2:],'utf-8')
+        # s = self.getData().encode('utf-8')
+        # block += bytes(s.hex(),'utf-8')
+
+        block = self.getPreviousHash()
+        block += str(self.getDoubleTimestamp())
+        block += str(self.getCID())
+        block += str(self.getEID())
+        block += str(self.getState())
+        block += str(self.getDataLength())
+        block += str(self.getData())
+
+        fileName = str(self.getTimestamp()).replace(":", "-")+".raw"
+       # print(fileName)
+       #TODO should turn "block" into hex or something but file is written as bytes
+        filePath = os.path.join('./BlockFolder', fileName)
+        if not os.path.exists('./BlockFolder'):
+            os.makedirs('./BlockFolder')
+        out = open(filePath, "wb")
+        out.write(bytes(block, 'utf-8'))
         
         
     def printBlock(self):

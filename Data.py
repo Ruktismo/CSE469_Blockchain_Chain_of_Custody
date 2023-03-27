@@ -17,13 +17,6 @@ class Data:
         # INITIAL (for the initial block ONLY), CHECKEDIN, CHECKEDOUT, DISPOSED, DESTROYED, or RELEASED
         # -1,                                   0,          2,          3,          4,          5
         #states need to be padded to 12 bytes
-    def importData(self, file):
-        filesize = os.path.getsize(file)
-        with open(file,'rb') as f:
-                block = f.read(filesize)
-                block = struct.unpack(str(filesize)+"B",block)
-        part = block[0:17]
-        part = tupHex(part)
-        print(part)
-# d = Data()
-# d.importData("2023-03-23T001804.594218.raw")
+        
+    def blockToData(self):
+        self.CaseID = 0
