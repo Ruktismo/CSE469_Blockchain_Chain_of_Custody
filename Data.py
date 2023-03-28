@@ -2,12 +2,7 @@
 import Block
 import os
 import struct
-
-def tupHex(tuple):
-    newList = []
-    for i in tuple:
-        newList.append(hex(i)) 
-    return newList
+from Block import byteCounter
 
 class Data:
     def __init__(self):
@@ -15,8 +10,16 @@ class Data:
         self.EvedanceID = 0
         self.state = 0
         # INITIAL (for the initial block ONLY), CHECKEDIN, CHECKEDOUT, DISPOSED, DESTROYED, or RELEASED
-        # -1,                                   0,          2,          3,          4,          5
-        #states need to be padded to 12 bytes
+        # add zeros to respective state to equal 12 characters
         
-    def blockToData(self):
+        
+    def blockToData(self, file):
         self.CaseID = 0
+        #read file as bytes
+        #extract cid
+        #extract EID
+        #extract state ignoring zeros
+        
+        
+    def toString(self):
+        return "Case ID: " + str(self.CaseID) +'\n' + "Evidence ID: " + str(self.EvedanceID) +'\n' + "State: " + str(self.state) 

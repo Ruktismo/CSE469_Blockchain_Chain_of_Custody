@@ -2,12 +2,18 @@
 import datetime
 import struct
 import os
+# INITIAL (for the initial block ONLY), CHECKEDIN, CHECKEDOUT, DISPOSED, DESTROYED, or RELEASED
+# add zeros to respective state to equal 12 characters
+
 
 #initial get iso time
 def getUnixTime():
     presentDate = datetime.datetime.now()
     isoTime = presentDate.isoformat()
     return  isoTime
+
+def byteCounter(str):
+    return len(str.encode("utf-8"))
 
 #converts stored double back to iso format
 def getIso8601Timestamp(double_timestamp):
@@ -61,6 +67,7 @@ class Block:
     def getDataLength(self):
         return self.DataLen
 
+    #TODO pack x into a 4 byte int
     def setDataLength(self, x):
         self.DataLen = x
         
@@ -70,13 +77,16 @@ class Block:
     def setData(self, data):
         self.Data = data
     
+    #TODO does not return a 4 byte double
     def getDoubleTimestamp(self):
         dt = datetime.datetime.strptime(self.getTimestamp(), '%Y-%m-%dT%H:%M:%S.%f')
         unix_timestamp = datetime.datetime.timestamp(dt) * 1000
         double_timestamp = struct.pack('d', unix_timestamp)
-        # print(type(double_timestamp))
+        # print(byteCounter(str(double_timestamp)))
         return double_timestamp
+    
 
+        
     #TODO need to work on formatting this
     def blockToBytes(self):
 
@@ -106,7 +116,6 @@ class Block:
         block += str(self.getState())
         block += str(self.getDataLength())
         block += str(self.getData())
-
         fileName = str(self.getTimestamp()).replace(":", "-")+".raw"
        # print(fileName)
        #TODO should turn "block" into hex or something but file is written as bytes
@@ -116,6 +125,16 @@ class Block:
         out = open(filePath, "wb")
         out.write(bytes(block, 'utf-8'))
         
+    def blockByteCounter(self):
+        print("Block byte counts: --------------------------------------")
+        print("Previous hash: " + str(byteCounter(self.PreviousHash))  )
+        print("Timestamp: " + str(byteCounter(str(self.getDoubleTimestamp()))))
+        print("CID: " + str(byteCounter(str(self.CID))) )
+        print("EID: " + str(byteCounter(str(self.EID))))
+        print("State: " + str(byteCounter(str(self.State))))
+        print("Data Length: " + str(byteCounter(str(self.DataLen))))
+        print("Data: " + str(byteCounter(self.Data)))
+    print("-------------------------------------------------------------")
         
     def printBlock(self):
         print("Static Block contents: --------------------------------------")
@@ -161,10 +180,11 @@ b = Block()
 b.setCID(9269517611667619)
 b.setData("uwF6MJKlWZ6G1JQQuqXRVHAwYIusJQBhhL7KFtrnxnN9xTwhESWbAi6MI09OfyGYUFbp8vUMEJcwCIJInReYggGt9HsS3QzjDc1h")
 b.setEID(2179)
-b.setState("CHECKEDIN")
-b.setPreviousHash("261913b71a13306d63d65612875ead13ed281b2f70f9c713761247f47a9ff7ee")
+b.setState("000CHECKEDIN")
+b.setPreviousHash("261913b71a13306d63d65612875ead13")
 b.setTimestamp()
 b.setDataLength(100)
 b.printBlock()
 
-b.blockToBytes()
+# b.blockToBytes()
+b.blockByteCounter()

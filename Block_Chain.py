@@ -2,7 +2,7 @@
 import os
 import struct
 import Data
-import Block
+from Data import Data
 
 class BlockChain:   
     def __init__(self):
@@ -13,21 +13,20 @@ class BlockChain:
     
     def load_data(self):
         # load in all data from disk and make data classes
-        
+        temp = Data()
         for filename in os.listdir(self.dir):
             f = os.path.join(self.dir, filename)
             if os.path.isfile(f):
-                print(f)
-                temp = f
-                #Data() function to extract info
+                # print(f)
+                temp = Data()
+                #TODO finish blockToData()
+                temp.blockToData(f)
                 self.datalist.append(temp)  
-        # for d in self.datalist():
-        #     print(d)    
-        # filesize = os.path.getsize(filepath)
-        # with open(filepath,'rb') as f:
-        #         block = f.read(filesize)
-        #         block = struct.unpack(str(filesize)+"B",block)
+                
+        #show datalist content for shits and gigs
+        for i in self.datalist:
+            print(i.toString()+'\n')
         
 
-temp = BlockChain()
-temp.load_data()
+# x = BlockChain()
+# x.load_data()
