@@ -9,6 +9,7 @@ class BlockChain:
         self.datalist = [] 
         self.blockList = []
         self.dir = './BlockFolder'
+        self.load_data()
         # Dir of block chain
        
     def dataExists(self, newData):
@@ -38,16 +39,16 @@ class BlockChain:
                 else:
                     x.state = temp.state
                 
-        #show datalist content 
-        # print("\nBlock list count: "+str(len(self.datalist)))
-        # print("datalist contents: ")
-        # for i in self.datalist:
-        #     print(i.toString()+'\n')
-        # print("\nBlock list count: "+str(len(self.blockList)))
-        # print("\nBlock list contents: ")
-        # for obj in self.blockList:
-        #     print(obj.printBlock())
+        # show datalist content 
+        print("\nBlock list count: "+str(len(self.datalist)))
+        print("datalist contents: ")
+        for i in self.datalist:
+            print(i.toString()+'\n')
+        print("\nBlock list count: "+str(len(self.blockList)))
+        print("\nBlock list contents: ")
+        for obj in self.blockList:
+            print(obj.printBlock())
         
 
-# x = BlockChain()
-# x.load_data()
+x = BlockChain()
+
