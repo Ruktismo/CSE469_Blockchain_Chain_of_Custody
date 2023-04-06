@@ -20,7 +20,7 @@ def main():
 
     """
     Argument Types:
-        bchoc add -c case_id -i item_id [-i item_id ...]
+        bchoc add -c case_id -i item_id [-i item_id ...]cv
         bchoc checkout -i item_id
         bchoc checkin -i item_id
         bchoc log [-r] [-n num_entries] [-c case_id] [-i item_id]
