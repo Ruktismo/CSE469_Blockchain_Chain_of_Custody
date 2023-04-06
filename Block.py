@@ -2,6 +2,9 @@
 import datetime
 import struct
 import os
+import pickle
+
+from Block_Chain import *
 # INITIAL (for the initial block ONLY), CHECKEDIN, CHECKEDOUT, DISPOSED, DESTROYED, or RELEASED
 # add zeros to respective state to equal 12 characters
 
@@ -12,15 +15,13 @@ def getUnixTime():
     isoTime = presentDate.isoformat()
     return  isoTime
 
-def byteCounter(str):
-    return len(str.encode("utf-8"))
-
 #converts stored double back to iso format
 def getIso8601Timestamp(double_timestamp):
-    unix_timestamp = struct.unpack('d', double_timestamp)[0] / 1000
-    dt = datetime.datetime.fromtimestamp(unix_timestamp)
-    iso8601_timestamp = dt.strftime('%Y-%m-%dT%H:%M:%S.%f')
-    return iso8601_timestamp
+    timestamp = struct.unpack('d', double_timestamp)[0]
+    dt = datetime.datetime.utcfromtimestamp(timestamp)
+    iso8601_timestamp = dt.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+
+    return iso8601_timestamp 
 
 class Block:
     def __init__(self):
@@ -45,7 +46,10 @@ class Block:
     #auto grabs current unix time, no params needed
     def setTimestamp(self):
         self.Timestamp = getUnixTime()
-    
+        
+    def updateTimestamp(self,x):
+        self.Timestamp = x
+        
     def getCID(self):
         return self.CID
 
@@ -77,114 +81,97 @@ class Block:
     def setData(self, data):
         self.Data = data
     
-    #TODO does not return a 4 byte double
+    #TODO does not return a 8 byte double
     def getDoubleTimestamp(self):
         dt = datetime.datetime.strptime(self.getTimestamp(), '%Y-%m-%dT%H:%M:%S.%f')
-        unix_timestamp = datetime.datetime.timestamp(dt) * 1000
-        double_timestamp = struct.pack('d', unix_timestamp)
-        # print(byteCounter(str(double_timestamp)))
-        return double_timestamp
+        now = datetime.datetime.timestamp(dt)
+        now_bytes = struct.pack('d', float(now))
+        print("byte verify: " + str(len(now_bytes)))
+        return now_bytes
     
-
-        
-    #TODO need to work on formatting this
+            
+    def printBlock(self):
+        ret ="Static Block contents: --------------------------------------"
+        ret += "\nPrevious hash: "+ str(self.PreviousHash)
+        ret +=("\nTimestamp: " + str(self.Timestamp))
+        ret +=("\nCID: " + str(self.CID))
+        ret +=("\nEID: " + str(self.EID))
+        ret +=("\nState: " + str(self.State))
+        ret +=("\nData Length: " + str(self.DataLen))
+        ret +=("\nData: " + str(self.Data))
+        ret +=("\n-------------------------------------------------------------")
+        return ret
+    
     def blockToBytes(self):
-
-        # block = bytes((str(self.getPreviousHash())),'utf-8')
+        block = []
+        packed1 = struct.pack("32s", self.getPreviousHash().encode())
+        packed2 = self.getDoubleTimestamp()
+        packed3 = struct.pack("16s", str(self.getCID()).encode())
+        packed4 = struct.pack("I", self.getEID())
+        packed5 = struct.pack("12s", self.getState().encode())
+        packed6 = struct.pack("I", self.getDataLength())
+        packed7 = struct.pack((str(len(self.getData()))+'s'), self.getData().encode())
         
-        # # print("***"+ self.getTimestamp())
-        # # y = self.getDoubleTimestamp()
-        # # print("***"+str(y))
-        # # print("***"+str(getIso8601Timestamp(y)))
-        
-        # #TODO need to make time a nicer hex
-        # block += bytes(str(self.getDoubleTimestamp()),'utf-8')
-        # block += bytes(hex(self.getCID())[2:],'utf-8')
-        # block += bytes(hex(self.getEID())[2:],'utf-8')
-        
-        # state = self.getState().encode('utf-8')
-        # block += bytes(state.hex(),'utf-8')
-        
-        # block += bytes(hex(self.getDataLength())[2:],'utf-8')
-        # s = self.getData().encode('utf-8')
-        # block += bytes(s.hex(),'utf-8')
-
-        block = self.getPreviousHash()
-        block += str(self.getDoubleTimestamp())
-        block += str(self.getCID())
-        block += str(self.getEID())
-        block += str(self.getState())
-        block += str(self.getDataLength())
-        block += str(self.getData())
+        block.append(packed1)  
+        block.append(packed2) 
+        block.append(packed3) 
+        block.append(packed4) 
+        block.append(packed5) 
+        block.append(packed6) 
+        block.append(packed7) 
+    
         fileName = str(self.getTimestamp()).replace(":", "-")+".raw"
-       # print(fileName)
-       #TODO should turn "block" into hex or something but file is written as bytes
         filePath = os.path.join('./BlockFolder', fileName)
+        
         if not os.path.exists('./BlockFolder'):
             os.makedirs('./BlockFolder')
-        out = open(filePath, "wb")
-        out.write(bytes(block, 'utf-8'))
+        with open(filePath, "wb") as out:
+            out.write(pickle.dumps(block))
+            
+    def fillFromFile(self, file):
+        with open(file,'rb') as f:
+            contents = pickle.load(f)
         
-    def blockByteCounter(self):
-        print("Block byte counts: --------------------------------------")
-        print("Previous hash: " + str(byteCounter(self.PreviousHash))  )
-        print("Timestamp: " + str(byteCounter(str(self.getDoubleTimestamp()))))
-        print("CID: " + str(byteCounter(str(self.CID))) )
-        print("EID: " + str(byteCounter(str(self.EID))))
-        print("State: " + str(byteCounter(str(self.State))))
-        print("Data Length: " + str(byteCounter(str(self.DataLen))))
-        print("Data: " + str(byteCounter(self.Data)))
-    print("-------------------------------------------------------------")
-        
-    def printBlock(self):
-        print("Static Block contents: --------------------------------------")
-        print("Previous hash: " + self.PreviousHash)
-        print("Timestamp: " + str(self.Timestamp))
-        print("CID: " + str(self.CID))
-        print("EID: " + str(self.EID))
-        print("State: " + str(self.State))
-        print("Data Length: " + str(self.DataLen))
-        print("Data: " + self.Data)
-        print("-------------------------------------------------------------")
-        
-# class static_block:
-#     #padding info (length in bytes) for state
-#     bytelen12 = 12
-#     #actual state assignment
-#     stateVar = b'\2'
-    
-#     PreviousHash = "26 19 13 b7 1a 13 30 6d 63 d6 56 12 87 5e ad 13 ed 28 1b 2f 70 f9 c7 13 76 12 47 f4 7a 9f f7 ee "
-    
-#     #function defined at the top, need to change to make 8 byte long float 
-#     Timestamp = getUnixTime()
-#     CID = 9269517611667619
-#     EID = 2179
-    
-#     #force padding of "a"s to the actual state assignment
-#     State = stateVar.rjust(bytelen12, b'\a')
-#     #length of following Data
-#     DataLen = 100
-#     #Data at length of 100
-#     Data = "uwF6MJKlWZ6G1JQQuqXRVHAwYIusJQBhhL7KFtrnxnN9xTwhESWbAi6MI09OfyGYUFbp8vUMEJcwCIJInReYggGt9HsS3QzjDc1h"
-        
-# print("Static Block contents: ")
-# print("Previous hash: " + static_block.PreviousHash)
-# print("Timestamp: " + str(static_block.Timestamp))
-# print("CID: " + str(static_block.CID))
-# print("EID: " + str(static_block.EID))
-# print("State: " + str(static_block.State))
-# print("Data Length: " + str(static_block.DataLen))
-# print("Data: " + static_block.Data)
 
-b = Block()
-b.setCID(9269517611667619)
-b.setData("uwF6MJKlWZ6G1JQQuqXRVHAwYIusJQBhhL7KFtrnxnN9xTwhESWbAi6MI09OfyGYUFbp8vUMEJcwCIJInReYggGt9HsS3QzjDc1h")
-b.setEID(2179)
-b.setState("000CHECKEDIN")
-b.setPreviousHash("261913b71a13306d63d65612875ead13")
-b.setTimestamp()
-b.setDataLength(100)
-b.printBlock()
+        unpacked1 = struct.unpack("32s", contents[0])
+        unpacked2 = getIso8601Timestamp(contents[1])
+        unpacked3 = struct.unpack("16s", contents[2])
+        unpacked4 = struct.unpack("I", contents[3])
+        unpacked5 = struct.unpack("12s", contents[4])
+        unpacked6 = struct.unpack("I", contents[5])
+        
+        unpacked1= "".join(str(i) for i in unpacked1)
+        unpacked3= "".join(str(i) for i in unpacked3)
+        unpacked4= "".join(str(i) for i in unpacked4)
+        unpacked5= "".join(str(i) for i in unpacked5)
+        unpacked6= "".join(str(i) for i in unpacked6)
+        
+        
+        unpacked7 = struct.unpack(unpacked6+'s', contents[6])
+        unpacked7= "".join(str(i) for i in unpacked7)
+        
+        
+        self.setPreviousHash(unpacked1[2:-1])
+        self.updateTimestamp(unpacked2)
+        self.setCID(unpacked3[2:-1])
+        self.setEID(unpacked4)
+        self.setState(unpacked5[2:-1].lstrip('0'))
+        self.setDataLength(unpacked6)
+        self.setData(unpacked7[2:-1])
+        
+        
 
+
+# b = Block()
+# b.setCID(9269517611667620)
+# b.setData("uwF6MJKlWZ6G1JQQuqXRVHAwYIusJQBhhL7KFtrnxnN9xTwhESWbAi6MI09OfyGYUFbp8vUMEJcwCIJInReYggGt9HsS3QzjDc1h")
+# b.setEID(2169)
+# b.setState("00000INITIAL")
+# b.setPreviousHash("261913b71a13306d63d65612875ead13")
+# b.setTimestamp()
+# b.setDataLength(100)
+# b.printBlock()
+# print(str(b.getDoubleTimestamp()))
+
+# print(str(getIso8601Timestamp(b.getDoubleTimestamp())))
 # b.blockToBytes()
-b.blockByteCounter()
