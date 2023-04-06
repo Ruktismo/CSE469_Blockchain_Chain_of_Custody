@@ -50,5 +50,5 @@ class BlockChain:
             print(obj.printBlock())
         
 
-x = BlockChain()
+# x = BlockChain()
 

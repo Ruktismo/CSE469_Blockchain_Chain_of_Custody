@@ -15,10 +15,6 @@ def getUnixTime():
     isoTime = presentDate.isoformat()
     return  isoTime
 
-def byteCounter(f):
-    
-    return len(struct.pack('f', f))
-
 #converts stored double back to iso format
 def getIso8601Timestamp(double_timestamp):
     timestamp = struct.unpack('d', double_timestamp)[0]
