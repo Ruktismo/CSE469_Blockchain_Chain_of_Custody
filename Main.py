@@ -1,7 +1,7 @@
 import sys
 
 from Add import add
-from Checkout import checkout
+#from Checkout import checkout
 from Checkin import checkin
 from Log import log
 from Remove import remove
@@ -32,30 +32,30 @@ def main():
         print("ERROR: please give a command")
         exit(-1)
 
-    if sys.argv[1] is "add":
+    if sys.argv[1] == "add":
         if len(sys.argv) < 6 or (len(sys.argv) % 2 != 0):
             print("ERROR: Incorrect number of args\n Proprer format: bchoc add -c case_id -i item_id [-i item_id ...]")
             exit(-1)
         case_id = sys.argv[3]
         item_ids = []
         for i in range(4, len(sys.argv)):
-            if sys.argv[i] is "-i":
+            if sys.argv[i] == "-i":
                 item_ids.append(sys.argv[i+1])
         add(case_id, item_ids)
 
-    if sys.argv[1] is "checkout":
+    elif sys.argv[1] == "checkout":
         if len(sys.argv) != 4:
             print("ERROR: Incorrect number of args\n Proprer format:  bchoc checkout -i item_id")
             exit(-1)
         checkout(sys.argv[3])
 
-    if sys.argv[1] is "checkin":
+    elif sys.argv[1] == "checkin":
         if len(sys.argv) != 4:
             print("ERROR: Incorrect number of args\n Proprer format: bchoc checkin -i item_id")
             exit(-1)
         checkin(sys.argv[3])
 
-    if sys.argv[1] is "log":
+    elif sys.argv[1] == "log":
         is_reversed = False
         num_entries = -1
         case_id = -1
@@ -64,14 +64,14 @@ def main():
             if '-r' in sys.argv[i]:
                 is_reversed = True
             if '-n' in sys.argv[i]:
-                num_entries = sys.argv[i+1]
-            if '-c' in sys.argv:
+                num_entries = int(sys.argv[i+1])
+            if '-c' in sys.argv[i]:
                 case_id = sys.argv[i+1]
-            if '-i' in sys.argv:
+            if '-i' in sys.argv[i]:
                 item_id = sys.argv[i+1]
         log(is_reversed, num_entries, case_id, item_id)
 
-    if sys.argv[1] is "remove":
+    elif sys.argv[1] == "remove":
         if len(sys.argv) != 6 or len(sys.argv) != 8:
             print("ERROR: Incorrect number of args\n Proprer format:  bchoc remove -i item_id -y reason [-o owner]")
             exit(-1)
@@ -80,21 +80,22 @@ def main():
             owner = sys.argv[7]
         remove(sys.argv[3], sys.argv[5], owner)
 
-    if sys.argv[1] is "init":
+    elif sys.argv[1] == "init":
         if len(sys.argv) != 2:
             print("ERROR: Incorrect number of args\n Proprer format:  bchoc init")
             exit(-1)
         init_chain()
 
-    if sys.argv[1] is "verify":
+    elif sys.argv[1] == "verify":
         if len(sys.argv) != 2:
             print("ERROR: Incorrect number of args\n Proprer format:  bchoc verify")
             exit(-1)
         verify_chain()
 
-    # if none of the args hit then exit with error
-    print("ERROR: Unknown command\n")
-    exit(-1)
+    else:
+        # if none of the args hit then exit with error
+        print("ERROR: Unknown command\n")
+        exit(-1)
 
 
 if __name__ == "__main__":

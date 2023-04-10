@@ -4,7 +4,7 @@ import struct
 import os
 import pickle
 
-from Block_Chain import *
+#from Block_Chain import *
 # INITIAL (for the initial block ONLY), CHECKEDIN, CHECKEDOUT, DISPOSED, DESTROYED, or RELEASED
 # add zeros to respective state to equal 12 characters
 
