@@ -34,3 +34,5 @@ class Data:
         
     def toString(self):
         return "Case ID: " + str(self.CaseID) +'\n' + "Evidence ID: " + str(self.EvidenceID) +'\n' + "State: " + str(self.state) 
+    
+Dat = Data()
