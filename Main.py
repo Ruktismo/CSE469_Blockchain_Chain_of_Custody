@@ -1,7 +1,7 @@
 import sys
 
 from Add import add
-#from Checkout import checkout
+from Checkout import checkout
 from Checkin import checkin
 from Log import log
 from Remove import remove

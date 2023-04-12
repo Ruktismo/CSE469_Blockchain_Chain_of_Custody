@@ -40,14 +40,14 @@ class BlockChain:
                     x.state = temp.state
                 
         # show datalist content 
-        print("\nBlock list count: "+str(len(self.datalist)))
-        print("datalist contents: ")
-        for i in self.datalist:
-            print(i.toString()+'\n')
-        print("\nBlock list count: "+str(len(self.blockList)))
-        print("\nBlock list contents: ")
-        for obj in self.blockList:
-            print(obj.printBlock())
+        # print("\nBlock list count: "+str(len(self.datalist)))
+        # print("datalist contents: ")
+        # for i in self.datalist:
+        #     print(i.toString()+'\n')
+        # print("\nBlock list count: "+str(len(self.blockList)))
+        # print("\nBlock list contents: ")
+        # for obj in self.blockList:
+        #     print(obj.printBlock())
         
 
 BC = BlockChain()  # Friendly name for us to import
