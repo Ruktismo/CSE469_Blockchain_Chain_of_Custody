@@ -13,5 +13,8 @@ import Block as item
 def checkin(item_id):
 
     print(f'Case: ')
+    print(f'Checked in item: ')
+    print(f'\tStatus: CHECKEDIN')
+    print(f'\tTime of action: ')
 
     pass

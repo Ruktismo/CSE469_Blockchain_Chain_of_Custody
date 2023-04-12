@@ -11,6 +11,10 @@ import Block as item
 #  time of action: [insert time here]
 def checkout(item_id):
 
+    print(f'Case: ')
+    print(f'Checked in item: ')
+    print(f'\tStatus: CHECKEDOUT')
+    print(f'\tTime of action: ')
 
     pass
 
