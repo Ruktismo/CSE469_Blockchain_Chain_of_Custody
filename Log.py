@@ -45,7 +45,7 @@ def log(is_reversed, num_entries, case_id, item_id):
     for i in range(0, (len(blocks) if num_entries == -1 else num_entries)):
         # if not checking case or item
         if case_id == -1 and item_id == -1:
-            print("Checking None")
+            # print("Checking None")
             p.append(blocks[i])  # just append
 
         # if checking case but NOT item

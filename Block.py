@@ -83,7 +83,7 @@ class Block:
     
     #TODO does not return a 8 byte double
     def getDoubleTimestamp(self):
-        dt = datetime.datetime.strptime(self.getTimestamp(), '%Y-%m-%dT%H:%M:%S.%f')
+        dt = datetime.datetime.strptime(self.getTimestamp(), '%Y-%m-%dT%H:%M:%S.%fZ')
         now = datetime.datetime.timestamp(dt)
         now_bytes = struct.pack('d', float(now))
         return now_bytes
