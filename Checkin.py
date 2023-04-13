@@ -24,42 +24,51 @@ def checkin(case_id, item_id):
 
     # go through the list and make sure its exact thingy, then change state
     for i in BC.datalist:
-        if i.CaseID == case_id:
-            if i.EvidenceID == item_id:
-                if i.State == "CHECKEDOUT":
-                    i.State = "CHECKEDIN"
+        if str(str(case_id)) == str(i.CaseID):
+            if str(i.EvidenceID) == str(item_id):
+                if i.state == "CHECKEDOUT":
+                    i.state = "CHECKEDIN"
+                    
+                    #this takes your data obj "i" and returns the block obj that matches it
+                    # this is mainly for filling the data and data length for writing to bytes
+                    dataBlock = BC.blockExists(i)
+                    thing = Block()
+                    
+                    
+                    # set the things
+                    hash = BC.getLatestHash()
+                    
+                    thing.setPreviousHash(hash)
+                    thing.setCID(case_id)
+                    thing.setEID(item_id)
+                    thing.setTimestamp()
+                    thing.setState("000CHECKEDIN")
+                    thing.setDataLength(int(dataBlock.getDataLength()))
+                    thing.setData(dataBlock.getData())
+                    
+                    # print the things from the getters
+                    print(f'Case: {thing.getCID()}')
+                    print(f'Checked in item: {thing.getEID()}')
+                    print(f'\tStatus: {thing.getState()}')
+                    print(f'\tTime of action: {thing.getTimestamp()}')
+
+                    
+
+                    # add  the thing to the file and update lists with reload
+                    thing.blockToBytes()
+                    BC.reload()
+                    
+                    
                 else:
-                    print("Error") #todo; work on later
+                    print("Error: cannot check in what is not checked out") #todo; work on later
 
-    # new block thingy to add to the chain
-    thing = Block()
-    # set the things
-    thing.setCID(case_id)
-    thing.setEID(item_id)
-    thing.setTimestamp()
-    thing.setState("CHECKEDIN")
-
-    # print the things from the getters
-    print(f'Case: {thing.getCID()}')
-    print(f'Checked in item: {thing.getEID()}')
-    print(f'\tStatus: {thing.getState()}')
-    print(f'\tTime of action: {thing.getTimestamp()}')
-
-    input = pickle.dumps(BC.blockList[-1])
-    hash = sha256(input).hexdigest()
-    thing.setPreviousHash(hash)
-
-    # add  the thing to the block list
-    BC.blockList.append(thing)
-    # possibly NIL, remaining block values
-    # maaaaybe update block folder #Johnny job???
+            
+    
+    
 
     # now do the thing
 
-checkout(9269517611667620, 2169)
-checkin(9269517611667620, 2169)
-#
-# Case ID: 9269517611667620
-# Evidence ID: 2169
-# State: INITIAL
+# checkin(9269517611799130, 2123)
+# BC.printBC()
+# checkin(9269517611799130, 2123)
 

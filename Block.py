@@ -86,7 +86,6 @@ class Block:
         dt = datetime.datetime.strptime(self.getTimestamp(), '%Y-%m-%dT%H:%M:%S.%f')
         now = datetime.datetime.timestamp(dt)
         now_bytes = struct.pack('d', float(now))
-        print("byte verify: " + str(len(now_bytes)))
         return now_bytes
     
             
@@ -103,7 +102,7 @@ class Block:
         return ret
     
     def blockToBytes(self):
-        block = []
+        
         packed1 = struct.pack("32s", self.getPreviousHash().encode())
         packed2 = self.getDoubleTimestamp()
         packed3 = struct.pack("16s", str(self.getCID()).encode())
@@ -112,33 +111,27 @@ class Block:
         packed6 = struct.pack("I", self.getDataLength())
         packed7 = struct.pack((str(len(self.getData()))+'s'), self.getData().encode())
         
-        block.append(packed1)  
-        block.append(packed2) 
-        block.append(packed3) 
-        block.append(packed4) 
-        block.append(packed5) 
-        block.append(packed6) 
-        block.append(packed7) 
+        block = (packed1) + (packed2) + (packed3) + (packed4) + (packed5) + (packed6) + (packed7)
+
     
-        fileName = str(self.getTimestamp()).replace(":", "-")+".raw"
-        filePath = os.path.join('./BlockFolder', fileName)
+        fileName = "./BC.raw"
         
-        if not os.path.exists('./BlockFolder'):
-            os.makedirs('./BlockFolder')
-        with open(filePath, "wb") as out:
-            out.write(pickle.dumps(block))
+        
+        with open(fileName, "ab") as out:
+                    out.write(block)
+                   
             
-    def fillFromFile(self, file):
-        with open(file,'rb') as f:
-            contents = pickle.load(f)
+    def fillFromFile(self):
+        with open("BC.raw",'rb') as f:
+            contents = f.read()
         
 
-        unpacked1 = struct.unpack("32s", contents[0])
-        unpacked2 = getIso8601Timestamp(contents[1])
-        unpacked3 = struct.unpack("16s", contents[2])
-        unpacked4 = struct.unpack("I", contents[3])
-        unpacked5 = struct.unpack("12s", contents[4])
-        unpacked6 = struct.unpack("I", contents[5])
+        unpacked1 = struct.unpack("32s", contents[0:32])
+        unpacked2 = getIso8601Timestamp(contents[32:40])
+        unpacked3 = struct.unpack("16s", contents[40:56])
+        unpacked4 = struct.unpack("I", contents[56:60])
+        unpacked5 = struct.unpack("12s", contents[60:72])
+        unpacked6 = struct.unpack("I", contents[72:76])
         
         unpacked1= "".join(str(i) for i in unpacked1)
         unpacked3= "".join(str(i) for i in unpacked3)
@@ -146,8 +139,8 @@ class Block:
         unpacked5= "".join(str(i) for i in unpacked5)
         unpacked6= "".join(str(i) for i in unpacked6)
         
-        
-        unpacked7 = struct.unpack(unpacked6+'s', contents[6])
+        countForSeven = int(unpacked6)+76
+        unpacked7 = struct.unpack(unpacked6+'s', contents[76:countForSeven])
         unpacked7= "".join(str(i) for i in unpacked7)
         
         
@@ -163,15 +156,26 @@ class Block:
 
 
 # b = Block()
-# b.setCID(9269517611667620)
-# b.setData("uwF6MJKlWZ6G1JQQuqXRVHAwYIusJQBhhL7KFtrnxnN9xTwhESWbAi6MI09OfyGYUFbp8vUMEJcwCIJInReYggGt9HsS3QzjDc1h")
-# b.setEID(2169)
-# b.setState("00000INITIAL")
+# b.setCID(9269517611799130)
+# b.setData("uwF6MJKlWZ")
+# b.setEID(2123)
+# b.setState("00CHECKEDOUT")
 # b.setPreviousHash("261913b71a13306d63d65612875ead13")
 # b.setTimestamp()
-# b.setDataLength(100)
-# b.printBlock()
-# print(str(b.getDoubleTimestamp()))
+# b.setDataLength(10)
+# # print(b.printBlock())
 
-# print(str(getIso8601Timestamp(b.getDoubleTimestamp())))
 # b.blockToBytes()
+
+# a = Block()
+# a.setCID(9269517888888130)
+# a.setData("uwF6MJKlWZ1231231231")
+# a.setEID(2122)
+# a.setState("000CHECKEDIN")
+# a.setPreviousHash("5205a5782cbd9040cfc858063b34c3acdd7b0731cf826aa4a04ffd49cc5559b4")
+# a.setTimestamp()
+# a.setDataLength(20)
+# # print(a.printBlock())
+
+# a.blockToBytes()
+

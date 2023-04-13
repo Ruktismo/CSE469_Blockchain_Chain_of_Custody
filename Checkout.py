@@ -34,7 +34,8 @@ def checkout(case_id, item_id):
     blox.setEID(item_id)
     blox.setTimestamp()
     blox.setState("CHECKEDOUT")
-
+    #possibly NIL, remaining block values
+    
     #print the things from the getters
     print(f'Case: {blox.getCID()}')
     print(f'Checked out item: {blox.getEID()}')
@@ -47,9 +48,8 @@ def checkout(case_id, item_id):
     blox.setPreviousHash(hash)
 
     #add  the thing to the block list
-    BC.blockList.append(blox)
-    #possibly NIL, remaining block values
-    #maaaaybe update block folder #Johnny job???
+    blox.blockToBytes()
+    BC.reload()
 
 
 
