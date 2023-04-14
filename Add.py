@@ -56,7 +56,7 @@ def add(case_id, item_ids):
                 if i.CaseID == case_id:
                     if i.EvidenceID == item_ids[j]:
                         print("Error: Cannot add an existing item. Must add a new item. ")
-                        exit()
+                        break
                     else:
                         # item_id is unique/new, add new block
                         b = Block()
