@@ -4,6 +4,13 @@ from Block_Chain import BC
 from Block import Block
 
 
+# convert int to hex
+def intToHex(i):
+    hex(i)  # convert int to hex
+    j = '%x' % i  # remove '0x' & 'L'
+    j = uuid.UUID(hex=j)  # add dashes back in
+    return j  # returns hex str formatted "########-####-####-####-############"
+
 def remove(item_id, reason, owner):
     # go through the list to check if item_id exists
     for i in BC.datalist:
@@ -43,9 +50,11 @@ def remove(item_id, reason, owner):
                 b.setDataLength(int(dataBlock.getDataLength()))
                 b.setData(dataBlock.getData())
 
-                # if storing CID as string w/ no hyphens (see Add.py, line 69), insert hyphens again
-                # print(f'Case: {uuid.UUID(hex=b.getCID())}')
-                print(f'Case: {b.getCID()}')
+                # print(f'Case: {b.getCID()}')
+
+                n = b.getCID()  # get int CID
+                UUIDstr = intToHex(n)  # convert int CID to UUID str (w dashes)
+                print(f'Case: {UUIDstr}')  # print UUID str
                 print(f'Removed item: {b.getEID()}')
                 print(f'\tStatus: {b.getState()}')
                 if (b.getState() == "RELEASED"):

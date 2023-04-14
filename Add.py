@@ -22,6 +22,7 @@ def isValidUuid(cid):
     except ValueError:
         return False
 
+
 # check if item_id is a valid 4 byte int
 def isValidInt(eid):
     if eid.isdigit():
@@ -29,9 +30,20 @@ def isValidInt(eid):
     else:
         return False
 
+
 # remove dashes from uuid
 def uuidToHex(u: str) -> str:
     return uuid.UUID(u).hex
+
+
+# convert int CID to hex string (add dashes again)
+# ex. CID=135312414559765810732748806252319031539 -> convert to hex -> 65CC391D65684DCCA3F186A2F04140F3 -> add dashes -> "65cc391d-6568-4dcc-a3f1-86a2f04140f3"
+def intToHex(i):
+    hex(i)  # convert int to hex
+    j = '%x' % i  # remove '0x' & 'L'
+    j = uuid.UUID(hex=j)  # add dashes back in
+    return j  # returns hex str formatted "########-####-####-####-############"
+
 
 # generate random string based on given random data length
 def getRandomString(dataLength):
@@ -64,9 +76,11 @@ def add(case_id, item_ids):
                         b.setPreviousHash(hash)
                         b.setTimestamp()
 
-                        # remove hyphens from uuid, store as hexstr
-                        b.setCID(uuidToHex(
-                            case_id))  # ex: '65cc391d-6568-4dcc-a3f1-86a2f04140f3' stored as '65cc391d65684dcca3f186a2f04140f3'
+                        # set str case_id to int CID
+                        n = uuidToHex(case_id)  # remove hyphens from uuid, store as hexstr
+                        intN = int(n, 16)  # convert hexstr to int
+                        b.setCID(intN)  # set int to CID
+
                         b.setEID(item_ids[j])
                         b.setState("000CHECKEDIN")
 
@@ -87,3 +101,4 @@ def add(case_id, item_ids):
             print("Error: item_id is not an integer. Must input integer")
 
 # add -c 65cc391d65684dcca3f186a2f04140f3 -i 987654321
+# add -c 65cc391d-6568-4dcc-a3f1-86a2f04140f3 -i 987654321
