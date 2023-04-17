@@ -190,19 +190,15 @@ class Block:
 # b.setPreviousHash("261913b71a13306d63d65612875ead13")
 # b.setTimestamp()
 # b.setDataLength(15)
-# # print(b.printBlock())
 
 # b.blockToBytes()
 
-# a = Block()
-# a.setCID(9269517888888130)
-# a.setData("uwF6MJKlWZ1231231231")
-# a.setEID(2122)
-# a.setState("000CHECKEDIN")
-# a.setPreviousHash("5205a5782cbd9040cfc858063b34c3acdd7b0731cf826aa4a04ffd49cc5559b4")
-# a.setTimestamp()
-# a.setDataLength(20)
-# # print(a.printBlock())
+# b.setCID(9269517612799150)
+# b.setData("uwF6MJKlWZ")
+# b.setEID(2113)
+# b.setState("000CHECKEDIN")
+# b.setPreviousHash("261913b71a13306d63d65612875ead13")
+# b.setTimestamp()
+# b.setDataLength(10)
 
-# a.blockToBytes()
-
+# b.blockToBytes()
