@@ -83,7 +83,7 @@ class Block:
     
     #TODO does not return a 8 byte double
     def getDoubleTimestamp(self):
-        dt = datetime.datetime.strptime(self.getTimestamp(), '%Y-%m-%dT%H:%M:%S.%fZ')
+        dt = datetime.datetime.strptime(self.getTimestamp(), '%Y-%m-%dT%H:%M:%S.%f')
         now = datetime.datetime.timestamp(dt)
         now_bytes = struct.pack('d', float(now))
         return now_bytes
@@ -114,15 +114,42 @@ class Block:
         block = (packed1) + (packed2) + (packed3) + (packed4) + (packed5) + (packed6) + (packed7)
 
     
-        fileName = "./BC.raw"
+        # fileName = "./BC.raw"
         
         
-        with open(fileName, "ab") as out:
-                    out.write(block)
-                   
+        # with open(fileName, "ab") as out:
+        #             out.write(block)
+        directory_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
+
+        directory = os.path.dirname(directory_path)
+        
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        if not os.path.exists(directory_path):
+            with open(directory_path, 'wb') as f:
+                f.write(block)
+        else:
+            with open(directory_path, "ab") as f:
+                f.write(block)
+            
+        f.close()          
             
     def fillFromFile(self):
-        with open("BC.raw",'rb') as f:
+            
+        file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
+
+        directory = os.path.dirname(file_path)
+
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+
+        if not os.path.exists(file_path):
+            with open(file_path, 'wb') as f:
+                f.close()
+        
+        with open(file_path, "rb") as f:
             contents = f.read()
         
 
@@ -156,13 +183,13 @@ class Block:
 
 
 # b = Block()
-# b.setCID(9269517611799130)
-# b.setData("uwF6MJKlWZ")
-# b.setEID(2123)
-# b.setState("00CHECKEDOUT")
+# b.setCID(9269517612799130)
+# b.setData("uwF6MJKlWZqqqqq")
+# b.setEID(2133)
+# b.setState("000CHECKEDIN")
 # b.setPreviousHash("261913b71a13306d63d65612875ead13")
 # b.setTimestamp()
-# b.setDataLength(10)
+# b.setDataLength(15)
 # # print(b.printBlock())
 
 # b.blockToBytes()
