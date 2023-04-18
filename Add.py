@@ -84,7 +84,8 @@ def add(case_id, item_ids):
     for j in item_ids:
         # check if j is INT
         print("Current item_id: " + j)
-        if isValidInt(j):  # lol oops, convert input to int
+        if isValidInt(str(j)):  # lol oops, convert input to int
+            print("item_id is VALID")
             # iter through blockchain. If item already exists, exit. Else add new block to chain
             for i in BC.datalist:
                 if i.CaseID == case_id:
