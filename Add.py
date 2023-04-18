@@ -59,14 +59,14 @@ def add(case_id, item_ids):
         exit()
 
     # Case ID Byte Check Passed, for ea item_id, check BC list if case id && item_id exists
-    print("\nCase: " + case_id)
+    print("Case: " + case_id)
     for j in item_ids:
-        # check if item_id[j] is INT
-        if isValidInt(item_ids[j]):
+        # check if j is INT
+        if isValidInt(j):  # lol oops, convert input to int
             # iter through blockchain. If item already exists, exit. Else add new block to chain
             for i in BC.datalist:
                 if i.CaseID == case_id:
-                    if i.EvidenceID == item_ids[j]:
+                    if i.EvidenceID == j:
                         print("Error: Cannot add an existing item. Must add a new item. ")
                         break
                     else:
@@ -81,7 +81,7 @@ def add(case_id, item_ids):
                         intN = int(n, 16)  # convert hexstr to int
                         b.setCID(intN)  # set int to CID
 
-                        b.setEID(item_ids[j])
+                        b.setEID(j)  # store item id into block
                         b.setState("000CHECKEDIN")
 
                         # set data to new block
@@ -96,7 +96,7 @@ def add(case_id, item_ids):
                         b.blockToBytes()
                         BC.reload()
 
-        # 2. item_id[j] is NOT an INT
+        # 2. j is NOT an INT
         else:
             print("Error: item_id is not an integer. Must input integer")
 
