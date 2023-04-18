@@ -53,22 +53,45 @@ def getRandomString(dataLength):
 
 
 def add(case_id, item_ids):
+
+    #Test 007 - add before init - should create initial block
+    if BC.blockList and BC.blockList[0].getState() == "INITIAL":  # str(len(BC.blockList) != 0), might change condition
+        pass
+    else:
+        b = Block()
+        b.setCID(0)  # or b.setCID(None)? reformat for printing, null
+        b.setData("Initial block")
+        b.setEID(0)
+        b.setState("00000INITIAL")
+        b.setPreviousHash("0000000000000000000000000000None")  # or b.setPreviousHash("None")? reformat for printing
+        b.setTimestamp()
+        b.setDataLength(14)
+        b.setData("Initial block ")  # 14 length string
+        print("Blockchain file not found. Created INITIAL block.")
+        b.blockToBytes()  # add into blockchain file, will be printed w/ log
+        BC.reload()
+
+
+
+
     # Check if CASE ID is UUID
     if not isValidUuid(case_id):
         print("Error: case_id is not a valid UUID. Must input valid UUID")
-        exit()
+        exit(-1)
 
     # Case ID Byte Check Passed, for ea item_id, check BC list if case id && item_id exists
     print("Case: " + case_id)
     for j in item_ids:
         # check if j is INT
+        print("Current item_id: " + j)
         if isValidInt(j):  # lol oops, convert input to int
             # iter through blockchain. If item already exists, exit. Else add new block to chain
             for i in BC.datalist:
                 if i.CaseID == case_id:
                     if i.EvidenceID == j:
                         print("Error: Cannot add an existing item. Must add a new item. ")
-                        break
+                        #break
+                        exit(-1)
                     else:
                         # item_id is unique/new, add new block
                         b = Block()

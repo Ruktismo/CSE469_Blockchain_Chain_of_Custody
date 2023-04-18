@@ -7,10 +7,11 @@ from Block import Block
 from Block_Chain import BC
 
 def init_chain():
+    BC.load_data()
     # 1. check if at least one blockchain .raw file exists
     # note from Johnny, checking if none checks the type, this will always return found bc type is list
     # have to iterate through BC.dataList or check first index of either data or blocklist and if empty to get all possible cases
-    if BC.blockList and BC.blockList[0].getState() == "INITIAL":  # str(len(BC.blockList) != 0), might change condition
+    if BC.blockList and BC.blockList[0].getState() == "INITIAL":
         print("Blockchain file found with INITIAL block.")
 
     # 2. else, create initial block
@@ -24,7 +25,8 @@ def init_chain():
         b.setTimestamp()
         b.setDataLength(14)
         b.setData("Initial block ")  # 14 length string
-        b.blockToBytes()  # add into blockchain file, will be printed w/ log
         print("Blockchain file not found. Created INITIAL block.")
+        b.blockToBytes()  # add into blockchain file, will be printed w/ log
+        BC.reload()
     # pass
 # init_chain()
