@@ -137,15 +137,15 @@ class Block:
         f.close()      
             
     def initToBytes(self):
-        packed1 = struct.pack("32s", self.getPreviousHash().encode())
+        packed1 = struct.pack("32s", self.getPreviousHash())
         packed2 = self.getDoubleTimestamp()
-        packed3 = struct.pack("16s", str(self.getCID()).encode())
+        packed3 = struct.pack("16s", str(self.getCID()))
         packed4 = struct.pack("I", self.getEID())
         packed5 = struct.pack("12s", self.getState().encode())
         packed6 = struct.pack("I", self.getDataLength())
         packed7 = struct.pack('14s', self.getData().encode())
         
-        block = (packed2) + (packed5) + (packed6) + (packed7)
+        block = (packed1) + (packed2) + (packed3) + (packed4) + (packed5) + (packed6) + (packed7)
         directory_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
         
         with open(directory_path, "ab") as f:
