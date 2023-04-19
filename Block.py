@@ -19,7 +19,7 @@ def getUnixTime():
 def getIso8601Timestamp(double_timestamp):
     timestamp = struct.unpack('d', double_timestamp)[0]
     dt = datetime.datetime.utcfromtimestamp(timestamp)
-    iso8601_timestamp = dt.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+    iso8601_timestamp = dt.strftime('%Y-%m-%dT%H:%M:%S.%f')
 
     return iso8601_timestamp 
 
