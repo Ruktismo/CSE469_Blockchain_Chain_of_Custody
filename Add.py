@@ -49,10 +49,12 @@ def add(case_id, item_ids):
     # init_chain if no initial block
     file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
     directory = os.path.dirname(file_path)
-    if not os.path.exists(directory):
+    #if not os.path.exists(directory):
         #print("Directory isnt there, initializing chain")
-        init_chain()
-        add(case_id, item_ids)
+        #init_chain()
+        #add(case_id, item_ids)
+    if not BC.blockList and not BC.blockList[0].getState() == "INITIAL":
+        print("No existing blocklist")
     else:
         # Check if CASE ID is UUID
         if not isValidUuid(case_id):
