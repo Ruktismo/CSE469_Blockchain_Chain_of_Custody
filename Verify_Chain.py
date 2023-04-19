@@ -71,7 +71,10 @@ def verify_chain():
             if newD.state == "CHECKEDIN" or newD.state == "INITIAL":
                 pass  # valid for new evidence
             else:
-                print("New evidence added with invalid state")
+                print(f"New evidence added with invalid state\n"
+                      f"\tCID: {BC.blockList[i].getCID()}\n"
+                      f"\tEID: {BC.blockList[i].getEID()}\n"
+                      f"\tState: {BC.blockList[i].getState()}")
                 exit(-3)
 
             datas[BC.blockList[i].getEID()] = newD
