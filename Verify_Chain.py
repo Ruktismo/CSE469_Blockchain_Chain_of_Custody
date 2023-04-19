@@ -46,18 +46,18 @@ def verify_chain():
             DI, DE, RE -> None
             """
             # TODO check if state change is valid
-            if BC.blockList[i].getState() == "INITIAL":
+            if "INITIAL" in BC.blockList[i].getState():
                 print("Can't have more than one Init block")
                 exit(-3)
-            if datas[BC.blockList[i].getEID()].state == "CHECKEDIN" and BC.blockList[i].getState() == "CHECKEDIN":
+            if "CHECKEDIN" in datas[BC.blockList[i].getEID()].state and "CHECKEDIN" in BC.blockList[i].getState():
                 print("Can't check in item that is already in")
                 exit(-3)
-            if datas[BC.blockList[i].getEID()].state == "CHECKEDOUT" and BC.blockList[i].getState() != "CHECKEDIN":
+            if "CHECKEDOUT" in datas[BC.blockList[i].getEID()].state and "CHECKEDIN" not in BC.blockList[i].getState():
                 print("Can't preform action on item that is already out")
                 exit(-3)
-            if datas[BC.blockList[i].getEID()].state == "DISPOSED" or \
-                    datas[BC.blockList[i].getEID()].state == "DESTROYED" or \
-                    datas[BC.blockList[i].getEID()].state == "RELEASED":
+            if "DISPOSED" in datas[BC.blockList[i].getEID()].state or \
+                    "DESTROYED" in datas[BC.blockList[i].getEID()].state or \
+                    "RELEASED" in datas[BC.blockList[i].getEID()].state:
                 print("Can't preform action on item that has been removed")
                 exit(-3)
             # if valid then update state
@@ -68,7 +68,7 @@ def verify_chain():
             newD.CaseID = BC.blockList[i].getCID()
             newD.EvidenceID = BC.blockList[i].getEID()
             newD.state = BC.blockList[i].getState()
-            if newD.state == "CHECKEDIN" or newD.state == "INITIAL":
+            if "CHECKEDIN" in newD.state or "INITIAL" in newD.state:
                 pass  # valid for new evidence
             else:
                 print(f"New evidence added with invalid state\n"
