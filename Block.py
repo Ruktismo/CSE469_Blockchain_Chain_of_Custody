@@ -137,10 +137,10 @@ class Block:
         f.close()      
             
     def initToBytes(self):
-        packed1 = struct.pack("32s", self.getPreviousHash())
+        packed1 = self.getPreviousHash()
         packed2 = self.getDoubleTimestamp()
-        packed3 = struct.pack("16s", self.getCID())
-        packed4 = struct.pack("I", self.getEID())
+        packed3 = self.getCID()
+        packed4 = self.getEID()
         packed5 = struct.pack("12s", self.getState().encode())
         packed6 = struct.pack("I", self.getDataLength())
         packed7 = struct.pack('14s', self.getData().encode())
