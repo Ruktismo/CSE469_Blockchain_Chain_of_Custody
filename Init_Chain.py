@@ -39,6 +39,7 @@ def init_chain():
     else:
 
         print("Blockchain file found with INITIAL block.")
+        exit(-1)
                 
 
 
