@@ -33,7 +33,7 @@ def init_chain():
                 b.setData("Initial block ")  # 14 length string
                 print("Blockchain file not found. Created INITIAL block.")
                 b.initToBytes()  # add into blockchain file, will be printed w/ log
-                BC.reload()
+                # BC.reload()
         
         
 
