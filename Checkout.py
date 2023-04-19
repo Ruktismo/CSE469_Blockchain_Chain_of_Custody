@@ -36,7 +36,7 @@ def checkout(case_id, item_id):
                     thing.setCID(case_id)
                     thing.setEID(item_id)
                     thing.setTimestamp()
-                    thing.setState("000CHECKEDOUT")
+                    thing.setState("00CHECKEDOUT")
                     thing.setDataLength(int(dataBlock.getDataLength()))
                     thing.setData(dataBlock.getData())
 
