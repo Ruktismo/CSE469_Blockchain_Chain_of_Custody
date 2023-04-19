@@ -13,14 +13,14 @@ def init_chain():
     file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
 
     directory = os.path.dirname(file_path)
-    
+    if not os.path.exists(directory):
+                os.makedirs(directory)
     if not os.path.exists(file_path):
             with open(file_path, 'wb') as f:
                 f.close()
                 b = Block()   
                  
-            if not os.path.exists(directory):
-                os.makedirs(directory)
+            
                 
                         
                 b.setCID(None)  # or b.setCID(None)? reformat for printing, null
