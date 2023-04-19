@@ -14,15 +14,20 @@ from Data import Data
 # This should be in the Block class, but I don't want to nag johnny
 # And I may be the only one who needs it
 def getBlockHash(Block):
-    packed1 = struct.pack("32s", Block.getPreviousHash().encode())
-    packed2 = Block.getDoubleTimestamp()
-    packed3 = struct.pack("16s", str(Block.getCID()).encode())
-    packed4 = struct.pack("I", int(Block.getEID()))
-    packed5 = struct.pack("12s", Block.getState().encode())
-    packed6 = struct.pack("I", int(Block.getDataLength()))
-    packed7 = struct.pack((str(len(Block.getData())) + 's'), Block.getData().encode())
+    try:
+        packed1 = struct.pack("32s", Block.getPreviousHash().encode())
+        packed2 = Block.getDoubleTimestamp()
+        packed3 = struct.pack("16s", str(Block.getCID()).encode())
+        packed4 = struct.pack("I", int(Block.getEID()))
+        packed5 = struct.pack("12s", Block.getState().encode())
+        packed6 = struct.pack("I", int(Block.getDataLength()))
+        packed7 = struct.pack((str(len(Block.getData())) + 's'), Block.getData().encode())
 
-    blockBytes = packed1 + packed2 + packed3 + packed4 + packed5 + packed6 + packed7
+        blockBytes = packed1 + packed2 + packed3 + packed4 + packed5 + packed6 + packed7
+    except Exception as e:
+        print("Error doing checksum in verify, bad block")
+        print(e)
+        exit(-6)
     return sha256(blockBytes).digest()
 
 def verify_chain():
@@ -71,7 +76,7 @@ def verify_chain():
             if "CHECKEDIN" in newD.state or "INITIAL" in newD.state:
                 pass  # valid for new evidence
             else:
-                print(f"New evidence added with invalid state\n"
+                print(f"New evidence {i} added with invalid state\n"
                       f"\tCID: {BC.blockList[i].getCID()}\n"
                       f"\tEID: {BC.blockList[i].getEID()}\n"
                       f"\tState: {BC.blockList[i].getState()}")
