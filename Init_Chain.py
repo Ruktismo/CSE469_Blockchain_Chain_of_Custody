@@ -43,4 +43,4 @@ def init_chain():
                 
 
 
-init_chain()
+# init_chain()
