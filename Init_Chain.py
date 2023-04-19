@@ -29,7 +29,7 @@ def init_chain():
         b.setPreviousHash(None)  # or b.setPreviousHash("None")? reformat for printing
         b.setTimestamp()
         b.setDataLength(14)
-        b.setData("Initial block ")  # 14 length string
+        b.setData("Initial block")  # 14 length string
         print("Blockchain file not found. Created INITIAL block.")
         b.initToBytes()  # add into blockchain file, will be printed w/ log
         BC.reload()
@@ -41,7 +41,7 @@ def init_chain():
         print("Blockchain file found with INITIAL block.")
         i = Block()
         i.initFromFile()
-        if(i.getState() == "INITIAL"):
+        if(i.getState() == "INITIAL" and i.getDataLength == 14 and i.getData == "Initial block"):
             exit(0)
         else:
             exit(-1)
