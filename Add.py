@@ -50,8 +50,9 @@ def add(case_id, item_ids):
     file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
     directory = os.path.dirname(file_path)
     if not os.path.exists(directory):
-        init_chain()
-        add(case_id, item_ids)
+        print("Directory isnt there, initializing chain")
+        #init_chain()
+        #add(case_id, item_ids)
     else:
         # Check if CASE ID is UUID
         if not isValidUuid(case_id):
