@@ -18,10 +18,10 @@ def getUnixTime():
 #converts stored double back to iso format
 def getIso8601Timestamp(double_timestamp):
     timestamp = struct.unpack('d', double_timestamp)[0]
-    dt = datetime.datetime.utcfromtimestamp(timestamp)
-    iso8601_timestamp = dt.strftime('%Y-%m-%dT%H:%M:%S.%f')
+    dt = datetime.datetime.fromtimestamp(timestamp)
+    iso8601_timestamp = dt.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
 
-    return iso8601_timestamp 
+    return iso8601_timestamp
 
 class Block:
     def __init__(self):
