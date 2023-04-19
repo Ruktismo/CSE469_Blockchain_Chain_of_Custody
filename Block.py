@@ -137,7 +137,10 @@ class Block:
         f.close()      
             
     def initToBytes(self):
+        packed1 = struct.pack("32s", self.getPreviousHash().encode())
         packed2 = self.getDoubleTimestamp()
+        packed3 = struct.pack("16s", str(self.getCID()).encode())
+        packed4 = struct.pack("I", self.getEID())
         packed5 = struct.pack("12s", self.getState().encode())
         packed6 = struct.pack("I", self.getDataLength())
         packed7 = struct.pack('14s', self.getData().encode())
@@ -158,10 +161,12 @@ class Block:
             with open(file_path, "rb") as f:
                 contents = f.read()
             
-
-            unpacked2 = getIso8601Timestamp(contents[0:8])
-            unpacked5 = struct.unpack("12s", contents[8:20])
-            unpacked6 = struct.unpack("I", contents[20:24])
+            unpacked1 = struct.unpack("32s", contents[0:32])
+            unpacked2 = getIso8601Timestamp(contents[32:40])
+            unpacked3 = struct.unpack("16s", contents[40:56])
+            unpacked4 = struct.unpack("I", contents[56:60])
+            unpacked5 = struct.unpack("12s", contents[60:72])
+            unpacked6 = struct.unpack("I", contents[72:76])
             
             unpacked5= "".join(str(i) for i in unpacked5)
             unpacked6= "".join(str(i) for i in unpacked6)

@@ -36,7 +36,7 @@ class BlockChain:
         self.load_data()
         
     def load_data(self):
-        byteCount = 38
+        byteCount = 76
         
         
         file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
@@ -52,7 +52,7 @@ class BlockChain:
         
         while byteCount < int(file_size) and int(file_size) != 0:
             initBlock = Block()
-            initBlock.initFromFile()
+            initBlock.fillFromFile()
             initData = Data()
             initData.blockToData(initBlock)
             
