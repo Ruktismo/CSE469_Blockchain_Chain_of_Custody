@@ -19,7 +19,7 @@ def checkout(case_id, item_id):
 
     #go through the list and make sure its exact thingy, then change state
     for i in BC.datalist:
-        if str(str(case_id)) == str(i.CaseID):
+        if str(case_id) == str(i.CaseID):
             if str(i.EvidenceID) == str(item_id):
                 if i.State != "CHECKEDOUT":
                     i.State = "CHECKEDOUT"
