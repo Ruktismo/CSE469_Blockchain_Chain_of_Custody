@@ -136,50 +136,53 @@ class Block:
         f.close()          
             
     def fillFromFile(self):
+        
+        try:
+             
+            file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
+
+            directory = os.path.dirname(file_path)
+
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+
+
+            if not os.path.exists(file_path):
+                with open(file_path, 'wb') as f:
+                    f.close()
             
-        file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
+            with open(file_path, "rb") as f:
+                contents = f.read()
+            
 
-        directory = os.path.dirname(file_path)
-
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-
-
-        if not os.path.exists(file_path):
-            with open(file_path, 'wb') as f:
-                f.close()
+            unpacked1 = struct.unpack("32s", contents[0:32])
+            unpacked2 = getIso8601Timestamp(contents[32:40])
+            unpacked3 = struct.unpack("16s", contents[40:56])
+            unpacked4 = struct.unpack("I", contents[56:60])
+            unpacked5 = struct.unpack("12s", contents[60:72])
+            unpacked6 = struct.unpack("I", contents[72:76])
+            
+            unpacked1= "".join(str(i) for i in unpacked1)
+            unpacked3= "".join(str(i) for i in unpacked3)
+            unpacked4= "".join(str(i) for i in unpacked4)
+            unpacked5= "".join(str(i) for i in unpacked5)
+            unpacked6= "".join(str(i) for i in unpacked6)
+            
+            countForSeven = int(unpacked6)+76
+            unpacked7 = struct.unpack(unpacked6+'s', contents[76:countForSeven])
+            unpacked7= "".join(str(i) for i in unpacked7)
+            
+            
+            self.setPreviousHash(unpacked1[2:-1])
+            self.updateTimestamp(unpacked2)
+            self.setCID(unpacked3[2:-1])
+            self.setEID(unpacked4)
+            self.setState(unpacked5[2:-1].lstrip('0'))
+            self.setDataLength(unpacked6)
+            self.setData(unpacked7[2:-1])
         
-        with open(file_path, "rb") as f:
-            contents = f.read()
-        
-
-        unpacked1 = struct.unpack("32s", contents[0:32])
-        unpacked2 = getIso8601Timestamp(contents[32:40])
-        unpacked3 = struct.unpack("16s", contents[40:56])
-        unpacked4 = struct.unpack("I", contents[56:60])
-        unpacked5 = struct.unpack("12s", contents[60:72])
-        unpacked6 = struct.unpack("I", contents[72:76])
-        
-        unpacked1= "".join(str(i) for i in unpacked1)
-        unpacked3= "".join(str(i) for i in unpacked3)
-        unpacked4= "".join(str(i) for i in unpacked4)
-        unpacked5= "".join(str(i) for i in unpacked5)
-        unpacked6= "".join(str(i) for i in unpacked6)
-        
-        countForSeven = int(unpacked6)+76
-        unpacked7 = struct.unpack(unpacked6+'s', contents[76:countForSeven])
-        unpacked7= "".join(str(i) for i in unpacked7)
-        
-        
-        self.setPreviousHash(unpacked1[2:-1])
-        self.updateTimestamp(unpacked2)
-        self.setCID(unpacked3[2:-1])
-        self.setEID(unpacked4)
-        self.setState(unpacked5[2:-1].lstrip('0'))
-        self.setDataLength(unpacked6)
-        self.setData(unpacked7[2:-1])
-        
-        
+        except Exception as err:
+            print(err)
 
 
 # b = Block()
