@@ -183,6 +183,7 @@ class Block:
         
         except Exception as err:
             print(err)
+            exit(-1)
 
 
 # b = Block()
