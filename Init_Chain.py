@@ -39,6 +39,9 @@ def init_chain():
     else:
 
         print("Blockchain file found with INITIAL block.")
+        file_size = os.path.getsize(file_path)
+        
+        print(str(file_size))
         # i = Block()
         # i.initFromFile()
         # if(i.getState() == "INITIAL" and i.getDataLength == 14 and i.getData == "Initial block"):
