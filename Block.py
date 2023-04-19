@@ -17,10 +17,14 @@ def getUnixTime():
 
 #converts stored double back to iso format
 def getIso8601Timestamp(double_timestamp):
-    timestamp = struct.unpack('d', double_timestamp)[0]
-    dt = datetime.datetime.fromtimestamp(timestamp)
-    iso8601_timestamp = dt.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
-
+    try:
+        timestamp = struct.unpack('d', double_timestamp)[0]
+        dt = datetime.datetime.fromtimestamp(timestamp)
+        iso8601_timestamp = dt.strftime('%Y-%m-%dT%H:%M:%S.%fZ')
+    except OverflowError as o:
+        print("bad time format\n")
+        print(o)
+        exit(-2)
     return iso8601_timestamp
 
 class Block:

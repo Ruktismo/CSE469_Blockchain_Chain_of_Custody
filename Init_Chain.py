@@ -30,7 +30,7 @@ def init_chain():
                 b.setPreviousHash(None)  # or b.setPreviousHash("None")? reformat for printing
                 b.setTimestamp()
                 b.setDataLength(14)
-                b.setData("Initial block ")  # 14 length string
+                b.setData("Initial block")  # 14 length string
                 print("Blockchain file not found. Created INITIAL block.")
                 b.initToBytes()  # add into blockchain file, will be printed w/ log
                 # BC.reload()
