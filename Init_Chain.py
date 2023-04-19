@@ -41,10 +41,10 @@ def init_chain():
         print("Blockchain file found with INITIAL block.")
         i = Block()
         i.initFromFile()
-        if(i.getState() != "INITAL"):
-            exit(-1)
-        else:
+        if(i.getState() == "INITAL"):
             exit(0)
+        else:
+            exit(-1)
                 
 
 
