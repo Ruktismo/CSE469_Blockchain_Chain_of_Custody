@@ -49,7 +49,7 @@ def add(case_id, item_ids):
     # init_chain if no initial block
     file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
     directory = os.path.dirname(file_path)
-    if not os.path.exists(directory):
+    if not os.path.exists(file_path):
         #print("Directory isnt there, initializing chain")
         init_chain()
         add(case_id, item_ids)
