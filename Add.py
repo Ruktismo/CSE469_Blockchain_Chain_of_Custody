@@ -101,11 +101,11 @@ def add(case_id, item_ids):
                     b.setTimestamp()
 
                     # set str case_id to int CID
-                    u = uuid.UUID(case_id)
-                    strBytes = str(u.bytes)
+                    #u = uuid.UUID(case_id)
+                    #strBytes = str(u.bytes)
                     #n = uuidToHex(case_id)  # remove hyphens from uuid, store as hexstr
                     #intN = int(n, 16)  # convert hexstr to int
-                    b.setCID(strBytes)  # set int to CID
+                    b.setCID(case_id)  # set int to CID
 
                     b.setEID(j)  # store item id into block
                     b.setState("000CHECKEDIN")
