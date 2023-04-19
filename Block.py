@@ -139,8 +139,69 @@ class Block:
             with open(directory_path, "ab") as f:
                 f.write(block)
             
-        f.close()          
+        f.close()      
             
+    def initToBytes(self):
+        packed2 = self.getDoubleTimestamp()
+        packed5 = struct.pack("12s", self.getState().encode())
+        packed6 = struct.pack("I", self.getDataLength())
+        packed7 = struct.pack('14s', self.getData().encode())
+        
+        block = (packed2) + (packed5) + (packed6) + (packed7)
+        directory_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
+
+        directory = os.path.dirname(directory_path)
+        
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        if not os.path.exists(directory_path):
+            with open(directory_path, 'wb') as f:
+                f.write(block)
+        else:
+            with open(directory_path, "ab") as f:
+                f.write(block)
+            
+        f.close() 
+        
+    def initFromFile(self):
+        # try:
+             
+            file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
+
+            directory = os.path.dirname(file_path)
+
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+
+
+            if not os.path.exists(file_path):
+                with open(file_path, 'wb') as f:
+                    f.close()
+            
+            with open(file_path, "rb") as f:
+                contents = f.read()
+            
+
+            unpacked2 = getIso8601Timestamp(contents[0:8])
+            unpacked5 = struct.unpack("12s", contents[8:20])
+            unpacked6 = struct.unpack("I", contents[20:24])
+            
+            unpacked5= "".join(str(i) for i in unpacked5)
+            unpacked6= "".join(str(i) for i in unpacked6)
+            
+            unpacked7 = struct.unpack(str(unpacked6)+'s', contents[24:24+int(unpacked6)])
+            unpacked7= "".join(str(i) for i in unpacked7)
+            
+            self.updateTimestamp(unpacked2)
+            self.setState(unpacked5[2:-1].lstrip('0'))
+            self.setDataLength(unpacked6)
+            self.setData(unpacked7[2:-1])
+            # print("init block from file")
+        # except Exception as err:
+        #     print(err)
+        #     exit(-1)
+ 
     def fillFromFile(self):
         
         try:

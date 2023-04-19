@@ -36,18 +36,8 @@ class BlockChain:
         self.load_data()
         
     def load_data(self):
-        byteCount = 0
+        byteCount = 38
         
-        # filename = "BC.raw"
-
-        # if os.path.exists(filename):
-
-        #     with open(filename, "rb") as f:
-        #         contents = f.read()
-        # else:
-        #     with open(filename, "wb") as f:
-        #         f.close()
-        # file_size = os.path.getsize('BC.raw')
         
         file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
 
@@ -64,14 +54,17 @@ class BlockChain:
         with open(file_path, "rb") as f:
             contents = f.read()
             file_size = os.path.getsize(file_path)
+        print("file size: "+str(file_size))
         
         while byteCount < int(file_size) and int(file_size) != 0:
-            
-            
+            initBlock = Block()
+            initBlock.initFromFile()
+            if(file_size == 38):
+                break
             temp = Data()
             newBlock = Block()
-            newBlock.fillFromFile()
-            
+            # newBlock.fillFromFile()
+            # print("filled from file")
             unpacked1 = struct.unpack("32s", contents[byteCount:byteCount+32])
             byteCount += 32
             unpacked2 = getIso8601Timestamp(contents[byteCount:byteCount +8])

@@ -26,7 +26,8 @@ def init_chain():
         b.setDataLength(14)
         b.setData("Initial block ")  # 14 length string
         print("Blockchain file not found. Created INITIAL block.")
-        b.blockToBytes()  # add into blockchain file, will be printed w/ log
+        b.initToBytes()  # add into blockchain file, will be printed w/ log
         BC.reload()
+        # print(b.printBlock())
     # pass
 # init_chain()
