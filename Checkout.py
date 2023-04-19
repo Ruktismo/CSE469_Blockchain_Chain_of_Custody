@@ -19,37 +19,64 @@ def checkout(case_id, item_id):
 
     #go through the list and make sure its exact thingy, then change state
     for i in BC.datalist:
-        if i.CaseID == case_id:
-            if i.EvidenceID == item_id:
+        if str(str(case_id)) == str(i.CaseID):
+            if str(i.EvidenceID) == str(item_id):
                 if i.State != "CHECKEDOUT":
                     i.State = "CHECKEDOUT"
+
+                    # this takes your data obj "i" and returns the block obj that matches it
+                    # this is mainly for filling the data and data length for writing to bytes
+                    dataBlock = BC.blockExists(i)
+                    thing = Block()
+
+                    # set the things
+                    hash = BC.getLatestHash()
+
+                    thing.setPreviousHash(hash)
+                    thing.setCID(case_id)
+                    thing.setEID(item_id)
+                    thing.setTimestamp()
+                    thing.setState("000CHECKEDOUT")
+                    thing.setDataLength(int(dataBlock.getDataLength()))
+                    thing.setData(dataBlock.getData())
+
+                    # print the things from the getters
+                    print(f'Case: {thing.getCID()}')
+                    print(f'Checked out item: {thing.getEID()}')
+                    print(f'\tStatus: {thing.getState()}')
+                    print(f'\tTime of action: {thing.getTimestamp()}')
+
+                    # add  the thing to the file and update lists with reload
+                    thing.blockToBytes()
+                    BC.reload()
+
                 else:
                     print("Error: Cannot check out a checked out item. Must check it in first")
 
 
-    #new block thingy to add to the chain
-    blox = Block()
-    #set the things
-    blox.setCID(case_id)
-    blox.setEID(item_id)
-    blox.setTimestamp()
-    blox.setState("CHECKEDOUT")
-    #possibly NIL, remaining block values
-    
-    #print the things from the getters
-    print(f'Case: {blox.getCID()}')
-    print(f'Checked out item: {blox.getEID()}')
-    print(f'\tStatus: {blox.getState()}')
-    print(f'\tTime of action: {blox.getTimestamp()}')
-
-
-    input = pickle.dumps(BC.blockList[-1])
-    hash = sha256(input).hexdigest()
-    blox.setPreviousHash(hash)
-
-    #add  the thing to the block list
-    blox.blockToBytes()
-    BC.reload()
+    # #new block thingy to add to the chain
+    # blox = Block()
+    # #set the things
+    # blox.setCID(case_id)
+    # blox.setEID(item_id)
+    # blox.setTimestamp()
+    # blox.setState("CHECKEDOUT")
+    # #possibly NIL, remaining block values
+    #
+    # #print the things from the getters
+    # print(f'Case: {blox.getCID()}')
+    # print(f'Checked out item: {blox.getEID()}')
+    # print(f'\tStatus: {blox.getState()}')
+    # print(f'\tTime of action: {blox.getTimestamp()}')
+    #
+    #
+    # input = pickle.dumps(BC.blockList[-1])
+    # hash = sha256(input).hexdigest()
+    # blox.setPreviousHash(hash)
+    #
+    # #add  the thing to the block list
+    # blox.blockToBytes()
+    # BC.reload()
 
 
 

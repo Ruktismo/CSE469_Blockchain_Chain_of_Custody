@@ -14,10 +14,6 @@
 
 from Block_Chain import BC
 from Block import Block
-from hashlib import sha256
-from Checkout import checkout
-import pickle
-
 
 
 def checkin(case_id, item_id):

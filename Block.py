@@ -91,6 +91,7 @@ class Block:
     
         except Exception as err:
             print(err)
+            print("In get TS")
             exit(-1)
     
             
