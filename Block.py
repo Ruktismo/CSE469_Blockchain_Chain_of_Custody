@@ -127,16 +127,7 @@ class Block:
         #             out.write(block)
         directory_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
 
-        directory = os.path.dirname(directory_path)
-        
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-
-        if not os.path.exists(directory_path):
-            with open(directory_path, 'wb') as f:
-                f.write(block)
-        else:
-            with open(directory_path, "ab") as f:
+        with open(directory_path, "ab") as f:
                 f.write(block)
             
         f.close()      
@@ -149,17 +140,8 @@ class Block:
         
         block = (packed2) + (packed5) + (packed6) + (packed7)
         directory_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
-
-        directory = os.path.dirname(directory_path)
         
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-
-        if not os.path.exists(directory_path):
-            with open(directory_path, 'wb') as f:
-                f.write(block)
-        else:
-            with open(directory_path, "ab") as f:
+        with open(directory_path, "ab") as f:
                 f.write(block)
             
         f.close() 
@@ -168,16 +150,6 @@ class Block:
         try:
              
             file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
-
-            directory = os.path.dirname(file_path)
-
-            if not os.path.exists(directory):
-                os.makedirs(directory)
-
-
-            if not os.path.exists(file_path):
-                with open(file_path, 'wb') as f:
-                    f.close()
             
             with open(file_path, "rb") as f:
                 contents = f.read()
@@ -208,15 +180,6 @@ class Block:
              
             file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
 
-            directory = os.path.dirname(file_path)
-
-            if not os.path.exists(directory):
-                os.makedirs(directory)
-
-
-            if not os.path.exists(file_path):
-                with open(file_path, 'wb') as f:
-                    f.close()
             
             with open(file_path, "rb") as f:
                 contents = f.read()

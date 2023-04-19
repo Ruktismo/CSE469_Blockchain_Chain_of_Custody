@@ -5,18 +5,23 @@
 import Block
 from Block import Block
 from Block_Chain import BC
+import os
+
 
 def init_chain():
-    BC.load_data()
-    # 1. check if at least one blockchain .raw file exists
-    # note from Johnny, checking if none checks the type, this will always return found bc type is list
-    # have to iterate through BC.dataList or check first index of either data or blocklist and if empty to get all possible cases
-    if BC.blockList and BC.blockList[0].getState() == "INITIAL":
-        print("Blockchain file found with INITIAL block.")
+    
+    file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
 
-    # 2. else, create initial block
-    else:
-        b = Block()
+    directory = os.path.dirname(file_path)
+        
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+        if not os.path.exists(file_path):
+            with open(file_path, 'wb') as f:
+                f.close()
+                b = Block()
+                
         b.setCID(None)  # or b.setCID(None)? reformat for printing, null
         b.setData("Initial block")
         b.setEID(None)
@@ -28,6 +33,13 @@ def init_chain():
         print("Blockchain file not found. Created INITIAL block.")
         b.initToBytes()  # add into blockchain file, will be printed w/ log
         BC.reload()
-        # print(b.printBlock())
-    # pass
-# init_chain()
+        
+        
+
+    else:
+
+        print("Blockchain file found with INITIAL block.")
+                
+
+
+init_chain()

@@ -10,7 +10,7 @@ class BlockChain:
     def __init__(self):
         self.datalist = [] 
         self.blockList = []
-        self.load_data()
+        # self.load_data()
        
     def dataExists(self, newData):
         for d in self.datalist:
@@ -41,15 +41,7 @@ class BlockChain:
         
         file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
 
-        directory = os.path.dirname(file_path)
 
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-
-
-        if not os.path.exists(file_path):
-            with open(file_path, 'wb') as f:
-                f.close()
         
         with open(file_path, "rb") as f:
             contents = f.read()
@@ -59,6 +51,12 @@ class BlockChain:
         while byteCount < int(file_size) and int(file_size) != 0:
             initBlock = Block()
             initBlock.initFromFile()
+            initData = Data()
+            initData.blockToData(initBlock)
+            
+            self.datalist.append(initData) 
+            self.blockList.append(initBlock)
+            
             if(file_size == 38):
                 break
             temp = Data()
@@ -121,6 +119,6 @@ class BlockChain:
         
 
 BC = BlockChain()  # Friendly name for us to import
-#BC.printBC()
+# BC.printBC()
 # print(BC.getLatestHash())
 # print(len(BC.getLatestHash()))
