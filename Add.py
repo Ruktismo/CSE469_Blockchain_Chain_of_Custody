@@ -13,6 +13,7 @@ import uuid
 import os
 from Block import Block
 from Block_Chain import BC
+from Init_Chain import init_chain
 
 
 # check if case_id is a valid uuid, works for strings w/ hyphens & no hyphens
@@ -49,10 +50,8 @@ def add(case_id, item_ids):
     file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
     directory = os.path.dirname(file_path)
     if not os.path.exists(directory):
-        print("Blockchain file not found. Created INITIAL block.")
-        # create initial block
-        exit(-1)
-
+        init_chain()
+        add(case_id, item_ids)
     else:
         # Check if CASE ID is UUID
         if not isValidUuid(case_id):
