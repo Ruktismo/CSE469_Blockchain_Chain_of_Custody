@@ -165,7 +165,7 @@ class Block:
         f.close() 
         
     def initFromFile(self):
-        # try:
+        try:
              
             file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
 
@@ -198,9 +198,9 @@ class Block:
             self.setDataLength(unpacked6)
             self.setData(unpacked7[2:-1])
             # print("init block from file")
-        # except Exception as err:
-        #     print(err)
-        #     exit(-1)
+        except Exception as err:
+            print(err)
+            exit(-1)
  
     def fillFromFile(self):
         
