@@ -40,7 +40,8 @@ def init_chain():
 
         print("Blockchain file found with INITIAL block.")
         file_size = os.path.getsize(file_path)
-        
+        if(file_size > 38 and file_size < 114):
+            exit(-1)
         print(str(file_size))
         # i = Block()
         # i.initFromFile()
