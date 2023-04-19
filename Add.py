@@ -51,7 +51,6 @@ def add(case_id, item_ids):
     directory = os.path.dirname(file_path)
     if not os.path.exists(directory):
         init_chain()
-        BC.reload()
         add(case_id, item_ids)
     else:
         # Check if CASE ID is UUID
