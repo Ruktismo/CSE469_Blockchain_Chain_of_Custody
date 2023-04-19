@@ -10,7 +10,7 @@ class BlockChain:
     def __init__(self):
         self.datalist = [] 
         self.blockList = []
-        # self.load_data()
+        self.load_data()
        
     def dataExists(self, newData):
         for d in self.datalist:
@@ -41,6 +41,8 @@ class BlockChain:
         
         file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
 
+        if not os.path.exists(file_path):
+            return # No BC to load. Leave BC structure empty.
 
         
         with open(file_path, "rb") as f:
