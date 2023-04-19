@@ -17,11 +17,11 @@ def init_chain():
     # 2. else, create initial block
     else:
         b = Block()
-        b.setCID(0)  # or b.setCID(None)? reformat for printing, null
+        b.setCID(None)  # or b.setCID(None)? reformat for printing, null
         b.setData("Initial block")
-        b.setEID(0)
+        b.setEID(None)
         b.setState("00000INITIAL")
-        b.setPreviousHash("0000000000000000000000000000None")  # or b.setPreviousHash("None")? reformat for printing
+        b.setPreviousHash(None)  # or b.setPreviousHash("None")? reformat for printing
         b.setTimestamp()
         b.setDataLength(14)
         b.setData("Initial block ")  # 14 length string
