@@ -84,7 +84,8 @@ def main():
         if len(sys.argv) != 2:
             print("ERROR: Incorrect number of args\n Proprer format:  bchoc init")
             exit(-1)
-        init_chain()
+        else:
+            init_chain()
 
     elif sys.argv[1] == "verify":
         if len(sys.argv) != 2:
