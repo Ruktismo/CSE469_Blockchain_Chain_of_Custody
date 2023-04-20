@@ -52,6 +52,7 @@ def add(case_id, item_ids):
     if not os.path.exists(file_path):
         #print("Directory isnt there, initializing chain")
         init_chain()
+        BC.reload()
         add(case_id, item_ids)
     else:
         # Check if CASE ID is UUID
