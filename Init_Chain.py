@@ -46,7 +46,7 @@ def init_chain():
         if(file_size < 90):
             exit(-1)
         
-        BC.reload()
+        # BC.reload()
         # print("BC len: "+str(len(BC.blockList)))
         # BC.printBC()
         exit(0)
