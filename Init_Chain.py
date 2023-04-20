@@ -26,7 +26,7 @@ def init_chain():
                         
                 b.setCID(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')  # or b.setCID(None)? reformat for printing, null
                 b.setData("Initial block")
-                b.setEID(b'\x00\x00\x00\x00')
+                b.setEID(0)
                 b.setState("INITIAL")
                 b.setPreviousHash(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')  # or b.setPreviousHash("None")? reformat for printing
                 b.setTimestamp()
