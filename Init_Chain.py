@@ -43,6 +43,8 @@ def init_chain():
         print("Blockchain file found with INITIAL block.")
         file_size = os.path.getsize(file_path)
         # print(str(file_size))
+        if(file_size < 90):
+            exit(-1)
         
         BC.reload()
         # print("BC len: "+str(len(BC.blockList)))
