@@ -19,42 +19,38 @@ def checkout( item_id):
 
     #go through the list and make sure its exact thingy, then change state
     for i in BC.datalist:
-            if str(i.EvidenceID) == str(item_id):
-                if i.State == "CHECKEDIN":
-                    i.State = "CHECKEDOUT"
+        if str(i.EvidenceID) == str(item_id):
+            if i.State == "CHECKEDIN":
+                i.State = "CHECKEDOUT"
 
-                    # this takes your data obj "i" and returns the block obj that matches it
-                    # this is mainly for filling the data and data length for writing to bytes
-                    dataBlock = BC.blockExists(i)
-                    thing = Block()
+                # this takes your data obj "i" and returns the block obj that matches it
+                # this is mainly for filling the data and data length for writing to bytes
+                dataBlock = BC.blockExists(i)
+                thing = Block()
 
-                    # set the things
-                    hash = BC.getLatestHash()
+                # set the things
+                hash = BC.getLatestHash()
 
-                    thing.setPreviousHash(hash)
-<<<<<<< Updated upstream
-                    #thing.setCID(case_id)
-=======
-                    thing.setCID(dataBlock.getCID())
->>>>>>> Stashed changes
-                    thing.setEID(item_id)
-                    thing.setTimestamp()
-                    thing.setState("00CHECKEDOUT")
-                    thing.setDataLength(int(dataBlock.getDataLength()))
-                    thing.setData(dataBlock.getData())
+                thing.setPreviousHash(hash)
+                thing.setCID(dataBlock.getCID())
+                thing.setEID(item_id)
+                thing.setTimestamp()
+                thing.setState("00CHECKEDOUT")
+                thing.setDataLength(int(dataBlock.getDataLength()))
+                thing.setData(dataBlock.getData())
 
-                    # print the things from the getters
-                    print(f'Case: {thing.getCID()}')
-                    print(f'Checked out item: {thing.getEID()}')
-                    print(f'\tStatus: {thing.getState()}')
-                    print(f'\tTime of action: {thing.getTimestamp()}')
+                # print the things from the getters
+                print(f'Case: {thing.getCID()}')
+                print(f'Checked out item: {thing.getEID()}')
+                print(f'\tStatus: {thing.getState()}')
+                print(f'\tTime of action: {thing.getTimestamp()}')
 
-                    # add  the thing to the file and update lists with reload
-                    thing.blockToBytes()
-                    # BC.reload()
+                # add  the thing to the file and update lists with reload
+                thing.blockToBytes()
+                # BC.reload()
 
-                else:
-                    print("Error: Cannot check out a checked out item. Must check it in first")
+            else:
+                print("Error: Cannot check out a checked out item. Must check it in first")
 
 
     # #new block thingy to add to the chain
