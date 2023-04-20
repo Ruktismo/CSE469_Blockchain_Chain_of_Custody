@@ -5,6 +5,7 @@ import os
 import pickle
 import uuid
 
+
 # from Block_Chain import *
 # INITIAL (for the initial block ONLY), CHECKEDIN, CHECKEDOUT, DISPOSED, DESTROYED, or RELEASED
 # add zeros to respective state to equal 12 characters
@@ -116,10 +117,9 @@ class Block:
 
         packed1 = struct.pack("32s", self.getPreviousHash())
         packed2 = self.getDoubleTimestamp()
-        b = uuid.UUID(str(self.getCID())).bytes
-        dev_uuid = uuid.UUID(int=int.from_bytes(b, 'big'))
-        packed3 = struct.pack("16s", str(dev_uuid.bytes).encode())
-        #packed3 = struct.pack("16s", str(self.getCID()).encode())
+        # u = self.getCID().to_bytes(16, 'big')
+        # str(u).encode()
+        packed3 = struct.pack("16s", self.getCID().to_bytes(16, 'big'))
         packed4 = struct.pack("I", self.getEID())
         packed5 = struct.pack("12s", self.getState().encode())
         packed6 = struct.pack("I", self.getDataLength())
