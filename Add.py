@@ -63,40 +63,40 @@ def add(case_id, item_ids):
         # for j in item_ids:
             # check if j is INT
             # print("Current item_id: " + j)
-        if isValidInt(str(item_ids)):  # lol oops, convert input to int
+        # if isValidInt(str(item_ids)):  # lol oops, convert input to int
             # print("item_id is VALID")
             # iter through blockchain. If item already exists, exit. Else add new block to chain
-            for i in BC.datalist:
-                if i.EvidenceID == item_ids and i.CaseID == case_id:
-                    print("Error: Cannot add an existing item. Must add a new item. ")
-                    # break
-                    exit(-1)
-                else:
-                    # item_id is unique/new, add new block
-                    b = Block()
-                    hash = BC.getLatestHash()
-                    b.setPreviousHash(hash)
-                    b.setTimestamp()
+        for i in BC.datalist:
+            if i.EvidenceID == item_ids and i.CaseID == case_id:
+                print("Error: Cannot add an existing item. Must add a new item. ")
+                # break
+                exit(-1)
+            else:
+                # item_id is unique/new, add new block
+                b = Block()
+                hash = BC.getLatestHash()
+                b.setPreviousHash(hash)
+                b.setTimestamp()
 
-                    # set str case_id
-                    b.setCID(case_id)  # set int to CID
-                    b.setEID(int(item_ids))  # store item id into block
-                    b.setState("000CHECKEDIN")
+                # set str case_id
+                b.setCID(case_id)  # set int to CID
+                b.setEID(int(item_ids))  # store item id into block
+                b.setState("000CHECKEDIN")
 
-                    # set data to new block
-                    b.setDataLength(random.randint(0, 32))  # set rand length of data (range: [0,32])
-                    b.setData(getRandomString(b.getDataLength()))  # gen rand str from data length
+                # set data to new block
+                b.setDataLength(random.randint(0, 32))  # set rand length of data (range: [0,32])
+                b.setData(getRandomString(b.getDataLength()))  # gen rand str from data length
 
-                    # get & print block
-                    print(f'Added item: {b.getEID()}')
-                    print(f'\tStatus: {b.getState()}')
-                    print(f'\tTime of action: {b.getTimestamp()}')
+                # get & print block
+                print(f'Added item: {b.getEID()}')
+                print(f'\tStatus: {b.getState()}')
+                print(f'\tTime of action: {b.getTimestamp()}')
 
-                    b.blockToBytes()
+                b.blockToBytes()
                     #BC.reload()
         # 2. j is NOT an INT
-        else:
-            print("Error: item_id is not an integer. Must input integer")
+        # else:
+        #     print("Error: item_id is not an integer. Must input integer")
 
 # add -c 65cc391d65684dcca3f186a2f04140f3 -i 987654321
 # add -c 65cc391d-6568-4dcc-a3f1-86a2f04140f3 -i 987654321
