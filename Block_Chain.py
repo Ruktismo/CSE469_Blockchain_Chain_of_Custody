@@ -62,8 +62,8 @@ class BlockChain:
         while byteCount <= int(file_size) and int(file_size) != 0:
             
             print(str(file_size))
-            # if(file_size == 90):
-            #     break
+            if(file_size == 90):
+                break
             temp = Data()
             newBlock = Block()
             # newBlock.fillFromFile()
