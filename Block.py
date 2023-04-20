@@ -35,7 +35,7 @@ class Block:
     def __init__(self):
         self.PreviousHash = None
         self.Timestamp = None
-        self.CID = 0
+        self.CID = None #changed
         self.EID = 0
         self.State = None
         self.DataLen = 0
@@ -117,16 +117,14 @@ class Block:
 
         packed1 = struct.pack("32s", self.getPreviousHash())
         packed2 = self.getDoubleTimestamp()
-        print("")
-        print(self.getCID())
-        print(str(self.getCID()))
-        #packed3 = struct.pack("16s", str(self.getCID()).encode())
-        zcase_id = int(self.getCID())
-        a = zcase_id.to_bytes(16, 'little')
-        packed3 = struct.pack("16s", a)
-        print(type(a))
-        print(packed3)
-        print("")
+        #cidINT = int(self.getCID()) #new, converts object to int
+        #a = cidINT.to_bytes(16, 'little') #get bytes
+        cid = self.getCID().bytes_le()
+        #packed3 = struct.pack("16s", a)
+        #print(type(a))
+        #print(packed3)
+        #print("")
+        packed3 = struct.pack("16s", cid)
         packed4 = struct.pack("I", self.getEID())
         packed5 = struct.pack("12s", self.getState().encode())
         packed6 = struct.pack("I", self.getDataLength())
