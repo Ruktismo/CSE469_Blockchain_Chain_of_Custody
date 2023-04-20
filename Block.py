@@ -122,7 +122,7 @@ class Block:
         print(str(self.getCID()))
         #packed3 = struct.pack("16s", str(self.getCID()).encode())
         zcase_id = int(self.getCID())
-        a = zcase_id.to_bytes(16, 'big')
+        a = zcase_id.to_bytes(16, 'little')
         packed3 = struct.pack("16s", a)
         print(type(a))
         print(packed3)
