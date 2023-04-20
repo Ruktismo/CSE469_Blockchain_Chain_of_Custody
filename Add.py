@@ -63,7 +63,9 @@ def add(case_id, item_ids):
         b.setPreviousHash(hash)
         b.setTimestamp()
 
-        b.setCID(case_id) # set str case_id
+        u = uuid.UUID(str(case_id))
+        b.setCID(u)
+        #b.setCID(case_id) # set str case_id
         b.setEID(int(j))  # store item id into block
         b.setState("CHECKEDIN000")
 

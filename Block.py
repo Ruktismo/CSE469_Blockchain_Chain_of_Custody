@@ -3,7 +3,6 @@ import datetime
 import struct
 import os
 import pickle
-import uuid
 
 
 # from Block_Chain import *
@@ -117,9 +116,7 @@ class Block:
 
         packed1 = struct.pack("32s", self.getPreviousHash())
         packed2 = self.getDoubleTimestamp()
-        u = self.getCID().to_bytes(16, 'big')
-        # str(u).encode()
-        packed3 = struct.pack("16s", str(u).encode())
+        packed3 = struct.pack("16s", str(self.getCID()).encode())
         packed4 = struct.pack("I", self.getEID())
         packed5 = struct.pack("12s", self.getState().encode())
         packed6 = struct.pack("I", self.getDataLength())
