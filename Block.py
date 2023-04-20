@@ -3,6 +3,7 @@ import datetime
 import struct
 import os
 import pickle
+import uuid
 
 #from Block_Chain import *
 # INITIAL (for the initial block ONLY), CHECKEDIN, CHECKEDOUT, DISPOSED, DESTROYED, or RELEASED
@@ -115,7 +116,8 @@ class Block:
         
         packed1 = struct.pack("32s", self.getPreviousHash())
         packed2 = self.getDoubleTimestamp()
-        packed3 = struct.pack("16s", str(str(self.getCID())).encode())
+        u = uuid.UUID(str(self.getCID()))
+        packed3 = u.bytes
         packed4 = struct.pack("I", self.getEID())
         packed5 = struct.pack("12s", self.getState().encode())
         packed6 = struct.pack("I", self.getDataLength())
