@@ -21,7 +21,7 @@ def checkout(case_id, item_id):
     for i in BC.datalist:
         if str(case_id) == str(i.CaseID):
             if str(i.EvidenceID) == str(item_id):
-                if i.State != "CHECKEDOUT":
+                if i.State == "CHECKEDIN":
                     i.State = "CHECKEDOUT"
 
                     # this takes your data obj "i" and returns the block obj that matches it
@@ -48,7 +48,7 @@ def checkout(case_id, item_id):
 
                     # add  the thing to the file and update lists with reload
                     thing.blockToBytes()
-                    BC.reload()
+                    # BC.reload()
 
                 else:
                     print("Error: Cannot check out a checked out item. Must check it in first")

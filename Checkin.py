@@ -52,7 +52,7 @@ def checkin(case_id, item_id):
 
                     # add  the thing to the file and update lists with reload
                     thing.blockToBytes()
-                    BC.reload()
+                    # BC.reload()
                     
                     
                 else:
