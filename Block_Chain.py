@@ -68,7 +68,7 @@ class BlockChain:
             temp = Data()
             newBlock = Block()
             # newBlock.fillFromFile()
-            print(str(byteCount))
+            print("byte count: "+str(byteCount))
             unpacked1 = struct.unpack("32s", contents[byteCount:byteCount+32])
             byteCount += 32
             unpacked2 = getIso8601Timestamp(contents[byteCount:byteCount +8])
