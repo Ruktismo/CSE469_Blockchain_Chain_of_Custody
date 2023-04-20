@@ -113,7 +113,7 @@ class Block:
     
     def blockToBytes(self):
         
-        packed1 = struct.pack("32s", self.getPreviousHash().encode())
+        packed1 = struct.pack("32s", self.getPreviousHash())
         packed2 = self.getDoubleTimestamp()
         packed3 = struct.pack("16s", str(self.getCID()).encode())
         packed4 = struct.pack("I", self.getEID())
