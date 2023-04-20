@@ -32,7 +32,11 @@ def checkout( item_id):
                     hash = BC.getLatestHash()
 
                     thing.setPreviousHash(hash)
+<<<<<<< Updated upstream
                     #thing.setCID(case_id)
+=======
+                    thing.setCID(dataBlock.getCID())
+>>>>>>> Stashed changes
                     thing.setEID(item_id)
                     thing.setTimestamp()
                     thing.setState("00CHECKEDOUT")
