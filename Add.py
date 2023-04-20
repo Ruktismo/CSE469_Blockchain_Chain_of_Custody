@@ -93,7 +93,7 @@ def add(case_id, item_ids):
                         print(f'\tTime of action: {b.getTimestamp()}')
 
                         b.blockToBytes()
-                        BC.reload()
+                        #BC.reload()
             # 2. j is NOT an INT
             else:
                 print("Error: item_id is not an integer. Must input integer")
