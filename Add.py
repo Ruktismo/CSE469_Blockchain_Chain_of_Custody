@@ -50,7 +50,7 @@ def add(case_id, item_ids):
     file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
     directory = os.path.dirname(file_path)
     if not os.path.exists(file_path):
-        #print("Directory isnt there, initializing chain")
+        # print("Directory isnt there, initializing chain")
         init_chain()
         add(case_id, item_ids)
     else:
@@ -67,41 +67,40 @@ def add(case_id, item_ids):
                 # print("item_id is VALID")
                 # iter through blockchain. If item already exists, exit. Else add new block to chain
                 for i in BC.blockList:
-                    print("EID: " + i.EID)
                     if i.EID == int(j):
-                        #print("Error: Cannot add an existing item. Must add a new item. ")
+                        print("Error: Cannot add an existing item. Must add a new item. ")
+                        # break
                         exit(-1)
-                    else:
-                        # item_id is unique/new, add new block
-                        b = Block()
-                        #hash = BC.getLatestHash()
-                        #b.setPreviousHash(hash)
-                        #testing only for block 1
-                        b.setPreviousHash(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
-                        b.setTimestamp()
 
+                # passed duplicate check, item_id unique, add new block
+                b = Block()
+                # hash = BC.getLatestHash()
+                # b.setPreviousHash(hash)
+                # testing only for block 1
+                b.setPreviousHash(
+                    b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
+                b.setTimestamp()
 
-                        # set str case_id
-                        #issue, fix setCID()
-                        b.setCID(case_id)  # set int to CID
-                        b.setEID(int(j))  # store item id into block
-                        b.setState("CHECKEDIN000")
+                # set str case_id
+                # issue, fix setCID()
+                b.setCID(case_id)  # set int to CID
+                b.setEID(int(j))  # store item id into block
+                b.setState("CHECKEDIN000")
 
-                        # set data to new block
-                        #b.setDataLength(random.randint(0, 32))  # set rand length of data (range: [0,32])
-                        #b.setData(getRandomString(b.getDataLength()))  # gen rand str from data length
-                        # testing only for block 1
-                        b.setDataLength(0)  # set rand length of data (range: [0,32])
-                        b.setData(getRandomString(b.getDataLength()))  # gen rand str from data length
+                # set data to new block
+                # b.setDataLength(random.randint(0, 32))  # set rand length of data (range: [0,32])
+                # b.setData(getRandomString(b.getDataLength()))  # gen rand str from data length
+                # testing only for block 1
+                b.setDataLength(0)  # set rand length of data (range: [0,32])
+                b.setData(getRandomString(b.getDataLength()))  # gen rand str from data length
 
+                # get & print block
+                print(f'Added item: {b.getEID()}')
+                print(f'\tStatus: {b.getState()}')
+                print(f'\tTime of action: {b.getTimestamp()}')
 
-                        # get & print block
-                        print(f'Added item: {b.getEID()}')
-                        print(f'\tStatus: {b.getState()}')
-                        print(f'\tTime of action: {b.getTimestamp()}')
-
-                        b.blockToBytes()
-                        #BC.reload()
+                b.blockToBytes()
+                # BC.reload()
             # 2. j is NOT an INT
             else:
                 print("Error: item_id is not an integer. Must input integer")
