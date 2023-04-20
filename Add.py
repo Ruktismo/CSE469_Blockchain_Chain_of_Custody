@@ -78,9 +78,8 @@ def add(case_id, item_ids):
                         b.setTimestamp()
 
                         # set str case_id
-                        u = uuid.UUID(case_id)
-                        packed = u.bytes # packed is a string of size 16
-                        b.setCID(packed)  # set int to CID
+                        u = uuid.UUID(str(case_id))
+                        b.setCID(u)
                         #b.setCID(case_id)  # set int to CID
                         b.setEID(int(j))  # store item id into block
                         b.setState("000CHECKEDIN")
