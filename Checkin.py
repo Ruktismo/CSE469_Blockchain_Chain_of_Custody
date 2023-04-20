@@ -34,7 +34,7 @@ def checkin( item_id):
                     hash = BC.getLatestHash()
                     
                     thing.setPreviousHash(hash)
-                    thing.setCID(case_id)
+                    #thing.setCID(case_id)
                     thing.setEID(item_id)
                     thing.setTimestamp()
                     thing.setState("000CHECKEDIN")
