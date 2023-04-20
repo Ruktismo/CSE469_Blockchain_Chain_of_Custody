@@ -74,9 +74,8 @@ def add(case_id, item_ids):
                     else:
                         # item_id is unique/new, add new block
                         b = Block()
-                        #hash = BC.getLatestHash()
-                        #b.setPreviousHash(hash)
-                        b.setPreviousHash(BC.getPreviousHash())
+                        hash = BC.getLatestHash()
+                        b.setPreviousHash(hash)
                         b.setTimestamp()
 
 
