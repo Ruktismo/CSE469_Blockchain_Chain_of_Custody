@@ -80,7 +80,7 @@ def add(case_id, item_ids):
 
         # set str case_id
         b.setCID(case_id)  # set int to CID
-        b.setEID(int(item_ids))  # store item id into block
+        b.setEID(item_ids) # store item id into block
         b.setState("000CHECKEDIN")
 
         # set data to new block
