@@ -118,7 +118,7 @@ class Block:
         packed2 = self.getDoubleTimestamp()
         b = uuid.UUID(str(self.getCID())).bytes
         dev_uuid = uuid.UUID(int=int.from_bytes(b, 'big'))
-        packed3 = struct.pack("16s", str(dev_uuid).encode())
+        packed3 = struct.pack("16s", dev_uuid.bytes)
         #packed3 = struct.pack("16s", str(self.getCID()).encode())
         packed4 = struct.pack("I", self.getEID())
         packed5 = struct.pack("12s", self.getState().encode())
