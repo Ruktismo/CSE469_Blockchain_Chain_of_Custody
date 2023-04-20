@@ -81,8 +81,7 @@ def add(case_id, item_ids):
 
 
                         # set str case_id
-                        u = uuid.UUID(case_id)
-                        b.setCID(u)
+                        b.setCID("752beae4-20ea-4901-b8aa-437b16e9a724")
                         #b.setCID(case_id)  # set int to CID
                         b.setEID(int(j))  # store item id into block
                         b.setState("CHECKEDIN000")
