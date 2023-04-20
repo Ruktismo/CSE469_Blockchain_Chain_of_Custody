@@ -153,35 +153,6 @@ class Block:
             
         f.close() 
         
-    def initFromFile(self):
-        try:
-             
-            file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
-            
-            with open(file_path, "rb") as f:
-                contents = f.read()
-            
-            unpacked1 = struct.unpack("32s", contents[0:32])
-            unpacked2 = getIso8601Timestamp(contents[32:40])
-            unpacked3 = struct.unpack("16s", contents[40:56])
-            unpacked4 = struct.unpack("I", contents[56:60])
-            unpacked5 = struct.unpack("12s", contents[60:72])
-            unpacked6 = struct.unpack("I", contents[72:76])
-            
-            unpacked5= "".join(str(i) for i in unpacked5)
-            unpacked6= "".join(str(i) for i in unpacked6)
-            
-            unpacked7 = struct.unpack(str(unpacked6)+'s', contents[24:24+int(unpacked6)])
-            unpacked7= "".join(str(i) for i in unpacked7)
-            
-            self.updateTimestamp(unpacked2)
-            self.setState(unpacked5[2:-1].lstrip('0'))
-            self.setDataLength(unpacked6)
-            self.setData(unpacked7[2:-1])
-            # print("init block from file")
-        except Exception as err:
-            print(err)
-            exit(-1)
  
     def fillFromFile(self):
         

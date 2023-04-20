@@ -24,11 +24,11 @@ def init_chain():
             
                 
                         
-                b.setCID(b'0'*128)  # or b.setCID(None)? reformat for printing, null
+                b.setCID(b'0'*16)  # or b.setCID(None)? reformat for printing, null
                 b.setData("Initial block")
-                b.setEID(b'0'*32)
+                b.setEID(b'0'*4)
                 b.setState("00000INITIAL")
-                b.setPreviousHash(b'0'*256)  # or b.setPreviousHash("None")? reformat for printing
+                b.setPreviousHash(b'0'*32)  # or b.setPreviousHash("None")? reformat for printing
                 b.setTimestamp()
                 b.setDataLength(14)
                 b.setData("Initial block")  # 14 length string
@@ -47,8 +47,10 @@ def init_chain():
         #     exit(-1)
         
         BC.reload()
+        print("BC len: "+str(len(BC.blockList)))
+        BC.printBC()
         exit(0)
                 
 
 
-#init_chain()
+init_chain()
