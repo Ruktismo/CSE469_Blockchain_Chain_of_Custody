@@ -6,7 +6,7 @@ import Block
 from Block import Block
 from Block_Chain import BC
 import os
-
+from Data import Data
 
 def init_chain():
     
@@ -34,7 +34,10 @@ def init_chain():
                 b.setData("Initial block")  # 14 length string
                 print("Blockchain file not found. Created INITIAL block.")
                 b.initToBytes()  # add into blockchain file, will be printed w/ log
-                # BC.reload()
+                BC.blockList.append(b)
+                d = Data()
+                d.blockToData(b)
+                BC.datalist.append(d)
         
         
 
