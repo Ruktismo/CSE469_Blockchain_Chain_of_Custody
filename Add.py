@@ -78,8 +78,9 @@ def add(case_id, item_ids):
                         b.setTimestamp()
 
                         # set str case_id
-                        u = uuid.UUID(case_id).hex
-                        b.setCID(u)
+                        u = uuid.UUID(case_id)
+                        packed = u.bytes # packed is a string of size 16
+                        b.setCID(packed)  # set int to CID
                         #b.setCID(case_id)  # set int to CID
                         b.setEID(int(j))  # store item id into block
                         b.setState("000CHECKEDIN")
@@ -89,6 +90,7 @@ def add(case_id, item_ids):
                         b.setData(getRandomString(b.getDataLength()))  # gen rand str from data length
 
                         # get & print block
+                        print(f'CID check: {b.getCID()}')
                         print(f'Added item: {b.getEID()}')
                         print(f'\tStatus: {b.getState()}')
                         print(f'\tTime of action: {b.getTimestamp()}')
