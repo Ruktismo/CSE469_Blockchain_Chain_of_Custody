@@ -74,13 +74,14 @@ def add(case_id, item_ids):
                     else:
                         # item_id is unique/new, add new block
                         b = Block()
-                        hash = BC.getLatestHash()
-                        b.setPreviousHash(hash)
+                        #hash = BC.getLatestHash()
+                        #b.setPreviousHash(hash)
+                        b.setPreviousHash(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')
                         b.setTimestamp()
 
 
                         # set str case_id
-                        u = uuidToHex(case_id)
+                        u = uuid.UUID(str(case_id))
                         b.setCID(u)
                         #b.setCID(case_id)  # set int to CID
                         b.setEID(int(j))  # store item id into block
