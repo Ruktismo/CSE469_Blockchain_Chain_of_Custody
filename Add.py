@@ -67,7 +67,8 @@ def add(case_id, item_ids):
                 # print("item_id is VALID")
                 # iter through blockchain. If item already exists, exit. Else add new block to chain
                 for i in BC.blockList:
-                    if i.EID == int(j):
+                    print("EID: " + i.EID)
+                    if int(i.EID) == int(j):
                         print("Error: Cannot add an existing item. Must add a new item. ")
                         # break
                         exit(-1)
