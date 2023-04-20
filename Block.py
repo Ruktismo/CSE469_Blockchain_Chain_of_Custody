@@ -35,7 +35,7 @@ class Block:
     def __init__(self):
         self.PreviousHash = None
         self.Timestamp = None
-        self.CID = None #changed
+        self.CID = 0
         self.EID = 0
         self.State = None
         self.DataLen = 0
@@ -117,14 +117,13 @@ class Block:
 
         packed1 = struct.pack("32s", self.getPreviousHash())
         packed2 = self.getDoubleTimestamp()
-        #cidINT = int(self.getCID()) #new, converts object to int
-        #a = cidINT.to_bytes(16, 'little') #get bytes
-        cid = self.getCID().bytes_le()
-        #packed3 = struct.pack("16s", a)
-        #print(type(a))
-        #print(packed3)
-        #print("")
-        packed3 = struct.pack("16s", cid)
+
+        cidINT = int(self.getCID())  # [NEW] converts object to int
+        a = cidINT.to_bytes(16, 'little')  # int to bytes
+        packed3 = struct.pack("16s", a)  # store bytes, srry lil messy. Tried using 'uuid' import, was weird.
+        # print(type(a))
+        # print(packed3)
+
         packed4 = struct.pack("I", self.getEID())
         packed5 = struct.pack("12s", self.getState().encode())
         packed6 = struct.pack("I", self.getDataLength())
