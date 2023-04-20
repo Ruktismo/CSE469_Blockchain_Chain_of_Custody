@@ -59,8 +59,9 @@ def add(case_id, item_ids):
 
         # [CHECKS PASSED] item_id is INT & unique. Add new block.
         b = Block()
-        hash = BC.getLatestHash()
-        b.setPreviousHash(hash)
+        #hash = BC.getLatestHash()
+        #b.setPreviousHash(hash)
+        b.setPreviousHash(0)
         b.setTimestamp()
 
         b.setCID(case_id) # set str case_id
