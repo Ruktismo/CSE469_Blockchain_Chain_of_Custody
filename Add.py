@@ -61,19 +61,21 @@ def add(case_id, item_ids):
         # Case ID Byte Check Passed, for ea item_id, check BC list if case id && item_id exists
         print("Case: " + case_id)
         for j in item_ids:
+            for i in BC.blockList:
+                if i.EID == int(j):
+                    exit(-1)
             # check if j is INT
             # print("Current item_id: " + j)
             if isValidInt(str(j)):  # lol oops, convert input to int
                 # print("item_id is VALID")
                 # iter through blockchain. If item already exists, exit. Else add new block to chain
-                for i in BC.blockList:
-                    print("EID: " + i.EID)
-                    if int(i.EID) == int(j):
-                        print("Error: Cannot add an existing item. Must add a new item. ")
+                #for i in BC.blockList:
+                    #if i.EID == int(j):
+                        #print("Error: Cannot add an existing item. Must add a new item. ")
                         # break
-                        exit(-1)
+                        #exit(-1)
 
-                # passed duplicate check, item_id unique, add new block
+                # item_id is unique/new, add new block
                 b = Block()
                 # hash = BC.getLatestHash()
                 # b.setPreviousHash(hash)
