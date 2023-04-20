@@ -17,16 +17,16 @@ def remove(item_id, reason, owner):
         if i.EvidenceID == item_id:
             if i.State == "CHECKEDOUT":
                 print("Error: Cannot remove a checked out item. Must check it in first")
-                exit(-1)
+                exit()
             elif i.State == "INITIAL":
                 print("Error: Cannot remove an initial block.")  # possible to remove initial block?
-                exit(-1)
+                exit()
             elif i.State == "DISPOSED" or i.State == "DESTROYED" or i.State == "RELEASED":
                 print("Error: Cannot remove an already disposed/destroyed/released item")
-                exit(-1)
+                exit()
             elif reason != "DISPOSED" or reason != "DESTROYED" or reason != "RELEASED":
                 print("Error: Not a valid reason. Must be 'DISPOSED', 'DESTROYED', or 'RELEASED")
-                exit(-1)
+                exit()
             else:
                 # Remove block
                 dataBlock = BC.blockExists(i)  # for setting data
