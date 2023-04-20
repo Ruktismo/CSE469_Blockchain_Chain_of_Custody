@@ -24,11 +24,11 @@ def init_chain():
             
                 
                         
-                b.setCID(b'0'*16)  # or b.setCID(None)? reformat for printing, null
+                b.setCID(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')  # or b.setCID(None)? reformat for printing, null
                 b.setData("Initial block")
-                b.setEID(b'0'*4)
-                b.setState("00000INITIAL")
-                b.setPreviousHash(b'0'*32)  # or b.setPreviousHash("None")? reformat for printing
+                b.setEID(b'\x00\x00\x00\x00')
+                b.setState("INITIAL")
+                b.setPreviousHash(b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00')  # or b.setPreviousHash("None")? reformat for printing
                 b.setTimestamp()
                 b.setDataLength(14)
                 b.setData("Initial block")  # 14 length string
