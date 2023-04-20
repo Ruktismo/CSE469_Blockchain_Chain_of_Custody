@@ -49,7 +49,7 @@ class BlockChain:
         with open(file_path, "rb") as f:
             contents = f.read()
             file_size = os.path.getsize(file_path)
-        # print("file size: "+str(file_size))
+        print("file size: "+str(file_size))
         
         
         initBlock = Block()
@@ -60,7 +60,7 @@ class BlockChain:
         self.datalist.append(initData) 
         self.blockList.append(initBlock)
         
-        while byteCount <= int(file_size) and int(file_size) != 0:
+        while byteCount < int(file_size) and int(file_size) != 0:
             
             # print(str(file_size))
             if(file_size == 90):
