@@ -74,16 +74,18 @@ def add(case_id, item_ids):
                     else:
                         # item_id is unique/new, add new block
                         b = Block()
-                        hash = BC.getLatestHash()
-                        b.setPreviousHash(hash)
+                        #hash = BC.getLatestHash()
+                        #b.setPreviousHash(hash)
+                        b.setPreviousHash(BC.getPreviousHash())
                         b.setTimestamp()
 
+
                         # set str case_id
-                        u = uuid.UUID(case_id)
-                        b.setCID(u)  # set int to CID
+                        u = uuidToHex(case_id)
+                        b.setCID(u)
                         #b.setCID(case_id)  # set int to CID
                         b.setEID(int(j))  # store item id into block
-                        b.setState("CHECKEDIN\x00\x00")
+                        b.setState("CHECKEDIN000")
 
                         # set data to new block
                         b.setDataLength(random.randint(0, 32))  # set rand length of data (range: [0,32])
