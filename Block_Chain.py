@@ -10,7 +10,7 @@ class BlockChain:
     def __init__(self):
         self.datalist = [] 
         self.blockList = []
-        # self.load_data()
+        self.load_data()
        
     def dataExists(self, newData):
         for d in self.datalist:
