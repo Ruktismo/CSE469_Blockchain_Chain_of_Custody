@@ -21,7 +21,7 @@ def checkin( item_id):
     # go through the list and make sure its exact thingy, then change state
     for i in BC.datalist:
         if str(i.EvidenceID) == str(item_id):
-            if i.state == "CHECKEDOUT":
+            if "CHECKEDOUT" in i.state:
                 i.state = "CHECKEDIN"
                 
                 #this takes your data obj "i" and returns the block obj that matches it
@@ -34,30 +34,26 @@ def checkin( item_id):
                 hash = BC.getLatestHash()
                 
                 thing.setPreviousHash(hash)
-                #thing.setCID(case_id)
+                thing.setCID(dataBlock.getCID())
                 thing.setEID(item_id)
                 thing.setTimestamp()
                 thing.setState("CHECKEDIN")
                 thing.setDataLength(int(dataBlock.getDataLength()))
                 thing.setData(dataBlock.getData())
-                
-                # print the things from the getters
+
                 print(f'Case: {thing.getCID()}')
                 print(f'Checked in item: {thing.getEID()}')
                 print(f'\tStatus: {thing.getState()}')
                 print(f'\tTime of action: {thing.getTimestamp()}')
-
                 
-
-                # add  the thing to the file and update lists with reload
                 thing.blockToBytes()
-                # BC.reload()
+                exit(0)
                 
                 
             else:
                 print("Error: cannot check in what is not checked out") 
                 exit(-1)
-
+    exit(-1)
             
     
     

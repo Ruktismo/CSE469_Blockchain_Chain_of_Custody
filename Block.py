@@ -190,6 +190,7 @@ class Block:
             unpacked7 = struct.unpack(unpacked6+'s', contents[76:countForSeven])
             unpacked7= "".join(str(i) for i in unpacked7)
             
+
             
             self.setPreviousHash(unpacked1[2:-1])
             self.updateTimestamp(unpacked2)

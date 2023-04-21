@@ -17,18 +17,15 @@ import pickle
 
 def checkout( item_id):
 
-    #go through the list and make sure its exact thingy, then change state
     for i in BC.datalist:
         if str(i.EvidenceID) == str(item_id):
             if "CHECKEDIN" in i.state:
                 i.state = "CHECKEDOUT"
 
-                # this takes your data obj "i" and returns the block obj that matches it
-                # this is mainly for filling the data and data length for writing to bytes
                 dataBlock = BC.blockExists(i)
                 thing = Block()
 
-                # set the things
+
                 hash = BC.getLatestHash()
 
                 thing.setPreviousHash(hash)
@@ -39,21 +36,20 @@ def checkout( item_id):
                 thing.setDataLength(int(dataBlock.getDataLength()))
                 thing.setData(dataBlock.getData())
 
-                # print the things from the getters
                 print(f'Case: {thing.getCID()}')
                 print(f'Checked out item: {thing.getEID()}')
                 print("Status: " + thing.getState() )
                 print(f'\tTime of action: {thing.getTimestamp()}')
 
-                # add  the thing to the file and update lists with reload
                 thing.blockToBytes()
-                # BC.reload()
+                exit(0)
+
 
             else:
                 print("Error: Cannot check out a checked out item. Must check it in first")
                 print("current state: "+ i.state)
                 exit(-1)
-
+    exit(-1)
 
     # #new block thingy to add to the chain
     # blox = Block()
