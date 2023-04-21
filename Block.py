@@ -120,9 +120,9 @@ class Block:
 
 
         u = uuid.UUID(self.getCID())
-        z = uuid.UUID(bytes_le = u.bytes)
+        z = uuid.UUID(bytes_le= u.bytes)
         zBytes = z.bytes
-        packed3 = zBytes
+        packed3 = struct.pack("16s", zBytes)
         #u = uuid.UUID(str(self.getCID()))
         #cidINT = int(u)  # [NEW] converts object to int
         #a = cidINT.to_bytes(16, 'little')  # int to bytes
