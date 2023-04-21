@@ -42,7 +42,7 @@ def verify_chain():
                       f"First OC {b}: {BC.blockList[b].getPreviousHash()}\n"
                       f"dup OC {i}: {BC.blockList[i].getPreviousHash()}")
                 exit(-3)
-        print(f"State: {BC.blockList[i].getState()}")
+        print(f"State: {BC.blockList[i].getState()}\n\tData: {BC.blockList[i].getData()}")
         # check datas to see if state change is valid
         if BC.blockList[i].getEID() in datas:
             """
