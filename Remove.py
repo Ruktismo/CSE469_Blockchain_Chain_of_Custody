@@ -43,8 +43,8 @@ def remove(item_id, reason, owner):
                 b.setPreviousHash(hash)
                 b.setTimestamp()
                 print(dataBlock.getCID())
-                #b.setCID(str(i.getCID())) #convert bytes to 16byte string
-                b.setCID(dataBlock.getCID())
+                b.setCID(int(dataBlock.getCID()))
+                #b.setCID(dataBlock.getCID())
                 b.setEID(int(item_id))
 
                 # state needs to be 12 char in length
