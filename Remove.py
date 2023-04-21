@@ -19,6 +19,8 @@ def remove(item_id, reason, owner):
         if i.EID == item_id:
             print(i.EID)
             print(item_id)
+            print(reason)
+            reason = str(reason)
             if i.State == "CHECKEDOUT":
                 print("Error: Cannot remove a checked out item. Must check it in first")
                 exit(-1)
