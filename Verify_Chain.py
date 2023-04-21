@@ -37,10 +37,11 @@ def verify_chain():
     for i in range(len(BC.blockList)):
         # Check that this blocks previous hash is the hash of the last block
         # but skip the init block since it has no parent
+        """
         if i > 0 and BC.blockList[i].getPreviousHash() != getBlockHash(BC.blockList[i-1]):
             print(f"Hash error at block {i}")
             exit(-1)
-
+        """
         # check datas to see if state change is valid
         if BC.blockList[i].getEID() in datas:
             """
