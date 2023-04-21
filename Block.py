@@ -4,7 +4,7 @@ import struct
 import os
 import pickle
 import uuid
-from Data import removePadding
+
 #from Block_Chain import *
 # INITIAL (for the initial block ONLY), CHECKEDIN, CHECKEDOUT, DISPOSED, DESTROYED, or RELEASED
 # add zeros to respective state to equal 12 characters
@@ -183,13 +183,14 @@ class Block:
             unpacked3= "".join(str(i) for i in unpacked3)
             unpacked4= "".join(str(i) for i in unpacked4)
             unpacked5= "".join(str(i) for i in unpacked5)
+
             unpacked6= "".join(str(i) for i in unpacked6)
             
             countForSeven = int(unpacked6)+76
             unpacked7 = struct.unpack(unpacked6+'s', contents[76:countForSeven])
             unpacked7= "".join(str(i) for i in unpacked7)
             
-            unpacked5 = removePadding(unpacked5)
+            
             self.setPreviousHash(unpacked1[2:-1])
             self.updateTimestamp(unpacked2)
             self.setCID(unpacked3[2:-1])
