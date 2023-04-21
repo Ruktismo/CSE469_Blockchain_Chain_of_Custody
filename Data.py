@@ -17,7 +17,7 @@ class Data:
         # print("CID: "+ str(self.CaseID))
         self.EvidenceID = block.getEID()
         # print("EID: " + str(self.EvidenceID))
-        self.state = block.getState()
+        self.state = block.getState().lstrip('0')
         
     def toString(self):
         return "Case ID: " + str(self.CaseID) +'\n' + "Evidence ID: " + str(self.EvidenceID) +'\n' + "State: " + str(self.state) 

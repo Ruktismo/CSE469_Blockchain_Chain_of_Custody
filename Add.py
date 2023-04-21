@@ -76,7 +76,7 @@ def add(case_id, item_ids):
         # get & print block
         print(f'CID check: {b.getCID()}')
         print(f'Added item: {b.getEID()}')
-        print(f'\tStatus: {b.getState()}')
+        print("Status: " + b.getState().lstrip('0'))
         print(f'\tTime of action: {b.getTimestamp()}')
 
         b.blockToBytes()
