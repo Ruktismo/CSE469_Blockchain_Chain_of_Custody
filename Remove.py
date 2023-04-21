@@ -12,6 +12,7 @@ def intToHex(i):
     return j  # returns hex str formatted "########-####-####-####-############"
 
 def remove(item_id, reason, owner):
+    #check if item_id exists
     # go through the list to check if item_id exists
     print("in Remove()")
     for i in BC.blockList:
@@ -65,6 +66,8 @@ def remove(item_id, reason, owner):
                 print(f'\tTime of action: {b.getTimestamp()}')
 
                 b.blockToBytes()
+                exit(0)
                 #BC.reload()
+    exit(-1)
 
 # remove -i 987654321 -y RELEASED -o "John Doe, 123 Cherry Ln, Pleasant, AZ 84848, 480-XXX-4321"
