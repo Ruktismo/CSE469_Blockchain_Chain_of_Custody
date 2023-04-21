@@ -72,11 +72,10 @@ class Block:
 
     def setState(self, state):
         if(state == "CHECKEDIN"):
-            state = "000CHECKEDIN"
+            self.State =  "000CHECKEDIN"
         elif state == "CHECKEDOUT":
-            state = "00CHECKEDOUT"
+            self.State = "00CHECKEDOUT"
 
-        self.State = state
         
     def getDataLength(self):
         return self.DataLen
