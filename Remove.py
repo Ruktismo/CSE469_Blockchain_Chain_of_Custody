@@ -3,6 +3,14 @@ import uuid
 from Block_Chain import BC
 from Block import Block
 
+
+# convert int to hex
+def intToHex(i):
+    hex(i)  # convert int to hex
+    j = '%x' % i  # remove '0x' & 'L'
+    j = uuid.UUID(hex=j)  # add dashes back in
+    return j  # returns hex str formatted "########-####-####-####-############"
+
 def remove(item_id, reason, owner):
     #iter thru list to see if checkedout
     for k in BC.datalist:
@@ -51,7 +59,7 @@ def remove(item_id, reason, owner):
                 # set data & data length from existing block's
                 if b.getState() == "RELEASED":
                     b.setDataLength(len(owner)+1)
-                    b.setData(str(owner))
+                    b.setData(owner)
                 else:
                     b.setDataLength(int(dataBlock.getDataLength()))
                     b.setData(dataBlock.getData())
