@@ -62,13 +62,13 @@ def main():
         case_id = -1
         item_id = -1
         for i in range(2, len(sys.argv)):
-            if '-r' in sys.argv[i]:
+            if '-r' == sys.argv[i]:
                 is_reversed = True
-            if '-n' in sys.argv[i]:
+            if '-n' == sys.argv[i]:
                 num_entries = int(sys.argv[i + 1])
-            if '-c' in sys.argv[i]:
+            if '-c' == sys.argv[i]:
                 case_id = sys.argv[i + 1]
-            if '-i' in sys.argv[i]:
+            if '-i' == sys.argv[i]:
                 item_id = sys.argv[i + 1]
         log(is_reversed, num_entries, case_id, item_id)
 

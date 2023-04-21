@@ -36,7 +36,7 @@ def verify_chain():
 
     for i in range(len(BC.blockList)):
         # Check that this blocks previous hash is not present on the chain
-        for b in range(i, 0, -1):
+        for b in range(i-1, 0, -1):
             if BC.blockList[b].getPreviousHash() == BC.blockList[i].getPreviousHash():
                 print(f"Two Blocks can not have the same parent\n"
                       f"First OC {b}: {BC.blockList[b].getPreviousHash()}\n"
