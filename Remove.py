@@ -22,9 +22,9 @@ def remove(item_id, reason, owner):
     # go through the list to check if item_id exists
     for i in BC.datalist:
         if i.EvidenceID == str(item_id):
-            #if i.state == "CHECKEDOUT":
-                #print("Error: Cannot remove a checked out item. Must check it in first")
-                #exit(-1)
+            if i.state == "CHECKEDOUT":
+                print("Error: Cannot remove a checked out item. Must check it in first")
+                exit(-1)
             if i.state == "INITIAL":
                 print("Error: Cannot remove an initial block.")  # possible to remove initial block?
                 exit(-1)
