@@ -19,7 +19,7 @@ def checkin( item_id):
                 
                 thing.setPreviousHash(hash)
                 thing.setCID(dataBlock.getCID())
-                thing.setEID(item_id)
+                thing.setEID(int(item_id))
                 thing.setTimestamp()
                 thing.setState("CHECKEDIN")
                 thing.setDataLength(int(dataBlock.getDataLength()))
