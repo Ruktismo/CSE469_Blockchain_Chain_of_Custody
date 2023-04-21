@@ -78,7 +78,7 @@ def main():
         elif len(sys.argv) >= 8 and sys.argv[6] == "-o":
             o_info = []
             for i in range(6, len(sys.argv)):
-                o_info.append(sys.argv[i + 1])
+                o_info.append(sys.argv[i])
             owner = ' '.join(str(o) for o in o_info)
             remove(sys.argv[3], sys.argv[5], owner)
         # elif len(sys.argv) == 8:
