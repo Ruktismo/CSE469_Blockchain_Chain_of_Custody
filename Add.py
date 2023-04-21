@@ -69,7 +69,6 @@ def add(case_id, item_ids):
 
         # set data to new block
         #b.setDataLength(random.randint(0, 32))  # set rand length of data (range: [0,32])
-        #b.setData(getRandomString(b.getDataLength()))  # gen rand str from data length
         b.setDataLength(0)
         b.setData(getRandomString(b.getDataLength()))  # gen rand str from data length
 
@@ -80,7 +79,6 @@ def add(case_id, item_ids):
         print(f'\tTime of action: {b.getTimestamp()}')
 
         b.blockToBytes()
-        # BC.reload()
 
 # add -c 65cc391d65684dcca3f186a2f04140f3 -i 987654321
 # add -c 65cc391d-6568-4dcc-a3f1-86a2f04140f3 -i 987654321

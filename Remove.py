@@ -3,14 +3,6 @@ import uuid
 from Block_Chain import BC
 from Block import Block
 
-
-# convert int to hex
-def intToHex(i):
-    hex(i)  # convert int to hex
-    j = '%x' % i  # remove '0x' & 'L'
-    j = uuid.UUID(hex=j)  # add dashes back in
-    return j  # returns hex str formatted "########-####-####-####-############"
-
 def remove(item_id, reason, owner):
     #iter thru list to see if checkedout
     for k in BC.datalist:
@@ -22,9 +14,6 @@ def remove(item_id, reason, owner):
     # go through the list to check if item_id exists
     for i in BC.datalist:
         if str(i.EvidenceID) == str(item_id):
-            if i.state == "CHECKEDOUT":
-                print("Error: Cannot remove a checked out item. Must check it in first")
-                exit(-1)
             if i.state == "INITIAL":
                 print("Error: Cannot remove an initial block.")  # possible to remove initial block?
                 exit(-1)
