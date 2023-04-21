@@ -182,8 +182,9 @@ class Block:
             int_val = int.from_bytes(byte_val, "little") #convert byte to int
             print(int_val)
             cid_uuid = uuid.UUID(int=int_val)
-            unpacked3 = str(cid_uuid)
-            print(unpacked3)
+            unpacked3 = cid_uuid
+            #unpacked3 = str(cid_uuid)
+            #print(unpacked3)
             #u = uuid.UUID(str(self.getCID()))
             #cidINT = int(u)  # [NEW] converts object to int
             #a = cidINT.to_bytes(16, 'little')  # int to bytes
