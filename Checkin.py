@@ -31,6 +31,7 @@ def checkin( item_id):
                 print(f'\tTime of action: {thing.getTimestamp()}')
                 
                 thing.blockToBytes()
+                BC.reload()
                 exit(0)
                 
                 
