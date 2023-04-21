@@ -34,7 +34,7 @@ class BlockChain:
         return False
     
     def getLatestHash(self):
-        print(str(len(self.blockList)))
+        # print(str(len(self.blockList)))
         input = pickle.dumps(self.blockList[-1])
         hash = sha256(input).digest()
         return hash

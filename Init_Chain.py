@@ -11,7 +11,7 @@ from Data import Data
 def init_chain():
     
     file_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
-    print(file_path)
+    # print(file_path)
     directory = os.path.dirname(file_path)
     if not os.path.exists(directory):
                 os.makedirs(directory)
