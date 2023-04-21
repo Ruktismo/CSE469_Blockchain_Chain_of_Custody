@@ -20,7 +20,7 @@ def checkout( item_id):
 
                 thing.setPreviousHash(hash)
                 thing.setCID(dataBlock.getCID())
-                thing.setEID(item_id)
+                thing.setEID(int(item_id))
                 thing.setTimestamp()
                 thing.setState("CHECKEDOUT")
                 thing.setDataLength(int(dataBlock.getDataLength()))
