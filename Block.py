@@ -68,8 +68,8 @@ class Block:
         self.EID = eid
         
     def getState(self):
-        s = self.State.lstrip("0")
-        return s
+        
+        return self.State
 
     def setState(self, state):
         if state == "CHECKEDIN":
