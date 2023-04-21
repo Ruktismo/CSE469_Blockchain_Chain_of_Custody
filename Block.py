@@ -179,7 +179,7 @@ class Block:
             #unpacked3 = str(cid_uuid)
 
             u = struct.unpack("16s", contents[40:56])  # tuple type
-            b = bytearray(str(u), 'utf-8')
+            b = bytes(str(u), 'utf-8')
             cid_int = int.from_bytes(b, 'little')
             cid_uuid = uuid.UUID(int=cid_int)
             unpacked3 = str(cid_uuid)
