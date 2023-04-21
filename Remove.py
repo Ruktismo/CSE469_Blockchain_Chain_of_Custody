@@ -42,6 +42,7 @@ def remove(item_id, reason, owner):
                 b.setTimestamp()
                 print(i.CID)
                 print(str(i.CID))
+                print(uuid.UUID(bytes=i.CID))
                 b.setCID(i.CID)
                 b.setEID(int(item_id))
 
