@@ -18,6 +18,7 @@ class Data:
         self.EvidenceID = block.getEID()
         # print("EID: " + str(self.EvidenceID))
         self.state = block.getState().replace("\x00","")
+        print("state of new data obj: "+block.getState().replace("\x00",""))
         
     def toString(self):
         return "Case ID: " + str(self.CaseID) +'\n' + "Evidence ID: " + str(self.EvidenceID) +'\n' + "State: " + str(self.state) 
