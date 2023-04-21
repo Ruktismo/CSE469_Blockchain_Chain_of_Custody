@@ -3,6 +3,7 @@ import datetime
 import struct
 import os
 import pickle
+import sys
 import uuid
 
 #from Block_Chain import *
@@ -121,11 +122,11 @@ class Block:
         # print("before pack: "+ str(self.getCID()))
         
         u = uuid.UUID(self.getCID())
-        uBytes = u.bytes_le
+        uBytes = u.bytes
         packed3 = uBytes
         #########################################################
         # print(str(uBytes))
-        print("////////////////////////////////////////////////////")
+        print(f"////////////////////////////////////////////////////{sys.byteorder}")
         
         print("OG CID: "+ str(self.getCID()))
         
