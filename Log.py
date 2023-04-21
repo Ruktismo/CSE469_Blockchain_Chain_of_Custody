@@ -10,9 +10,26 @@ from Block_Chain import *
 
 def disp_data(blocks):
     for i in range(len(blocks)):
+        # convert block state into printable form
+        if "INITIAL" in blocks[i].getState():
+            block_state = "INITIAL"
+        elif "CHECKEDIN" in blocks[i].getState():
+            block_state = "CHECKEDIN"
+        elif "CHECKEDOUT" in blocks[i].getState():
+            block_state = "CHECKEDOUT"
+        elif "DISPOSED" in blocks[i].getState():
+            block_state = "DISPOSED"
+        elif "DESTROYED" in blocks[i].getState():
+            block_state = "DESTROYED"
+        elif "RELEASED" in blocks[i].getState():
+            block_state = "RELEASED"
+        else:
+            print(f"Unknown block State: {blocks[i].getState()}")
+            exit(-7)
+
         print(f"Case: {blocks[i].getCID()}\n"
               f"Item: {blocks[i].getEID()}\n"
-              f"Action: {blocks[i].getState()}\n"
+              f"Action: {block_state}\n"
               f"Time: {blocks[i].getTimestamp()}")
         if i < len(blocks) - 1:
             print("\n")  # if not the last piece of data print an extra 2 newlines
