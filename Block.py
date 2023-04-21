@@ -117,10 +117,10 @@ class Block:
         packed1 = struct.pack("32s", self.getPreviousHash())
         packed2 = self.getDoubleTimestamp()
 
-        # u = uuid.UUID(str(self.getCID())) # [NEW] converts object to int, get bytes, store
-        # cidINT = int(u)
-        # a = cidINT.to_bytes(16, 'little')  # int to bytes
-        packed3 = struct.pack("16s", self.getCID())  # store bytes, srry lil messy. Tried using 'uuid' import to get bytes, but was weird.
+        u = uuid.UUID(str(self.getCID())) # [NEW] converts object to int, get bytes, store
+        cidINT = int(u)
+        a = cidINT.to_bytes(16, 'little')  # int to bytes
+        packed3 = struct.pack("16s", a)  # store bytes, srry lil messy. Tried using 'uuid' import to get bytes, but was weird.
         #packed3 = struct.pack("16s", str(self.getCID()).encode())
 
         packed4 = struct.pack("I", self.getEID())
