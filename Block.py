@@ -123,7 +123,7 @@ class Block:
         
         u = uuid.UUID(self.getCID())
         uBytes = u.bytes
-        packed3 = uBytes
+        packed3 = uBytes[::-1]
         #########################################################
         # print(str(uBytes))
         print(f"////////////////////////////////////////////////////{sys.byteorder}")
