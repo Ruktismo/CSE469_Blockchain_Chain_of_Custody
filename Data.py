@@ -33,7 +33,7 @@ class Data:
         # print("CID: "+ str(self.CaseID))
         self.EvidenceID = block.getEID()
         # print("EID: " + str(self.EvidenceID))
-        self.state = block.getState().lstrip("0")
+        self.state = block.getState().lstrip("\x00")
         
     def toString(self):
         return "Case ID: " + str(self.CaseID) +'\n' + "Evidence ID: " + str(self.EvidenceID) +'\n' + "State: " + str(self.state) 
