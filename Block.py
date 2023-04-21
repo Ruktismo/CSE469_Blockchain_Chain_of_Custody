@@ -123,6 +123,7 @@ class Block:
         u = uuid.UUID(self.getCID())
         uBytes = u.bytes
         packed3 = uBytes
+        # print(str(uBytes))
         
         # u = uuid.UUID(str(self.getCID())) # [NEW] converts object to int, get bytes, store
         # cidINT = int(u)
