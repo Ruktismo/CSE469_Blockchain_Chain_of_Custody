@@ -126,19 +126,19 @@ class Block:
         packed3 = uBytes[::-1]
         #########################################################
         # print(str(uBytes))
-        print(f"////////////////////////////////////////////////////{sys.byteorder}")
+        # print(f"////////////////////////////////////////////////////{sys.byteorder}")
         
-        print("OG CID: "+ str(self.getCID()))
+        # print("OG CID: "+ str(self.getCID()))
         
-        byteString = ''.join('{:02x}'.format(b) for b in packed3)
-        print("stored CID val: " + byteString)
+        # byteString = ''.join('{:02x}'.format(b) for b in packed3)
+        # print("stored CID val: " + byteString)
         
-        unpacked3 = struct.unpack("16s", uBytes)[0]
-        cid_uuid = uuid.UUID(bytes=unpacked3)
-        unpacked3 = str(cid_uuid)
-        print("unpacked CID: "+unpacked3)
+        # unpacked3 = struct.unpack("16s", uBytes)[0]
+        # cid_uuid = uuid.UUID(bytes=unpacked3)
+        # unpacked3 = str(cid_uuid)
+        # print("unpacked CID: "+unpacked3)
         
-        print("////////////////////////////////////////////////////")
+        # print("////////////////////////////////////////////////////")
         #########################################################
         # u = uuid.UUID(str(self.getCID())) # [NEW] converts object to int, get bytes, store
         # cidINT = int(u)
@@ -222,6 +222,7 @@ class Block:
             self.setPreviousHash(unpacked1[2:-1])
             self.updateTimestamp(unpacked2)
             self.setCID(unpacked3)
+            # print("set to CID/unpacked: " + unpacked3)
             self.setEID(unpacked4)
             self.setState(unpacked5[2:-1])
             self.setDataLength(unpacked6)

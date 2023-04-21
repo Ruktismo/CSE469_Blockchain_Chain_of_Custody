@@ -77,11 +77,11 @@ class BlockChain:
             byteCount += 32
             unpacked2 = getIso8601Timestamp(contents[byteCount:byteCount +8])
             byteCount += 8
-            unpacked3 = struct.unpack("16s", contents[byteCount:byteCount +16])[0]
+            unpacked3 = struct.unpack("16s", contents[byteCount:byteCount +16][::-1])[0]
             cid_uuid = uuid.UUID(bytes=unpacked3)
 
             unpacked3 = str(cid_uuid)
-            # print("unpacked BC : "+unpacked3)
+            # print("unpacked UUID : "+unpacked3)
             
             byteCount += 16
             unpacked4 = struct.unpack("I", contents[byteCount:byteCount +4])
