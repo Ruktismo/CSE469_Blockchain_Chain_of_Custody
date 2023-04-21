@@ -72,7 +72,7 @@ def main():
         log(is_reversed, num_entries, case_id, item_id)
 
     elif sys.argv[1] == "remove":
-        if len(sys.argv) == 6 or len(sys.argv) != 8:
+        if len(sys.argv) == 6 or len(sys.argv) == 8:
             owner = None
             if len(sys.argv) == 8:
                 owner = sys.argv[7]
