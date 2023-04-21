@@ -20,7 +20,7 @@ def checkout( item_id):
     #go through the list and make sure its exact thingy, then change state
     for i in BC.datalist:
         if str(i.EvidenceID) == str(item_id):
-            if i.state == "CHECKEDIN":
+            if i.state == "CHECKEDIN\x00\x00\x00":
                 i.state = "CHECKEDOUT"
 
                 # this takes your data obj "i" and returns the block obj that matches it
