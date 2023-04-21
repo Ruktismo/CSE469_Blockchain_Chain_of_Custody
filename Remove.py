@@ -15,7 +15,7 @@ def remove(item_id, reason, owner):
     # go through the list to check if item_id exists
     print("in Remove()")
     for i in BC.blockList:
-        if i.EvidenceID == item_id:
+        if i.EID == item_id:
             print(i.EID)
             print(item_id)
             if i.State == "CHECKEDOUT":
@@ -39,7 +39,7 @@ def remove(item_id, reason, owner):
                 b.setPreviousHash(hash)
                 b.setTimestamp()
                 b.setCID(i.CID)
-                b.setEID(item_id)
+                b.setEID(int(item_id))
 
                 # state needs to be 12 char in length
                 if reason == "DISPOSED":
@@ -55,9 +55,9 @@ def remove(item_id, reason, owner):
 
                 # print(f'Case: {b.getCID()}')
 
-                n = b.getCID()  # get int CID
-                UUIDstr = intToHex(n)  # convert int CID to UUID str (w dashes)
-                print(f'Case: {UUIDstr}')  # print UUID str
+                #n = b.getCID()  # get int CID
+                #UUIDstr = intToHex(n)  # convert int CID to UUID str (w dashes)
+                print(f'Case: {b.getCID()}')  # print UUID str
                 print(f'Removed item: {b.getEID()}')
                 print(f'\tStatus: {b.getState()}')
                 if (b.getState() == "RELEASED"):
