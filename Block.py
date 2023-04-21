@@ -194,7 +194,7 @@ class Block:
             self.updateTimestamp(unpacked2)
             self.setCID(unpacked3[2:-1])
             self.setEID(unpacked4)
-            self.setState(unpacked5)
+            self.setState(unpacked5[2:-1])
             self.setDataLength(unpacked6)
             self.setData(unpacked7[2:-1])
         
