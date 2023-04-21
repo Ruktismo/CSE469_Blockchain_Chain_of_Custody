@@ -68,14 +68,14 @@ class Block:
         self.EID = eid
         
     def getState(self):
-        return self.State
+        return self.State.lstrip("0")
 
     def setState(self, state):
         if(state == "CHECKEDIN"):
             state = "000CHECKEDIN"
         elif state == "CHECKEDOUT":
             state = "00CHECKEDOUT"
-        
+
         self.State = state
         
     def getDataLength(self):
