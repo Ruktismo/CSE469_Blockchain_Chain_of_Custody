@@ -208,7 +208,8 @@ class Block:
 
             self.setPreviousHash(unpacked1[2:-1])
             self.updateTimestamp(unpacked2)
-            self.setCID(unpacked3[2:-1])
+            #self.setCID(unpacked3[2:-1])
+            self.setCID(unpacked3)
             self.setEID(unpacked4)
             self.setState(unpacked5[2:-1].lstrip('0'))
             self.setDataLength(unpacked6)
