@@ -194,7 +194,7 @@ class Block:
             #unpacked3 = struct.unpack("16s", contents[40:56])
 
             unpacked3 = struct.unpack("16s", contents[40:56])[0]
-            print("[fillFromFile] unpacked CID: " + unpacked3)
+            print("[fillFromFile] unpacked CID: " + str(unpacked3))
             cid_uuid = uuid.UUID(bytes=unpacked3)
             unpacked3 = str(cid_uuid)
             print("[fillFromFile] unpacked CID: " + unpacked3)
