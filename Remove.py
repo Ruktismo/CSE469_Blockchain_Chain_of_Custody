@@ -58,9 +58,7 @@ def remove(item_id, reason, owner):
 
                 # set data & data length from existing block's
                 if b.getState() == "RELEASED":
-                    owner = owner + '\0'
-                    #b.setDataLength(len(owner)+1)
-                    #b.setData(owner + "")
+                    owner = owner + '\0' #add null char for len & data struct
                     b.setDataLength(len(owner))
                     b.setData(owner)
                 else:
