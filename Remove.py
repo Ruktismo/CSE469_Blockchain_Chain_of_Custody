@@ -50,7 +50,8 @@ def remove(item_id, reason, owner):
                 b.setDataLength(int(dataBlock.getDataLength()))
                 b.setData(dataBlock.getData())
 
-                # print(f'Case: {b.getCID()}')
+                print(b.getCID())
+                print(type(b.getCID()))
 
                 print(f'Case: {b.getCID()}')  # print UUID str
                 print(f'Removed item: {b.getEID()}')
