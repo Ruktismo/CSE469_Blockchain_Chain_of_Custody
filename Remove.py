@@ -14,14 +14,14 @@ def intToHex(i):
 def remove(item_id, reason, owner):
     # go through the list to check if item_id exists
     for i in BC.datalist:
-        if i.EvidenceID == item_id:
-            if i.State == "CHECKEDOUT":
+        if i.EvidenceID == str(item_id):
+            if i.state == "CHECKEDOUT":
                 print("Error: Cannot remove a checked out item. Must check it in first")
                 exit()
-            elif i.State == "INITIAL":
+            elif i.state == "INITIAL":
                 print("Error: Cannot remove an initial block.")  # possible to remove initial block?
                 exit()
-            elif i.State == "DISPOSED" or i.State == "DESTROYED" or i.State == "RELEASED":
+            elif i.state == "DISPOSED" or i.state == "DESTROYED" or i.state == "RELEASED":
                 print("Error: Cannot remove an already disposed/destroyed/released item")
                 exit()
             elif reason != "DISPOSED" or reason != "DESTROYED" or reason != "RELEASED":
@@ -36,15 +36,15 @@ def remove(item_id, reason, owner):
                 b.setPreviousHash(hash)
                 b.setTimestamp()
                 b.setCID(i.CID)
-                b.setEID(item_id)
+                b.setEID(int(item_id))
 
                 # state needs to be 12 char in length
                 if reason == "DISPOSED":
-                    b.setState("0000DISPOSED")
+                    b.setState("DISPOSED")
                 elif reason == "DESTROYED":
-                    b.setState("000DESTROYED")
+                    b.setState("DESTROYED")
                 else:
-                    b.setState("0000RELEASED")
+                    b.setState("RELEASED")
 
                 # set data & data length from existing block's
                 b.setDataLength(int(dataBlock.getDataLength()))
@@ -52,9 +52,7 @@ def remove(item_id, reason, owner):
 
                 # print(f'Case: {b.getCID()}')
 
-                n = b.getCID()  # get int CID
-                UUIDstr = intToHex(n)  # convert int CID to UUID str (w dashes)
-                print(f'Case: {UUIDstr}')  # print UUID str
+                print(f'Case: {b.getCID()}')  # print UUID str
                 print(f'Removed item: {b.getEID()}')
                 print(f'\tStatus: {b.getState()}')
                 if (b.getState() == "RELEASED"):
