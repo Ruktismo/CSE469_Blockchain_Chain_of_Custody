@@ -190,6 +190,13 @@ class Block:
             unpacked7 = struct.unpack(unpacked6+'s', contents[76:countForSeven])
             unpacked7= "".join(str(i) for i in unpacked7)
             
+            cid_int = int.from_bytes(unpacked3, 'little')
+
+            # Convert the integer back into a UUID object
+            cid_uuid = uuid.UUID(int=cid_int)
+
+            # Get the string representation of the UUID object
+            unpacked3 = str(cid_uuid)
             
             self.setPreviousHash(unpacked1[2:-1])
             self.updateTimestamp(unpacked2)
