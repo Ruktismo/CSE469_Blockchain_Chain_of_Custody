@@ -125,4 +125,4 @@ class BlockChain:
         
 
 BC = BlockChain()  # Friendly name for us to import
-# BC.printBC()
+BC.printBC()

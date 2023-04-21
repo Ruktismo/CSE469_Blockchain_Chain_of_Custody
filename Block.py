@@ -120,14 +120,14 @@ class Block:
         
         # print(str(self.getCID()))
         
-        u = uuid.UUID(self.getCID())
-        uBytes = u.bytes
-        packed3 = struct.pack("16s", uBytes)
+        # u = uuid.UUID(self.getCID())
+        # uBytes = u.bytes
+        # packed3 = struct.pack("16s", uBytes)
         
-        # u = uuid.UUID(str(self.getCID())) # [NEW] converts object to int, get bytes, store
-        # cidINT = int(u)
-        # a = cidINT.to_bytes(16, 'little')  # int to bytes
-        # packed3 = struct.pack("16s", a)  # store bytes, srry lil messy. Tried using 'uuid' import to get bytes, but was weird.
+        u = uuid.UUID(str(self.getCID())) # [NEW] converts object to int, get bytes, store
+        cidINT = int(u)
+        a = cidINT.to_bytes(16, 'little')  # int to bytes
+        packed3 = struct.pack("16s", a)  # store bytes, srry lil messy. Tried using 'uuid' import to get bytes, but was weird.
         #packed3 = struct.pack("16s", str(self.getCID()).encode())
 
         packed4 = struct.pack("I", self.getEID())
