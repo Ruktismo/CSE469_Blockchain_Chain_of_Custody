@@ -131,12 +131,7 @@ class Block:
         
         block = (packed1) + (packed2) + (packed3) + (packed4) + (packed5) + (packed6) + (packed7)
 
-    
-        # fileName = "./BC.raw"
-        
-        
-        # with open(fileName, "ab") as out:
-        #             out.write(block)
+
         directory_path = os.getenv('BCHOC_FILE_PATH', './BlockFolder/BC.raw')
 
         with open(directory_path, "ab") as f:
@@ -174,11 +169,17 @@ class Block:
             
             unpacked1 = struct.unpack("32s", contents[0:32])
             unpacked2 = getIso8601Timestamp(contents[32:40])
-            unpacked3 = struct.unpack("16s", contents[40:56])
+            unpacked3 = struct.unpack("16s", contents[40:56])[0]
+            cid_uuid = uuid.UUID(bytes=unpacked3)
+
+            unpacked3 = str(cid_uuid)
+            print(unpacked3)
+            
+            
             unpacked4 = struct.unpack("I", contents[56:60])
             unpacked5 = struct.unpack("12s", contents[60:72])
             unpacked6 = struct.unpack("I", contents[72:76])
-            
+
             unpacked1= "".join(str(i) for i in unpacked1)
             unpacked3= "".join(str(i) for i in unpacked3)
             unpacked4= "".join(str(i) for i in unpacked4)
@@ -191,7 +192,7 @@ class Block:
             unpacked7= "".join(str(i) for i in unpacked7)
             
 
-            
+
             self.setPreviousHash(unpacked1[2:-1])
             self.updateTimestamp(unpacked2)
             self.setCID(unpacked3[2:-1])
@@ -206,22 +207,12 @@ class Block:
 
 
 # b = Block()
-# b.setCID("9269517612799130")
+# b.setCID("90a46b61-5c30-44b2-91f2-a70a5005926c")
 # b.setData("uwF6MJKlWZqqqqq")
 # b.setEID(2133)
-# b.setState("000CHECKEDIN")
-# b.setPreviousHash(bytes("261913b71a13306d63d65612875ead13", "utf-8"))
+# b.setState("CHECKEDIN")
+# b.setPreviousHash(b'0'*32)
 # b.setTimestamp()
 # b.setDataLength(15)
-
-# b.blockToBytes()
-
-# b.setCID(9269517612799150)
-# b.setData("uwF6MJKlWZ")
-# b.setEID(2113)
-# b.setState("000CHECKEDIN")
-# b.setPreviousHash("261913b71a13306d63d65612875ead13")
-# b.setTimestamp()
-# b.setDataLength(10)
 
 # b.blockToBytes()

@@ -5,7 +5,7 @@ from Data import *
 from Block import Block
 from Block import getIso8601Timestamp
 from hashlib import sha256
-
+import uuid
 class BlockChain:   
     def __init__(self):
         self.datalist = [] 
@@ -30,7 +30,6 @@ class BlockChain:
         hash = sha256(input).digest()
         return hash
     
-    #use after using blockToBytes to update lists
     def reload(self):
         self.blockList.clear()
         self.datalist.clear()
@@ -49,7 +48,6 @@ class BlockChain:
         with open(file_path, "rb") as f:
             contents = f.read()
             file_size = os.path.getsize(file_path)
-        # print("file size: "+str(file_size))
         
         
         initBlock = Block()
@@ -62,18 +60,21 @@ class BlockChain:
         
         while byteCount < int(file_size) and int(file_size) != 0:
             
-            # print(str(file_size))
             if(file_size == 90):
                 break
             temp = Data()
             newBlock = Block()
-            # newBlock.fillFromFile()
-            # print("byte count: "+str(byteCount))
+
             unpacked1 = struct.unpack("32s", contents[byteCount:byteCount+32])
             byteCount += 32
             unpacked2 = getIso8601Timestamp(contents[byteCount:byteCount +8])
             byteCount += 8
-            unpacked3 = struct.unpack("16s", contents[byteCount:byteCount +16])
+            unpacked3 = struct.unpack("16s", contents[byteCount:byteCount +16])[0]
+            cid_uuid = uuid.UUID(bytes=unpacked3)
+
+            unpacked3 = str(cid_uuid)
+            print(unpacked3)
+            
             byteCount += 16
             unpacked4 = struct.unpack("I", contents[byteCount:byteCount +4])
             byteCount += 4
@@ -105,7 +106,7 @@ class BlockChain:
             
             temp.blockToData(newBlock)
             self.blockList.append(newBlock)
-            # # fills datalist
+
             x = self.dataExists(temp)
             if x == False:
                 self.datalist.append(temp)  
@@ -113,7 +114,6 @@ class BlockChain:
                 x.state = temp.state
                 
     def printBC(self):
-         # show datalist content 
         print("\nBlock list count: "+str(len(self.datalist)))
         print("datalist contents: ")
         for i in self.datalist:
@@ -126,5 +126,3 @@ class BlockChain:
 
 BC = BlockChain()  # Friendly name for us to import
 # BC.printBC()
-# print(BC.getLatestHash())
-# print(len(BC.getLatestHash()))
