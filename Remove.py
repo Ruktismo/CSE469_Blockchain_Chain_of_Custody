@@ -35,7 +35,7 @@ def remove(item_id, reason, owner):
                 hash = BC.getLatestHash()
                 b.setPreviousHash(hash)
                 b.setTimestamp()
-                b.setCID(i.CID)
+                b.setCID(dataBlock.getCID())
                 b.setEID(int(item_id))
 
                 # state needs to be 12 char in length
@@ -63,4 +63,5 @@ def remove(item_id, reason, owner):
                 #BC.reload()
                 exit(0)
     exit(-1) #no such evidence item
+
 # remove -i 987654321 -y RELEASED -o "John Doe, 123 Cherry Ln, Pleasant, AZ 84848, 480-XXX-4321"
