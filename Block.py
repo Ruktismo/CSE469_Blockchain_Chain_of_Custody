@@ -120,7 +120,7 @@ class Block:
         
         # print(str(self.getCID()))
         
-        u = uuid.UUID(str(self.getCID()))
+        u = uuid.UUID(self.getCID())
         uBytes = u.bytes
         packed3 = struct.pack("16s", uBytes)
         
