@@ -67,7 +67,7 @@ def add(case_id, item_ids):
         b.setCID(u) # store as uuid object
         #b.setCID(case_id)  # set str case_id
         b.setEID(int(j))  # store item id into block
-        b.setState("CHECKEDIN000")
+        b.setState("CHECKEDIN\0\0")
 
         # set data to new block
         b.setDataLength(random.randint(0, 32))  # set rand length of data (range: [0,32])
