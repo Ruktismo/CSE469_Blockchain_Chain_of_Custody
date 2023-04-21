@@ -172,13 +172,9 @@ class Block:
             unpacked1 = struct.unpack("32s", contents[0:32])
             unpacked2 = getIso8601Timestamp(contents[32:40])
 
-            temp = struct.unpack("16s", contents[40:56])
-            print(temp)
-            print(type(temp))
-            b = bytearray()
-            print(b)
-            print(type(b))
-            cid_int = int.from_bytes(b, byteorder='little')
+            temp = struct.unpack("16s", contents[40:56]) #tuple type
+            b = bytearray() #byte array type
+            cid_int = int.from_bytes(temp, byteorder='little')
             print("cid_int: ")
             print(cid_int)
             cid_uuid = uuid.UUID(int=cid_int)
@@ -208,8 +204,7 @@ class Block:
 
             self.setPreviousHash(unpacked1[2:-1])
             self.updateTimestamp(unpacked2)
-            #self.setCID(unpacked3[2:-1])
-            self.setCID(unpacked3)
+            self.setCID(unpacked3[2:-1])
             self.setEID(unpacked4)
             self.setState(unpacked5[2:-1].lstrip('0'))
             self.setDataLength(unpacked6)
