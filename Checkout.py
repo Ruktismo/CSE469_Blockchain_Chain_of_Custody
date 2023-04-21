@@ -20,8 +20,8 @@ def checkout( item_id):
     #go through the list and make sure its exact thingy, then change state
     for i in BC.datalist:
         if str(i.EvidenceID) == str(item_id):
-            if i.State == "CHECKEDIN":
-                i.State = "CHECKEDOUT"
+            if i.state == "CHECKEDIN":
+                i.state = "CHECKEDOUT"
 
                 # this takes your data obj "i" and returns the block obj that matches it
                 # this is mainly for filling the data and data length for writing to bytes
