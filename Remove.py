@@ -17,16 +17,16 @@ def remove(item_id, reason, owner):
         if i.EvidenceID == str(item_id):
             if i.state == "CHECKEDOUT":
                 print("Error: Cannot remove a checked out item. Must check it in first")
-                exit()
+                exit(-1)
             elif i.state == "INITIAL":
                 print("Error: Cannot remove an initial block.")  # possible to remove initial block?
-                exit()
+                exit(-1)
             elif i.state == "DISPOSED" or i.state == "DESTROYED" or i.state == "RELEASED":
                 print("Error: Cannot remove an already disposed/destroyed/released item")
-                exit()
-            elif reason != "DISPOSED" or reason != "DESTROYED" or reason != "RELEASED":
+                exit(-1)
+            elif reason != "DISPOSED" and reason != "DESTROYED" and reason != "RELEASED":
                 print("Error: Not a valid reason. Must be 'DISPOSED', 'DESTROYED', or 'RELEASED")
-                exit()
+                exit(-1)
             else:
                 # Remove block
                 dataBlock = BC.blockExists(i)  # for setting data
@@ -60,6 +60,7 @@ def remove(item_id, reason, owner):
                 print(f'\tTime of action: {b.getTimestamp()}')
 
                 b.blockToBytes()
-                BC.reload()
-
+                #BC.reload()
+                exit(0)
+    exit(-1) #no such evidence item
 # remove -i 987654321 -y RELEASED -o "John Doe, 123 Cherry Ln, Pleasant, AZ 84848, 480-XXX-4321"
