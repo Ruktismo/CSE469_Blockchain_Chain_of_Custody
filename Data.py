@@ -24,6 +24,7 @@ class Data:
         self.EvidenceID = block.getEID()
         # print("EID: " + str(self.EvidenceID))
         self.state = removePadding(block.getState())
+        print("test: "+ removePadding(block.getState()))
         
         
     def toString(self):
