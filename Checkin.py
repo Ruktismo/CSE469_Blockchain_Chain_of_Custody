@@ -37,7 +37,7 @@ def checkin( item_id):
                 #thing.setCID(case_id)
                 thing.setEID(item_id)
                 thing.setTimestamp()
-                thing.setState("000CHECKEDIN")
+                thing.setState("CHECKEDIN")
                 thing.setDataLength(int(dataBlock.getDataLength()))
                 thing.setData(dataBlock.getData())
                 

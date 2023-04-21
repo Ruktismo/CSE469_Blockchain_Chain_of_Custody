@@ -72,11 +72,6 @@ class Block:
         return self.State
 
     def setState(self, state):
-        if state == "CHECKEDIN":
-            state = "000CHECKEDIN"
-        elif state == "CHECKEDOUT":
-            state = "00CHECKEDOUT"
-            
         self.State = state
         
     def getDataLength(self):
@@ -200,7 +195,7 @@ class Block:
             self.updateTimestamp(unpacked2)
             self.setCID(unpacked3[2:-1])
             self.setEID(unpacked4)
-            self.setState(unpacked5[2:-1].lstrip('0'))
+            self.setState(unpacked5[2:-1])
             self.setDataLength(unpacked6)
             self.setData(unpacked7[2:-1])
         

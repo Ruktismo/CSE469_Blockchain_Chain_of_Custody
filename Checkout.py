@@ -42,7 +42,7 @@ def checkout( item_id):
                 # print the things from the getters
                 print(f'Case: {thing.getCID()}')
                 print(f'Checked out item: {thing.getEID()}')
-                print("Status: " + thing.getState().lstrip('0') )
+                print("Status: " + thing.getState() )
                 print(f'\tTime of action: {thing.getTimestamp()}')
 
                 # add  the thing to the file and update lists with reload
