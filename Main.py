@@ -72,13 +72,13 @@ def main():
         log(is_reversed, num_entries, case_id, item_id)
 
     elif sys.argv[1] == "remove":
-        if len(sys.argv) != 6 or len(sys.argv) != 8:
+        if len(sys.argv) == 6:
+            remove(sys.argv[3], sys.argv[5], None)
+        elif len(sys.argv) == 8:
+            remove(sys.argv[3], sys.argv[5], sys.argv[7])
+        else:
             print("ERROR: Incorrect number of args\n Proprer format:  bchoc remove -i item_id -y reason [-o owner]")
             exit(-1)
-        owner = None
-        if len(sys.argv) == 8:
-            owner = sys.argv[7]
-        remove(sys.argv[3], sys.argv[5], owner)
 
     elif sys.argv[1] == "init":
         if len(sys.argv) != 2:
