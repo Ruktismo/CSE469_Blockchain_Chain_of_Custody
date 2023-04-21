@@ -40,8 +40,8 @@ def remove(item_id, reason, owner):
                 hash = BC.getLatestHash()
                 b.setPreviousHash(hash)
                 b.setTimestamp()
-                print(i.CID)
-                b.setCID(i.CID)
+                print(i.CaseID)
+                b.setCID(i.CaseID)
                 b.setEID(int(item_id))
 
                 # state needs to be 12 char in length
