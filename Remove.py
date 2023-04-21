@@ -41,6 +41,7 @@ def remove(item_id, reason, owner):
                 b.setPreviousHash(hash)
                 b.setTimestamp()
                 print(i.CID)
+                print(str(i.CID))
                 b.setCID(i.CID)
                 b.setEID(int(item_id))
 
