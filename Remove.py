@@ -50,8 +50,12 @@ def remove(item_id, reason, owner):
                     b.setState("RELEASED")
 
                 # set data & data length from existing block's
-                b.setDataLength(int(dataBlock.getDataLength()))
-                b.setData(dataBlock.getData())
+                if b.getState() == "RELEASED":
+                    b.setDataLength(len(str(owner)))
+                    b.setData(str(owner))
+                else:
+                    b.setDataLength(int(dataBlock.getDataLength()))
+                    b.setData(dataBlock.getData())
 
                 print(b.getCID())
                 print(type(b.getCID()))
