@@ -174,8 +174,9 @@ class Block:
             print(unpacked1)
             unpacked2 = getIso8601Timestamp(contents[32:40])
 
-            u = struct.unpack("<16s", contents[40:56])  # tuple type
-            cid_int = int.from_bytes(u, 'little')
+            u = struct.unpack("16s", contents[40:56])  # tuple type
+            cid_int = int.from_bytes(contents[40:56], 'little')
+            type(cid_int)
             cid_uuid = uuid.UUID(int=cid_int)
             unpacked3 = str(cid_uuid)
 
