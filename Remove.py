@@ -13,20 +13,21 @@ def intToHex(i):
 
 def remove(item_id, reason, owner):
     # go through the list to check if item_id exists
+    print("in Remove()")
     for i in BC.datalist:
         if i.EvidenceID == item_id:
             if i.State == "CHECKEDOUT":
                 print("Error: Cannot remove a checked out item. Must check it in first")
-                exit()
+                exit(-1)
             elif i.State == "INITIAL":
                 print("Error: Cannot remove an initial block.")  # possible to remove initial block?
-                exit()
+                exit(-1)
             elif i.State == "DISPOSED" or i.State == "DESTROYED" or i.State == "RELEASED":
                 print("Error: Cannot remove an already disposed/destroyed/released item")
-                exit()
+                exit(-1)
             elif reason != "DISPOSED" or reason != "DESTROYED" or reason != "RELEASED":
                 print("Error: Not a valid reason. Must be 'DISPOSED', 'DESTROYED', or 'RELEASED")
-                exit()
+                exit(-1)
             else:
                 # Remove block
                 dataBlock = BC.blockExists(i)  # for setting data
@@ -40,11 +41,11 @@ def remove(item_id, reason, owner):
 
                 # state needs to be 12 char in length
                 if reason == "DISPOSED":
-                    b.setState("0000DISPOSED")
+                    b.setState("DISPOSED")
                 elif reason == "DESTROYED":
-                    b.setState("000DESTROYED")
+                    b.setState("DESTROYED")
                 else:
-                    b.setState("0000RELEASED")
+                    b.setState("RELEASED")
 
                 # set data & data length from existing block's
                 b.setDataLength(int(dataBlock.getDataLength()))
@@ -62,6 +63,6 @@ def remove(item_id, reason, owner):
                 print(f'\tTime of action: {b.getTimestamp()}')
 
                 b.blockToBytes()
-                BC.reload()
+                #BC.reload()
 
 # remove -i 987654321 -y RELEASED -o "John Doe, 123 Cherry Ln, Pleasant, AZ 84848, 480-XXX-4321"
