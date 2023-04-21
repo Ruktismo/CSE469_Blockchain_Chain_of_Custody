@@ -42,7 +42,14 @@ def verify_chain():
                       f"First OC {b}: {BC.blockList[b].getPreviousHash()}\n"
                       f"dup OC {i}: {BC.blockList[i].getPreviousHash()}")
                 exit(-3)
-        print(f"State: {BC.blockList[i].getState()}\n\tData: {BC.blockList[i].getData()}")
+
+        # check that state is a valid state
+        curr_state = BC.blockList[i].getState()
+        if "CHECKEDIN" not in curr_state or "CHECKEDOUT" not in curr_state or "DISPOSED" not in curr_state or \
+           "DESTROYED" not in curr_state or "RELEASED" not in curr_state:
+            print(f"State: {curr_state} is not a valid state")
+            exit(-3)
+
         # check datas to see if state change is valid
         if BC.blockList[i].getEID() in datas:
             """
@@ -66,9 +73,6 @@ def verify_chain():
                     "RELEASED" in datas[BC.blockList[i].getEID()].state:
                 print("Can't preform action on item that has been removed")
                 exit(-3)
-
-            # if curr state is CI and new state is Remove check for valid reason
-
 
             # if valid then update state
             datas[BC.blockList[i].getEID()].state = BC.blockList[i].getState()
