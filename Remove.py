@@ -53,9 +53,9 @@ def remove(item_id, reason, owner):
                 if b.getState() == "RELEASED":
                     b.setDataLength(len(owner)+1)
                     b.setData(owner)
-                else:
-                    b.setDataLength(int(dataBlock.getDataLength()))
-                    b.setData(dataBlock.getData())
+                #else:
+                    #b.setDataLength(int(dataBlock.getDataLength()))
+                    #b.setData(dataBlock.getData())
 
                 print(f'Case: {b.getCID()}')  # print UUID str
                 print(f'Removed item: {b.getEID()}')
