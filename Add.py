@@ -59,19 +59,23 @@ def add(case_id, item_ids):
 
         # [CHECKS PASSED] item_id is INT & unique. Add new block.
         b = Block()
-        hash = BC.getLatestHash()
-        b.setPreviousHash(hash)
+        #hash = BC.getLatestHash()
+        #b.setPreviousHash(hash)
+        b.setPreviousHash("00000000000000000000000000000000")
         b.setTimestamp()
 
         u = uuid.UUID(str(case_id))
         b.setCID(u) # store as uuid object
         #b.setCID(case_id)  # set str case_id
         b.setEID(int(j))  # store item id into block
-        b.setState("CHECKEDIN\0\0")
+        b.setState("CHECKEDIN" + "\0")
 
         # set data to new block
-        b.setDataLength(random.randint(0, 32))  # set rand length of data (range: [0,32])
+        #b.setDataLength(random.randint(0, 32))  # set rand length of data (range: [0,32])
+        #b.setData(getRandomString(b.getDataLength()))  # gen rand str from data length
+        b.setDataLength(0)  # set rand length of data (range: [0,32])
         b.setData(getRandomString(b.getDataLength()))  # gen rand str from data length
+
 
         # get & print block
         print(f'CID check: {b.getCID()}')
