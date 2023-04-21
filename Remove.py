@@ -12,13 +12,20 @@ def intToHex(i):
     return j  # returns hex str formatted "########-####-####-####-############"
 
 def remove(item_id, reason, owner):
-    # go through the list to check if item_id exists
+    #iter thru list to see if checkedout
     for i in BC.datalist:
         if i.EvidenceID == str(item_id):
             if i.state == "CHECKEDOUT":
                 print("Error: Cannot remove a checked out item. Must check it in first")
                 exit(-1)
-            elif i.state == "INITIAL":
+
+    # go through the list to check if item_id exists
+    for i in BC.datalist:
+        if i.EvidenceID == str(item_id):
+            #if i.state == "CHECKEDOUT":
+                #print("Error: Cannot remove a checked out item. Must check it in first")
+                #exit(-1)
+            if i.state == "INITIAL":
                 print("Error: Cannot remove an initial block.")  # possible to remove initial block?
                 exit(-1)
             elif i.state == "DISPOSED" or i.state == "DESTROYED" or i.state == "RELEASED":
@@ -53,9 +60,9 @@ def remove(item_id, reason, owner):
                 if b.getState() == "RELEASED":
                     b.setDataLength(len(owner)+1)
                     b.setData(owner)
-                #else:
-                    #b.setDataLength(int(dataBlock.getDataLength()))
-                    #b.setData(dataBlock.getData())
+                else:
+                    b.setDataLength(int(dataBlock.getDataLength()))
+                    b.setData(dataBlock.getData())
 
                 print(f'Case: {b.getCID()}')  # print UUID str
                 print(f'Removed item: {b.getEID()}')
