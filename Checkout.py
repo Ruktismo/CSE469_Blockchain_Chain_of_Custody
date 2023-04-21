@@ -50,7 +50,7 @@ def checkout( item_id):
                 # BC.reload()
 
             else:
-                print("Error: Cannot check out a checked out item. Must check it in first")
+                print("Error: Cannot check out a checked out item. Must check it in first(State:+"+i.state() +")")
 
 
     # #new block thingy to add to the chain
