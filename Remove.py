@@ -24,7 +24,7 @@ def remove(item_id, reason, owner):
             elif i.getState() == "INITIAL":
                 print("Error: Cannot remove an initial block.")  # possible to remove initial block?
                 exit(-1)
-            elif i.getState() == "DISPOSED" or i.State == "DESTROYED" or i.State == "RELEASED":
+            elif i.getState() == "DISPOSED" or i.getState() == "DESTROYED" or i.getState() == "RELEASED":
                 print("Error: Cannot remove an already disposed/destroyed/released item")
                 exit(-1)
             elif reason != "DISPOSED" or reason != "DESTROYED" or reason != "RELEASED":
