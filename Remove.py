@@ -35,7 +35,6 @@ def remove(item_id, reason, owner):
             else:
                 print("removing block!")
                 # Remove block
-                dataBlock = BC.blockExists(i)  # for setting data
                 b = Block()
 
                 hash = BC.getLatestHash()
@@ -53,10 +52,8 @@ def remove(item_id, reason, owner):
                     b.setState("RELEASED")
 
                 # set data & data length from existing block's
-                b.setDataLength(int(dataBlock.getDataLength()))
-                b.setData(dataBlock.getData())
-
-                # print(f'Case: {b.getCID()}')
+                b.setDataLength(i.DataLen)
+                b.setData(i.Data)
 
                 #n = b.getCID()  # get int CID
                 #UUIDstr = intToHex(n)  # convert int CID to UUID str (w dashes)
