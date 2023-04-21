@@ -174,7 +174,10 @@ class Block:
 
             temp = struct.unpack("16s", contents[40:56])
             print(temp)
-            cid_int = int.from_bytes(temp, byteorder='little')
+            print(type(temp))
+            b = bytearray()
+            print(b)
+            cid_int = int.from_bytes(b, byteorder='little')
             print("cid_int: ")
             print(cid_int)
             cid_uuid = uuid.UUID(int=cid_int)
