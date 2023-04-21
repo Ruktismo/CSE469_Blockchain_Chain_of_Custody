@@ -173,13 +173,17 @@ class Block:
             unpacked2 = getIso8601Timestamp(contents[32:40])
 
             #u = struct.unpack("16s", contents[40:56])  # tuple type
+            u = struct.unpack("16s", contents[40:56])  # tuple type
+            print(u)
+            print(type(u))
             byte_val = contents[40:56]
+            print(type(byte_val))
             print(byte_val)
             int_val = int.from_bytes(byte_val, "little") #convert byte to int
             print(int_val)
             cid_uuid = uuid.UUID(int=int_val)
             unpacked3 = str(cid_uuid)
-
+            print(unpacked3)
             #u = uuid.UUID(str(self.getCID()))
             #cidINT = int(u)  # [NEW] converts object to int
             #a = cidINT.to_bytes(16, 'little')  # int to bytes
