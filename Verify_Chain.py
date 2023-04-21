@@ -45,6 +45,7 @@ def verify_chain():
 
         # check that state is a valid state
         curr_state = BC.blockList[i].getState()
+        print(curr_state)
         if "INITIAL" in curr_state or "CHECKEDIN" in curr_state or "CHECKEDOUT" in curr_state or \
            "DISPOSED" in curr_state or "DESTROYED" in curr_state or "RELEASED" in curr_state:
             pass
