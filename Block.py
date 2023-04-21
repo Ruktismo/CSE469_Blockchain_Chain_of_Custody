@@ -176,7 +176,7 @@ class Block:
             #u = struct.unpack("16s", contents[40:56])  # tuple type
             #cid_int = int.from_bytes(contents[40:56], 'little')
             #cid_uuid = uuid.UUID(int=cid_int)
-            unpacked3 = contents[40:56]
+            unpacked3 = str(uuid.UUID(int=contents[40:56]))
 
             unpacked4 = struct.unpack("I", contents[56:60])
             unpacked5 = struct.unpack("12s", contents[60:72])
