@@ -93,7 +93,7 @@ class BlockChain:
             byteCount += int(unpacked6)
             unpacked7= "".join(str(i) for i in unpacked7)
             
-            
+            unpacked5 = removePadding(unpacked5)
             newBlock.setPreviousHash(unpacked1[2:-1])
             newBlock.updateTimestamp(unpacked2)
             newBlock.setCID(unpacked3[2:-1])

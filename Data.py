@@ -3,6 +3,12 @@ import os
 import pickle
 import struct
 from Block import Block
+
+def removePadding(s):
+    s = bytearray(s, 'utf-8')
+    s = s.replace(b'\x00', b'')
+    s = s.decode('utf-8')
+    return s
 class Data:
     def __init__(self):
         self.CaseID = 0
@@ -17,8 +23,8 @@ class Data:
         # print("CID: "+ str(self.CaseID))
         self.EvidenceID = block.getEID()
         # print("EID: " + str(self.EvidenceID))
-        self.state = block.getState()
-        print(type(block.getState()))
+        self.state = removePadding(block.getState())
+        
         
     def toString(self):
         return "Case ID: " + str(self.CaseID) +'\n' + "Evidence ID: " + str(self.EvidenceID) +'\n' + "State: " + str(self.state) 
