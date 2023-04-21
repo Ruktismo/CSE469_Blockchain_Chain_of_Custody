@@ -15,18 +15,18 @@ def remove(item_id, reason, owner):
     #check if item_id exists
     # go through the list to check if item_id exists
     print("in Remove()")
-    for i in BC.blockList:
-        if i.EID == item_id:
-            print(i.EID)
+    for i in BC.datalist:
+        if i.EvidenceID == item_id:
+            print(i.EvidenceID)
             print(item_id)
             print(reason)
-            if i.State == "CHECKEDOUT":
+            if i.state == "CHECKEDOUT":
                 print("Error: Cannot remove a checked out item. Must check it in first")
                 exit(-1)
-            elif i.State == "INITIAL":
+            elif i.state == "INITIAL":
                 print("Error: Cannot remove an initial block.")  # possible to remove initial block?
                 exit(-1)
-            elif i.State == "DISPOSED" or i.State == "DESTROYED" or i.State == "RELEASED":
+            elif i.state == "DISPOSED" or i.state == "DESTROYED" or i.state == "RELEASED":
                 print("Error: Cannot remove an already disposed/destroyed/released item")
                 exit(-1)
             elif reason != "DISPOSED" and reason != "DESTROYED" and reason != "RELEASED":
@@ -40,6 +40,7 @@ def remove(item_id, reason, owner):
                 hash = BC.getLatestHash()
                 b.setPreviousHash(hash)
                 b.setTimestamp()
+                print(i.CID)
                 b.setCID(i.CID)
                 b.setEID(int(item_id))
 
