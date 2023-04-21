@@ -14,14 +14,14 @@ def intToHex(i):
 def remove(item_id, reason, owner):
     #iter thru list to see if checkedout
     for k in BC.datalist:
-        if k.EvidenceID == str(item_id):
-            if "CHECKEDIN" in k.state:
+        if str(k.EvidenceID) == str(item_id):
+            if "CHECKEDOUT" in k.state:
                 print("Error: Cannot remove a checked out item. Must check it in first")
                 exit(-1)
 
     # go through the list to check if item_id exists
     for i in BC.datalist:
-        if i.EvidenceID == str(item_id):
+        if str(i.EvidenceID) == str(item_id):
             if i.state == "CHECKEDOUT":
                 print("Error: Cannot remove a checked out item. Must check it in first")
                 exit(-1)
