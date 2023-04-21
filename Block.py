@@ -172,7 +172,6 @@ class Block:
             with open(file_path, "rb") as f:
                 contents = f.read()
             
-
             unpacked1 = struct.unpack("32s", contents[0:32])
             unpacked2 = getIso8601Timestamp(contents[32:40])
             unpacked3 = struct.unpack("16s", contents[40:56])
@@ -184,6 +183,7 @@ class Block:
             unpacked3= "".join(str(i) for i in unpacked3)
             unpacked4= "".join(str(i) for i in unpacked4)
             unpacked5= "".join(str(i) for i in unpacked5)
+            unpacked5 = unpacked5.replace("\x00", "")
             unpacked6= "".join(str(i) for i in unpacked6)
             
             countForSeven = int(unpacked6)+76
