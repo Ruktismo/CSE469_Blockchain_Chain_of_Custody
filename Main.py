@@ -62,7 +62,7 @@ def main():
         case_id = -1
         item_id = -1
         for i in range(2, len(sys.argv)):
-            if '-r' == sys.argv[i]:
+            if '-r' == sys.argv[i] or '--reverse' == sys.argv[i]:
                 is_reversed = True
             if '-n' == sys.argv[i]:
                 num_entries = int(sys.argv[i + 1])

@@ -42,7 +42,7 @@ def verify_chain():
                       f"First OC {b}: {BC.blockList[b].getPreviousHash()}\n"
                       f"dup OC {i}: {BC.blockList[i].getPreviousHash()}")
                 exit(-3)
-
+        print(f"State: {BC.blockList[i].getState()}")
         # check datas to see if state change is valid
         if BC.blockList[i].getEID() in datas:
             """
@@ -68,7 +68,7 @@ def verify_chain():
                 exit(-3)
 
             # if curr state is CI and new state is Remove check for valid reason
-            print(f"State: {BC.blockList[i].getState()}")
+
 
             # if valid then update state
             datas[BC.blockList[i].getEID()].state = BC.blockList[i].getState()
