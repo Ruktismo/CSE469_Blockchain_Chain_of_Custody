@@ -51,14 +51,11 @@ def remove(item_id, reason, owner):
 
                 # set data & data length from existing block's
                 if b.getState() == "RELEASED":
-                    b.setDataLength(len(str(owner)))
-                    b.setData(str(owner))
+                    b.setDataLength(len(owner))
+                    b.setData(owner)
                 else:
                     b.setDataLength(int(dataBlock.getDataLength()))
                     b.setData(dataBlock.getData())
-
-                print(b.getCID())
-                print(type(b.getCID()))
 
                 print(f'Case: {b.getCID()}')  # print UUID str
                 print(f'Removed item: {b.getEID()}')
@@ -68,7 +65,6 @@ def remove(item_id, reason, owner):
                 print(f'\tTime of action: {b.getTimestamp()}')
 
                 b.blockToBytes()
-                #BC.reload()
                 exit(0)
     exit(-1) #no such evidence item
 
