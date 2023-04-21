@@ -124,7 +124,7 @@ class Block:
         #print(a)
         #packed3 = struct.pack("16s", a)
         #print(packed3)
-        u = uuid.UUID(self.getCID())
+        u = uuid.UUID(str(self.getCID()))
         uBytes = u.bytes_le
         packed3 = uBytes
         #########################################################
