@@ -20,7 +20,6 @@ def remove(item_id, reason, owner):
             print(i.EID)
             print(item_id)
             print(reason)
-            reason = str(reason)
             if i.State == "CHECKEDOUT":
                 print("Error: Cannot remove a checked out item. Must check it in first")
                 exit(-1)
@@ -30,10 +29,11 @@ def remove(item_id, reason, owner):
             elif i.State == "DISPOSED" or i.State == "DESTROYED" or i.State == "RELEASED":
                 print("Error: Cannot remove an already disposed/destroyed/released item")
                 exit(-1)
-            elif reason != "DISPOSED" or reason != "DESTROYED" or reason != "RELEASED":
+            elif reason != "DISPOSED" and reason != "DESTROYED" and reason != "RELEASED":
                 print("Error: Not a valid reason. Must be 'DISPOSED', 'DESTROYED', or 'RELEASED")
                 exit(-1)
             else:
+                print("removing block!")
                 # Remove block
                 dataBlock = BC.blockExists(i)  # for setting data
                 b = Block()
