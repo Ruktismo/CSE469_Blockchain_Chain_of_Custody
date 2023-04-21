@@ -27,6 +27,9 @@ def remove(item_id, reason, owner):
             elif reason != "DISPOSED" and reason != "DESTROYED" and reason != "RELEASED":
                 print("Error: Not a valid reason. Must be 'DISPOSED', 'DESTROYED', or 'RELEASED")
                 exit(-1)
+            elif reason == "RELEASED" and owner is None:
+                print("Error: No given owner. Must give owner information.")
+                exit(-1)
             else:
                 # Remove block
                 dataBlock = BC.blockExists(i)  # for setting data
