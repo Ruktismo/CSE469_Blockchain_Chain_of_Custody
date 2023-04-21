@@ -15,9 +15,18 @@ class BlockChain:
     def dataExists(self, newData):
         for d in self.datalist:
             if d.CaseID == newData.CaseID and d.EvidenceID == newData.EvidenceID:
-                return d
+                return True
         return False
-    
+    def dataState(self, newData):
+        for d in self.datalist:
+            if d.CaseID == newData.CaseID and d.EvidenceID == newData.EvidenceID:
+                return str(d.state)
+        return False
+    def updateState(self,data,state):
+        for d in self.datalist:
+            if d.CaseID == data.CaseID and d.EvidenceID == data.EvidenceID:
+                d.state = state
+                
     def blockExists(self, newData):
         for d in self.blockList:
             if d.CID == newData.CaseID and d.EID == newData.EvidenceID:
@@ -62,7 +71,6 @@ class BlockChain:
             
             if(file_size == 90):
                 break
-            temp = Data()
             newBlock = Block()
 
             unpacked1 = struct.unpack("32s", contents[byteCount:byteCount+32])
@@ -94,7 +102,7 @@ class BlockChain:
             byteCount += int(unpacked6)
             unpacked7= "".join(str(i) for i in unpacked7)
             
-            
+            print("formatted BC : "+unpacked3)
             newBlock.setPreviousHash(unpacked1[2:-1])
             newBlock.updateTimestamp(unpacked2)
             newBlock.setCID(unpacked3)
@@ -103,15 +111,25 @@ class BlockChain:
             newBlock.setDataLength(unpacked6)
             newBlock.setData(unpacked7[2:-1])
             
+            temp = Data()
             
             temp.blockToData(newBlock)
             self.blockList.append(newBlock)
 
-            x = self.dataExists(temp)
-            if x == False:
-                self.datalist.append(temp)  
+            if self.dataExists(temp):
+                print("state before change: "+ str(temp.state))
+                self.updateState(temp,newBlock.getState())
+                print("state after change: "+ str(self.dataState(temp)))
             else:
-                x.state = temp.state
+                self.datalist.append(temp)
+                print("New data added")
+
+            # x = self.dataExists(temp)
+            # if x == False:
+            #     self.datalist.append(temp)  
+            # else:
+            #     self.updateState(x,newBlock.getState())
+            #     # x.state = temp.state
                 
     def printBC(self):
         print("\nBlock list count: "+str(len(self.datalist)))

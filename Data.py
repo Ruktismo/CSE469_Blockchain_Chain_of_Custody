@@ -4,11 +4,6 @@ import pickle
 import struct
 from Block import Block
 
-def removePadding(s):
-    s = bytearray(s, 'utf-8')
-    s = s.replace(b'\x00', b'')
-    s = s.decode('utf-8')
-    return s
 class Data:
     def __init__(self):
         self.CaseID = 0

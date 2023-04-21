@@ -118,10 +118,10 @@ class Block:
         packed1 = struct.pack("32s", self.getPreviousHash())
         packed2 = self.getDoubleTimestamp()
         
-        print("before pack: "+ str(self.getCID()))
+        # print("before pack: "+ str(self.getCID()))
         
         u = uuid.UUID(self.getCID())
-        uBytes = u.bytes_le
+        uBytes = u.bytes
         packed3 = struct.pack("16s", uBytes)
         
         # u = uuid.UUID(str(self.getCID())) # [NEW] converts object to int, get bytes, store
@@ -179,7 +179,7 @@ class Block:
             cid_uuid = uuid.UUID(bytes=unpacked3)
 
             unpacked3 = str(cid_uuid)
-            # print("unpacked: "+ unpacked3)
+            print("after unpacked: "+ unpacked3)
             
             
             unpacked4 = struct.unpack("I", contents[56:60])

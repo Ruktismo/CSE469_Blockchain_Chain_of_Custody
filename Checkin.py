@@ -36,6 +36,7 @@ def checkin( item_id):
                 
             else:
                 print("Error: cannot check in what is not checked out") 
+                print("current state: "+ i.state)
                 exit(-1)
     exit(-1)
             
