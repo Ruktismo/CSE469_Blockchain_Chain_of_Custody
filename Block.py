@@ -183,7 +183,7 @@ class Block:
             unpacked3= "".join(str(i) for i in unpacked3)
             unpacked4= "".join(str(i) for i in unpacked4)
             unpacked5= "".join(str(i) for i in unpacked5)
-            unpacked5 = unpacked5.replace("\x00", "")
+            unpacked5 = unpacked5.rstrip('\x00')
             unpacked6= "".join(str(i) for i in unpacked6)
             
             countForSeven = int(unpacked6)+76

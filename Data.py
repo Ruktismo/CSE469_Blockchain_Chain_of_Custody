@@ -17,7 +17,7 @@ class Data:
         # print("CID: "+ str(self.CaseID))
         self.EvidenceID = block.getEID()
         # print("EID: " + str(self.EvidenceID))
-        self.state = block.getState().replace("\x00","")
+        self.state = block.getState().rstrip('\x00')
         print(type(block.getState()))
         
     def toString(self):
