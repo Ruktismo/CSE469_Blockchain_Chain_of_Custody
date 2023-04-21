@@ -15,7 +15,7 @@ def remove(item_id, reason, owner):
     #iter thru list to see if checkedout
     for k in BC.datalist:
         if k.EvidenceID == str(item_id):
-            if k.state == "CHECKEDOUT":
+            if "CHECKEDIN" in k.state:
                 print("Error: Cannot remove a checked out item. Must check it in first")
                 exit(-1)
 
@@ -72,7 +72,6 @@ def remove(item_id, reason, owner):
                 print(f'\tTime of action: {b.getTimestamp()}')
 
                 b.blockToBytes()
-                BC.reload()
                 exit(0)
     exit(-1) #no such evidence item
 
