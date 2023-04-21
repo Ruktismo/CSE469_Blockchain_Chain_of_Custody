@@ -122,14 +122,6 @@ class BlockChain:
                 # print("state after change: "+ str(self.dataState(temp)))
             else:
                 self.datalist.append(temp)
-                # print("New data added")
-
-            # x = self.dataExists(temp)
-            # if x == False:
-            #     self.datalist.append(temp)  
-            # else:
-            #     self.updateState(x,newBlock.getState())
-            #     # x.state = temp.state
                 
     def printBC(self):
         print("\nBlock list count: "+str(len(self.datalist)))
