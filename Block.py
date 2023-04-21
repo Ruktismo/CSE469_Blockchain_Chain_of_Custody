@@ -127,7 +127,7 @@ class Block:
         # print(str(uBytes))
         print("////////////////////////////////////////////////////")
         print("OG CID: "+ str(self.getCID()))
-        byteString = ''.join('{:02x}'.format(b) for b in uBytes)
+        byteString = ''.join('{:02x}'.format(b) for b in packed3)
         print("stored CID val: " + byteString)
         unpacked3 = struct.unpack("16s", uBytes)[0]
         cid_uuid = uuid.UUID(bytes=unpacked3)
