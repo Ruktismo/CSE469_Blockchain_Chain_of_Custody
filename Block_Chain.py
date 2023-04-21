@@ -98,7 +98,7 @@ class BlockChain:
             newBlock.updateTimestamp(unpacked2)
             newBlock.setCID(unpacked3[2:-1])
             newBlock.setEID(unpacked4)
-            newBlock.setState(unpacked5[2:-1])
+            newBlock.setState(unpacked5)
             newBlock.setDataLength(unpacked6)
             newBlock.setData(unpacked7[2:-1])
             
