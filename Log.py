@@ -59,7 +59,7 @@ def log(is_reversed, num_entries, case_id, item_id):
         blocks.reverse()
 
     # for each block we process
-    for i in range(0, (len(blocks) if num_entries == -1 else num_entries)):
+    for i in range(0, (len(blocks) if num_entries == -1 else min(num_entries, len(blocks)))):
         # if not checking case or item
         if case_id == -1 and item_id == -1:
             # print("Checking None")

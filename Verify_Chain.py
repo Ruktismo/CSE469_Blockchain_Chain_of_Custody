@@ -35,13 +35,12 @@ def verify_chain():
     print(f"Transactions in blockchain: {len(BC.blockList)}")
 
     for i in range(len(BC.blockList)):
-        # Check that this blocks previous hash is the hash of the last block
-        # but skip the init block since it has no parent
-        """
-        if i > 0 and BC.blockList[i].getPreviousHash() != getBlockHash(BC.blockList[i-1]):
-            print(f"Hash error at block {i}")
-            exit(-1)
-        """
+        # Check that this blocks previous hash is not present on the chain
+        for b in range(i, 0, -1):
+            if BC.blockList[b].getPreviousHash() == BC.blockList[i].getPreviousHash():
+                print("Two Blocks can not have the same parent")
+                exit(-3)
+
         # check datas to see if state change is valid
         if BC.blockList[i].getEID() in datas:
             """
@@ -51,7 +50,6 @@ def verify_chain():
             CO -> CI
             DI, DE, RE -> None
             """
-            # TODO check if state change is valid
             if "INITIAL" in BC.blockList[i].getState():
                 print("Can't have more than one Init block")
                 exit(-3)
@@ -66,6 +64,10 @@ def verify_chain():
                     "RELEASED" in datas[BC.blockList[i].getEID()].state:
                 print("Can't preform action on item that has been removed")
                 exit(-3)
+
+            # if curr state is CI and new state is Remove check for valid reason
+            print(f"State: {BC.blockList[i].getState()}")
+
             # if valid then update state
             datas[BC.blockList[i].getEID()].state = BC.blockList[i].getState()
         else:
