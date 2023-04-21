@@ -217,7 +217,8 @@ class Block:
 
             self.setPreviousHash(unpacked1[2:-1])
             self.updateTimestamp(unpacked2)
-            self.setCID(unpacked3[2:-1]) #new quick test
+            self.setCID(unpacked3)
+            print("set to CID/unpacked: " + unpacked3)
             self.setEID(unpacked4)
             self.setState(unpacked5[2:-1])
             self.setDataLength(unpacked6)
