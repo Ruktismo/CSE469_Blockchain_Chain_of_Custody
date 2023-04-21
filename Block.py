@@ -119,6 +119,7 @@ class Block:
         packed2 = self.getDoubleTimestamp()
 
         #print(str(self.getCID()))
+        #u = uuid.UUID(str(self.getCID()))
         u = uuid.UUID(str(self.getCID()))
         cidINT = int(u)  # [NEW] converts object to int
         a = cidINT.to_bytes(16, 'little')  # int to bytes
@@ -172,25 +173,10 @@ class Block:
             unpacked1 = struct.unpack("32s", contents[0:32])
             unpacked2 = getIso8601Timestamp(contents[32:40])
 
-            #u = struct.unpack("16s", contents[40:56])  # tuple type
             u = struct.unpack("16s", contents[40:56])  # tuple type
-            print(u)
-            print(type(u))
-            byte_val = contents[40:56]
-            print(type(byte_val))
-            print(byte_val)
-            int_val = int.from_bytes(byte_val, "little") #convert byte to int
-            print(int_val)
-            cid_uuid = uuid.UUID(int=int_val)
-            print("cid_uuid")
-            print(cid_uuid)
-            unpacked3 = cid_uuid
-            #unpacked3 = str(cid_uuid)
-            #print(unpacked3)
-            #u = uuid.UUID(str(self.getCID()))
-            #cidINT = int(u)  # [NEW] converts object to int
-            #a = cidINT.to_bytes(16, 'little')  # int to bytes
-            #packed3 = struct.pack("16s", a)
+            cid_int = int.from_bytes(u, 'little')
+            cid_uuid = uuid.UUID(int=cid_int)
+            unpacked3 = int(cid_uuid)
 
             unpacked4 = struct.unpack("I", contents[56:60])
             unpacked5 = struct.unpack("12s", contents[60:72])
