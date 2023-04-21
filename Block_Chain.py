@@ -81,7 +81,7 @@ class BlockChain:
             cid_uuid = uuid.UUID(bytes=unpacked3)
 
             unpacked3 = str(cid_uuid)
-            print("unpacked BC : "+unpacked3)
+            # print("unpacked BC : "+unpacked3)
             
             byteCount += 16
             unpacked4 = struct.unpack("I", contents[byteCount:byteCount +4])
@@ -102,7 +102,7 @@ class BlockChain:
             byteCount += int(unpacked6)
             unpacked7= "".join(str(i) for i in unpacked7)
             
-            print("formatted BC : "+unpacked3)
+            # print("formatted BC : "+unpacked3)
             newBlock.setPreviousHash(unpacked1[2:-1])
             newBlock.updateTimestamp(unpacked2)
             newBlock.setCID(unpacked3)
@@ -117,12 +117,12 @@ class BlockChain:
             self.blockList.append(newBlock)
 
             if self.dataExists(temp):
-                print("state before change: "+ str(temp.state))
+                # print("state before change: "+ str(temp.state))
                 self.updateState(temp,newBlock.getState())
-                print("state after change: "+ str(self.dataState(temp)))
+                # print("state after change: "+ str(self.dataState(temp)))
             else:
                 self.datalist.append(temp)
-                print("New data added")
+                # print("New data added")
 
             # x = self.dataExists(temp)
             # if x == False:

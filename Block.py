@@ -122,7 +122,7 @@ class Block:
         
         u = uuid.UUID(self.getCID())
         uBytes = u.bytes
-        packed3 = struct.pack("16s", uBytes)
+        packed3 = struct.pack("<16s", uBytes)
         
         # u = uuid.UUID(str(self.getCID())) # [NEW] converts object to int, get bytes, store
         # cidINT = int(u)
@@ -179,7 +179,7 @@ class Block:
             cid_uuid = uuid.UUID(bytes=unpacked3)
 
             unpacked3 = str(cid_uuid)
-            print("after unpacked: "+ unpacked3)
+            # print("after unpacked: "+ unpacked3)
             
             
             unpacked4 = struct.unpack("I", contents[56:60])
