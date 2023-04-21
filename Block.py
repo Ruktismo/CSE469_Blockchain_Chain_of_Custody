@@ -123,8 +123,19 @@ class Block:
         u = uuid.UUID(self.getCID())
         uBytes = u.bytes
         packed3 = uBytes
+        #########################################################
         # print(str(uBytes))
-        
+        print("////////////////////////////////////////////////////")
+        print("OG CID: "+ str(self.getCID()))
+        byteString = ''.join('{:02x}'.format(b) for b in uBytes)
+        print("stored CID val: " + byteString)
+        unpacked3 = struct.unpack("16s", uBytes)[0]
+        cid_uuid = uuid.UUID(bytes=unpacked3)
+
+        unpacked3 = str(cid_uuid)
+        print("unpacked CID: "+unpacked3)
+        print("////////////////////////////////////////////////////")
+        #########################################################
         # u = uuid.UUID(str(self.getCID())) # [NEW] converts object to int, get bytes, store
         # cidINT = int(u)
         # a = cidINT.to_bytes(16, 'little')  # int to bytes
@@ -176,10 +187,10 @@ class Block:
             
             unpacked1 = struct.unpack("32s", contents[0:32])
             unpacked2 = getIso8601Timestamp(contents[32:40])
-            unpacked3 = struct.unpack("16s", contents[40:56])[0]
-            cid_uuid = uuid.UUID(bytes=unpacked3)
+            unpacked3 = struct.unpack("16s", contents[40:56])
+            # [0]cid_uuid = uuid.UUID(bytes=unpacked3)
 
-            unpacked3 = str(cid_uuid)
+            # unpacked3 = str(cid_uuid)
             # print("after unpacked: "+ unpacked3)
             
             
