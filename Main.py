@@ -74,8 +74,15 @@ def main():
     elif sys.argv[1] == "remove":
         if len(sys.argv) == 6:
             remove(sys.argv[3], sys.argv[5], None)
-        elif len(sys.argv) == 8:
-            remove(sys.argv[3], sys.argv[5], sys.argv[7])
+        elif sys.argv[6] == "-o":
+            o_info = []
+            for i in range(6, len(sys.argv)):
+                    o_info.append(sys.argv[i + 1])
+            owner = ' '.join(str(o) for o in o_info)
+            remove(sys.argv[3], sys.argv[5], owner)
+        #elif len(sys.argv) == 8:
+            #owner=None
+            #remove(sys.argv[3], sys.argv[5], owner)
         else:
             print("ERROR: Incorrect number of args\n Proprer format:  bchoc remove -i item_id -y reason [-o owner]")
             exit(-1)
