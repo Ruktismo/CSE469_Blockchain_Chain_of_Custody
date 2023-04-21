@@ -41,7 +41,7 @@ def remove(item_id, reason, owner):
                 b.setPreviousHash(hash)
                 b.setTimestamp()
                 print(i.CID)
-                b.setCID(str(i.CID))
+                b.setCID(i.CID)
                 b.setEID(int(item_id))
 
                 # state needs to be 12 char in length
