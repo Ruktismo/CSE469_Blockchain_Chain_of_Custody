@@ -14,17 +14,17 @@ def intToHex(i):
 def remove(item_id, reason, owner):
     # go through the list to check if item_id exists
     print("in Remove()")
-    for i in BC.datalist:
+    for i in BC.blockList:
         if i.EvidenceID == item_id:
-            print(i.EvidenceID)
+            print(i.EID)
             print(item_id)
-            if i.getState() == "CHECKEDOUT":
+            if i.State == "CHECKEDOUT":
                 print("Error: Cannot remove a checked out item. Must check it in first")
                 exit(-1)
-            elif i.getState() == "INITIAL":
+            elif i.State == "INITIAL":
                 print("Error: Cannot remove an initial block.")  # possible to remove initial block?
                 exit(-1)
-            elif i.getState() == "DISPOSED" or i.getState() == "DESTROYED" or i.getState() == "RELEASED":
+            elif i.State == "DISPOSED" or i.State == "DESTROYED" or i.State == "RELEASED":
                 print("Error: Cannot remove an already disposed/destroyed/released item")
                 exit(-1)
             elif reason != "DISPOSED" or reason != "DESTROYED" or reason != "RELEASED":
