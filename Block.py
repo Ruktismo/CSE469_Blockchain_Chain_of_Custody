@@ -177,6 +177,7 @@ class Block:
             print(type(temp))
             b = bytearray()
             print(b)
+            print(type(b))
             cid_int = int.from_bytes(b, byteorder='little')
             print("cid_int: ")
             print(cid_int)
