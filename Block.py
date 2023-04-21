@@ -59,7 +59,7 @@ class Block:
         return self.CID
 
     def setCID(self, cid):
-        self.CID = str(cid)
+        self.CID = cid
 
     def getEID(self):
         return self.EID
