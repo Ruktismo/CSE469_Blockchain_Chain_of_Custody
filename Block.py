@@ -191,7 +191,10 @@ class Block:
             
             unpacked1 = struct.unpack("32s", contents[0:32])
             unpacked2 = getIso8601Timestamp(contents[32:40])
-            unpacked3 = struct.unpack("16s", contents[40:56])
+            #unpacked3 = struct.unpack("16s", contents[40:56])
+            unpacked3 = struct.unpack("16s", contents[40:56])[0] #test
+            cid_uuid = uuid.UUID(bytes=unpacked3) #test
+            unpacked3 = str(cid_uuid) #test
             # [0]cid_uuid = uuid.UUID(bytes=unpacked3)
 
             # unpacked3 = str(cid_uuid)
