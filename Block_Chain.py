@@ -73,7 +73,7 @@ class BlockChain:
             cid_uuid = uuid.UUID(bytes=unpacked3)
 
             unpacked3 = str(cid_uuid)
-            print(unpacked3)
+            # print(unpacked3)
             
             byteCount += 16
             unpacked4 = struct.unpack("I", contents[byteCount:byteCount +4])
