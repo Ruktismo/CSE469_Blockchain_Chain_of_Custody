@@ -1,0 +1,124 @@
+Can use UUID: f884000e-d93c-4645-9f14-319daea3dde2
+
+./bchoc init
+
+./bchoc add -c f884000e-d93c-4645-9f14-319daea3dde2 -i 687880156
+
+./bchoc remove -i 687880156 --why DESTROYED
+
+./bchoc add -c f884000e-d93c-4645-9f14-319daea3dde2 -i 3573052070
+
+./bchoc remove -i 3573052070 --why DISPOSED
+
+./bchoc add -c f884000e-d93c-4645-9f14-319daea3dde2 -i 1100959821
+
+./bchoc checkout -i 1100959821
+
+./bchoc add -c f884000e-d93c-4645-9f14-319daea3dde2 -i 2997277715
+
+./bchoc remove -i 2997277715 --why RELEASED -o "Dr. Mike Mabey, no address given"
+
+./bchoc checkin -i 1100959821
+
+./bchoc checkout -i 1100959821
+
+./bchoc checkin -i 1100959821
+
+./bchoc remove -i 1100959821 --why RELEASED -o "Dr. Mike Mabey, no address given"
+
+./bchoc add -c f884000e-d93c-4645-9f14-319daea3dde2 -i 2257511062
+
+./bchoc remove -i 2257511062 --why DESTROYED
+
+./bchoc log
+
+
+stdout from your program:
+> Case: 00000000-0000-0000-0000-000000000000
+> Item: 0
+> Action: INITIAL
+> Time: 2023-04-21T22:54:56.752024Z
+> 
+> 
+> Case: 97c0cb6b-9423-4ca9-8e96-5bcb08543a05
+> Item: 687880156
+> Action: CHECKEDIN
+> Time: 2023-04-21T22:54:56.785075Z
+> 
+> 
+> Case: 97c0cb6b-9423-4ca9-8e96-5bcb08543a05
+> Item: 687880156
+> Action: DESTROYED
+> Time: 2023-04-21T22:54:56.818012Z
+> 
+> 
+> Case: 97c0cb6b-9423-4ca9-8e96-5bcb08543a05
+> Item: 3573052070
+> Action: CHECKEDIN
+> Time: 2023-04-21T22:54:56.851416Z
+> 
+> 
+> Case: 97c0cb6b-9423-4ca9-8e96-5bcb08543a05
+> Item: 3573052070
+> Action: DISPOSED
+> Time: 2023-04-21T22:54:56.885560Z
+> 
+> 
+> Case: 31000800-4c76-41ea-a462-02a88a9d2a3b
+> Item: 1100959821
+> Action: CHECKEDIN
+> Time: 2023-04-21T22:54:56.919257Z
+> 
+> 
+> Case: 31000800-4c76-41ea-a462-02a88a9d2a3b
+> Item: 1100959821
+> Action: CHECKEDOUT
+> Time: 2023-04-21T22:54:56.952288Z
+> 
+> 
+> Case: e1394f39-b77e-4475-b6e0-ff23a2b4cb90
+> Item: 2997277715
+> Action: CHECKEDIN
+> Time: 2023-04-21T22:54:56.985076Z
+> 
+> 
+> Case: e1394f39-b77e-4475-b6e0-ff23a2b4cb90
+> Item: 2997277715
+> Action: RELEASED
+> Time: 2023-04-21T22:54:57.017997Z
+> 
+> 
+> Case: 31000800-4c76-41ea-a462-02a88a9d2a3b
+> Item: 1100959821
+> Action: CHECKEDIN
+> Time: 2023-04-21T22:54:57.050689Z
+> 
+> 
+> Case: 31000800-4c76-41ea-a462-02a88a9d2a3b
+> Item: 1100959821
+> Action: CHECKEDOUT
+> Time: 2023-04-21T22:54:57.083691Z
+> 
+> 
+> Case: 31000800-4c76-41ea-a462-02a88a9d2a3b
+> Item: 1100959821
+> Action: CHECKEDIN
+> Time: 2023-04-21T22:54:57.116762Z
+> 
+> 
+> Case: 31000800-4c76-41ea-a462-02a88a9d2a3b
+> Item: 1100959821
+> Action: RELEASED
+> Time: 2023-04-21T22:54:57.150137Z
+> 
+> 
+> Case: e1394f39-b77e-4475-b6e0-ff23a2b4cb90
+> Item: 2257511062
+> Action: CHECKEDIN
+> Time: 2023-04-21T22:54:57.184476Z
+> 
+> 
+> Case: e1394f39-b77e-4475-b6e0-ff23a2b4cb90
+> Item: 2257511062
+> Action: DESTROYED
+> Time: 2023-04-21T22:54:57.217661Z
